@@ -1,0 +1,479 @@
+<title>BCC Homepage Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  /* Single deliberate light look: this is a mockup of a light website, so it does not switch themes. */
+  :root {
+    color-scheme: light;
+    --ink: #161616;          /* BCC primary #171717 */
+    --ink-2: #272727;        /* BCC global */
+    --stone: #D3CDC6;        /* BCC secondary */
+    --mist: #E2DEDA;         /* BCC global */
+    --paper: #FFFFFF;
+    --bone: #F3F1EE;         /* light tint of mist for bands */
+    --muted: #5F5A55;
+    --orange: #FD774E;       /* BCC accent, CTAs only */
+    --orange-ink: #2A130B;
+    --cyan: #00B4EB;         /* BCC logo blue, focus + badge only */
+    --display: "Archivo Black", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --wrap: 1320px;
+    --gutter: 60px;
+    --radius: 20px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+
+  .wrap { width: 100%; max-width: calc(var(--wrap) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+
+  /* ---------- review ribbon (not part of the design) ---------- */
+  .ribbon { background: #2b2b2b; color: #e9e6e2; font: 400 12px/1.4 var(--mono); letter-spacing: .02em; }
+  .ribbon .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; padding-block: 9px; }
+  .ribbon b { color: #fff; font-weight: 600; }
+  .ribbon .key { display: inline-flex; gap: 18px; flex-wrap: wrap; }
+  .ribbon .key span::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 7px; border-radius: 2px; vertical-align: 0; }
+  .ribbon .k-photo::before { background: var(--stone); }
+  .ribbon .k-video::before { background: #8a8580; }
+  .ribbon .k-real::before { background: var(--orange); }
+
+  /* ---------- buttons ---------- */
+  .btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 28px; border-radius: 999px; font: 600 16px/1 var(--body); text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+  .btn-orange { background: var(--orange); color: var(--orange-ink); }
+  .btn-orange:hover { background: #ff8a66; transform: translateY(-2px); }
+  .btn-ghost { border: 1.5px solid currentColor; }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn .arr { width: 18px; height: 18px; flex: none; }
+
+  /* ---------- header ---------- */
+  .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255,255,255,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .site-header .wrap { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 84px; }
+  .site-header nav { display: flex; gap: 36px; font: 500 15px/1 var(--body); }
+  .site-header nav a { text-decoration: none; padding-block: 6px; background: linear-gradient(var(--ink), var(--ink)) left bottom / 0 1.5px no-repeat; transition: background-size .25s ease; }
+  .site-header nav a:hover { background-size: 100% 1.5px; }
+  .site-header .logo img { height: 44px; width: auto; }
+  .site-header .cta { justify-self: end; padding: 13px 24px; font-size: 15px; }
+
+  /* ---------- placeholders ---------- */
+  .ph { position: relative; margin: 0; width: 100%; max-width: 100%; border-radius: var(--radius); overflow: hidden;
+        background: repeating-linear-gradient(-45deg, var(--bone) 0 14px, var(--mist) 14px 15px); border: 1.5px dashed #b9b2aa; }
+  .ph-label { position: absolute; left: 20px; bottom: 20px; right: 20px; display: grid; gap: 4px; font: 400 12px/1.45 var(--mono); color: #4a4540; }
+  .ph-label strong { font-weight: 600; font-size: 13px; color: var(--ink); letter-spacing: .03em; }
+  .ph-id { position: absolute; top: 16px; left: 16px; font: 600 12px/1 var(--mono); background: var(--ink); color: #fff; padding: 6px 9px; border-radius: 6px; letter-spacing: .04em; }
+  .ph.dark { background: repeating-linear-gradient(-45deg, #1f1f1f 0 14px, #2a2a2a 14px 15px); border-color: #555; }
+  .ph.dark .ph-label { color: #bdb7b1; }
+  .ph.dark .ph-label strong { color: #fff; }
+  .ph.dark .ph-id { background: var(--paper); color: var(--ink); }
+  .real-tag { position: absolute; top: 16px; left: 16px; font: 600 11px/1 var(--mono); background: var(--orange); color: var(--orange-ink); padding: 6px 9px; border-radius: 6px; letter-spacing: .04em; }
+
+  /* ---------- 1. hero ---------- */
+  .hero { padding-block: 72px 0; }
+  .hero-top { display: grid; grid-template-columns: 8fr 4fr; gap: 40px; align-items: end; }
+  .hero h1 { font: 400 clamp(56px, 8.6vw, 136px)/.9 var(--display); letter-spacing: -.035em; }
+  .hero-sub { font: 500 22px/1.4 var(--body); color: var(--ink-2); max-width: 22ch; padding-bottom: 14px; }
+  .hero-media { position: relative; margin-top: 56px; }
+  .hero-media .ph { aspect-ratio: 2 / 1; border-radius: 28px; }
+  .play { position: absolute; inset: 0; margin: auto; width: 96px; height: 96px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.7); display: grid; place-items: center; }
+  .play::after { content: ""; border-left: 22px solid #fff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px; }
+  .badge { position: absolute; right: 56px; top: -70px; width: 148px; height: 148px; border-radius: 50%; background: var(--cyan); display: grid; place-items: center; z-index: 2; box-shadow: 0 0 0 10px var(--paper); transition: transform .3s ease; }
+  .badge img { width: 136px; height: 136px; animation: spin 26s linear infinite; }
+  .badge:hover { transform: scale(1.05); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- 2. offers ---------- */
+  .offers { padding-block: 160px 150px; }
+  .offer { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; align-items: center; }
+  .offer + .offer { margin-top: 120px; }
+  .offer .ph { aspect-ratio: 4 / 5; }
+  .offer-a .ph { grid-column: 1 / span 5; }
+  .offer-a .offer-text { grid-column: 7 / span 5; }
+  .offer-b .offer-text { grid-column: 2 / span 5; grid-row: 1; }
+  .offer-b .ph { grid-column: 8 / span 5; grid-row: 1; }
+  .offer-text { display: grid; gap: 28px; }
+  .offer h2 { font: 400 clamp(40px, 4.4vw, 64px)/1 var(--display); letter-spacing: -.02em; }
+  .offer h2 a { text-decoration: none; display: inline-flex; align-items: flex-end; gap: 18px; }
+  .offer h2 a .arr { width: .7em; height: .7em; transition: transform .25s ease; flex: none; }
+  .offer h2 a:hover .arr { transform: translate(4px, -4px); }
+  .offer p { font-size: 19px; line-height: 1.65; color: var(--ink-2); max-width: 44ch; }
+  .offer p strong { font-weight: 600; color: var(--ink); }
+  .offers-cta { margin-top: 110px; display: flex; justify-content: center; }
+
+  /* ---------- 3. they trust us ---------- */
+  .trust { background: var(--ink); color: #fff; padding-block: 88px; overflow: hidden; }
+  .trust .wrap { display: grid; grid-template-columns: 3fr 9fr; gap: 40px; align-items: center; }
+  .trust h2 { font: 400 40px/1 var(--display); letter-spacing: -.01em; }
+  .marquee { position: relative; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+  .marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee ul { display: flex; gap: 88px; padding: 0 44px; margin: 0; list-style: none; align-items: center; }
+  .marquee img { height: 46px; width: auto; opacity: .55; transition: opacity .3s ease, transform .3s ease; }
+  .marquee li:hover img { opacity: 1; transform: scale(1.06); }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ---------- 4. building tomorrow's now ---------- */
+  .tomorrow { padding-block: 150px 0; }
+  .tomorrow h2 { font: 400 clamp(64px, 10.4vw, 168px)/.86 var(--display); letter-spacing: -.04em; }
+  .tomorrow-row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; margin-top: 44px; }
+  .tomorrow h3 { grid-column: 7 / span 6; font: 500 24px/1.4 var(--body); color: var(--ink-2); }
+  .tomorrow .ph { aspect-ratio: 21 / 9; border-radius: 0; border-inline: 0; margin-top: 80px; }
+
+  /* ---------- 5. our spaces ---------- */
+  .spaces { padding-block: 150px 140px; }
+  .spaces-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 56px; }
+  .spaces h2 { font: 400 clamp(56px, 7vw, 112px)/.9 var(--display); letter-spacing: -.03em; }
+  .round-link { width: 92px; height: 92px; flex: none; border-radius: 50%; background: var(--cyan); color: var(--ink); display: grid; place-items: center; transition: transform .25s ease; }
+  .round-link:hover { transform: rotate(-45deg); }
+  .round-link .arr { width: 34px; height: 34px; }
+  .mosaic { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+  .mosaic figure { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; height: 460px; }
+  .mosaic img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+  .mosaic figure:hover img { transform: scale(1.04); }
+  .m1 { grid-column: span 8; }
+  .m2 { grid-column: span 4; }
+  .m3 { grid-column: span 4; }
+  .m4 { grid-column: span 8; }
+
+  /* ---------- 6. find more ---------- */
+  .findmore { background: var(--bone); padding-block: 110px; }
+  .findmore .wrap { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+  .findmore h2 { font: 400 clamp(40px, 4.6vw, 68px)/1 var(--display); letter-spacing: -.02em; max-width: 15ch; }
+  .btn-large { padding: 22px 38px; font-size: 18px; }
+
+  /* ---------- 7. testimonials ---------- */
+  .quotes { padding-block: 150px; }
+  .quotes h2 { font: 400 clamp(44px, 5vw, 76px)/1 var(--display); letter-spacing: -.02em; max-width: 14ch; margin-bottom: 72px; }
+  .quote-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; }
+  .quote-side { display: grid; gap: 24px; }
+  .quote { display: flex; flex-direction: column; gap: 28px; padding: 44px; border-radius: var(--radius); background: var(--bone); margin: 0; }
+  .quote.feature { background: var(--ink); color: #fff; padding: 56px; justify-content: space-between; }
+  .stars { display: flex; gap: 4px; color: var(--orange); }
+  .stars svg { width: 18px; height: 18px; }
+  .quote blockquote { margin: 0; font: 500 19px/1.6 var(--body); }
+  .quote.feature blockquote { font-size: 27px; line-height: 1.45; letter-spacing: -.01em; }
+  .quote figcaption { display: flex; align-items: center; gap: 16px; }
+  .portrait { position: relative; width: 64px; height: 64px; flex: none; border-radius: 50%; border: 1.5px dashed #b9b2aa; background: repeating-linear-gradient(-45deg, var(--paper) 0 7px, var(--mist) 7px 8px); display: grid; place-items: center; font: 600 11px/1 var(--mono); color: var(--ink); }
+  .feature .portrait { border-color: #666; background: repeating-linear-gradient(-45deg, #202020 0 7px, #333 7px 8px); color: #fff; }
+  .who { display: grid; gap: 2px; font-size: 15px; line-height: 1.4; }
+  .who b { font: 400 17px/1.2 var(--display); letter-spacing: .01em; }
+  .who span { color: var(--muted); }
+  .feature .who span { color: #b8b2ac; }
+  .who em { font: 400 11px/1.3 var(--mono); font-style: normal; color: var(--muted); margin-top: 4px; }
+  .feature .who em { color: #9a948e; }
+
+  /* ---------- 8. final cta + map ---------- */
+  .final { padding-block: 0 150px; }
+  .final-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; }
+  .final-panel { background: var(--ink); color: #fff; border-radius: 28px; padding: 72px; display: flex; flex-direction: column; justify-content: space-between; gap: 56px; min-height: 620px; }
+  .final-panel h2 { font: 400 clamp(52px, 6vw, 96px)/.92 var(--display); letter-spacing: -.03em; }
+  .final .ph { height: 100%; min-height: 620px; border-radius: 28px; }
+  .map { position: relative; margin-top: 24px; height: 380px; border-radius: 28px; overflow: hidden; border: 1.5px dashed #b9b2aa;
+         background:
+           radial-gradient(circle at 58% 46%, rgba(253,119,78,.22) 0 36px, transparent 37px),
+           linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px) 0 0 / 56px 56px,
+           linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px) 0 0 / 56px 56px,
+           var(--bone); }
+  .map .pin { position: absolute; left: 58%; top: 46%; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 6px #fff; }
+  .map .ph-label { left: 28px; bottom: 28px; right: auto; max-width: 480px; }
+  .map .open { position: absolute; right: 28px; bottom: 28px; padding: 13px 22px; font-size: 14px; background: var(--paper); }
+
+  /* ---------- footer ---------- */
+  .site-footer { background: var(--ink); color: #d9d4ce; padding-block: 96px 40px; }
+  .foot-grid { display: grid; grid-template-columns: 5fr 2fr 2fr 3fr; gap: 40px; }
+  .foot-logo { height: 56px; width: auto; filter: invert(1) hue-rotate(180deg); }
+  .tagline { font: 400 28px/1.2 var(--display); color: #fff; margin-top: 32px; max-width: 18ch; letter-spacing: -.01em; }
+  .site-footer h6 { margin: 0 0 20px; font: 600 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8e8883; }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .site-footer a { text-decoration: none; }
+  .site-footer a:hover { color: var(--orange); }
+  .social { display: flex; gap: 12px; }
+  .social a { width: 48px; height: 48px; border-radius: 50%; border: 1px solid #444; display: grid; place-items: center; color: #fff; transition: border-color .2s ease, color .2s ease; }
+  .social a:hover { border-color: var(--orange); }
+  .social svg { width: 20px; height: 20px; }
+  address { font-style: normal; line-height: 1.7; }
+  .legal { margin-top: 88px; padding-top: 28px; border-top: 1px solid #333; font-size: 14px; color: #8e8883; }
+
+  /* ---------- review appendix (not part of the design) ---------- */
+  .appendix { background: #2b2b2b; color: #e9e6e2; padding-block: 64px 80px; font-size: 15px; }
+  .appendix h2 { font: 600 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #fff; margin-bottom: 24px; }
+  .appendix p { max-width: 72ch; color: #c9c4be; margin-bottom: 12px; }
+  .table-scroll { overflow-x: auto; margin-block: 16px 40px; }
+  .appendix table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+  .appendix th, .appendix td { color: #e9e6e2; font-size: 14px; text-align: left; padding: 11px 14px 11px 0; border-bottom: 1px solid #444; vertical-align: top; }
+  .appendix th { font: 600 11px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #9a948e; }
+  .appendix td:first-child { font: 600 13px/1.4 var(--mono); color: #fff; white-space: nowrap; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track, .badge img { animation: none; }
+    * { transition: none !important; }
+  }
+
+  /* Desktop is the design under review. These rules only keep the page usable on narrow screens. */
+  @media (max-width: 900px) {
+    :root { --gutter: 16px; }
+    .site-header .wrap { grid-template-columns: auto 1fr; height: 68px; }
+    .site-header nav { display: none; }
+    .site-header .logo img { height: 34px; }
+    .hero-top, .trust .wrap, .quote-grid, .final-grid, .foot-grid, .tomorrow-row { grid-template-columns: 1fr; }
+    .offer, .mosaic { grid-template-columns: 1fr; }
+    .offer > *, .mosaic > *, .tomorrow h3 { grid-column: auto !important; grid-row: auto !important; }
+    .mosaic figure { height: 260px; }
+    .badge { width: 100px; height: 100px; top: -50px; right: 20px; }
+    .badge img { width: 92px; height: 92px; }
+    .findmore .wrap, .spaces-head { flex-direction: column; align-items: flex-start; }
+    .final-panel { padding: 36px; min-height: 0; }
+    .final .ph { min-height: 360px; }
+    .quote, .quote.feature { padding: 28px; }
+    .offers, .tomorrow, .spaces, .quotes { padding-block: 80px; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arr" viewBox="0 0 24 24"><path d="M6 18L18 6M9 6h9v9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+</svg>
+
+<div class="ribbon" role="note">
+  <div class="wrap">
+    <span><b>BCC homepage</b> · desktop mockup v1 · 1440 px · for internal review, not production</span>
+    <span class="key"><span class="k-real">real BCC asset</span><span class="k-photo">P = photo needed</span><span class="k-video">V = video needed</span><span>Existing contact assistant: unchanged, not shown</span></span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a href="https://www.businesscentercapellen.lu/about-us/">About Us</a>
+      <a href="https://www.businesscentercapellen.lu/about-us/#services">Our Services</a>
+      <a href="https://www.businesscentercapellen.lu/contact/">Contact Us</a>
+    </nav>
+    <a class="logo" href="https://www.businesscentercapellen.lu"><img src="assets/bcc-logo.png" alt="BCC – Business Center Capellen" width="569" height="257"></a>
+    <a class="btn btn-orange cta" href="https://businesscentercapellen.lu/contact/">Contact</a>
+  </div>
+</header>
+
+<main>
+  <!-- 1. HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <h1>Business Center Capellen</h1>
+        <p class="hero-sub">Your trusted partner for office rentals in Capellen (Luxembourg)</p>
+      </div>
+      <div class="hero-media">
+        <a class="badge" href="https://businesscentercapellen.lu/contact/" aria-label="Work with us: contact"><img src="assets/work-with-us.png" alt="" width="241" height="241"></a>
+        <figure class="ph dark" aria-label="Video placeholder V1">
+          <span class="ph-id">V1</span>
+          <span class="play" aria-hidden="true"></span>
+          <figcaption class="ph-label">
+            <strong>VIDEO NEEDED: Hero walkthrough loop</strong>
+            <span>Horizontal · shot 16:9, shown at 2:1 · 15–20 s · muted autoplay loop · keep lower-right corner calm (badge)</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. OFFERS -->
+  <section class="offers" id="offices">
+    <div class="wrap">
+      <article class="offer offer-a">
+        <figure class="ph">
+          <span class="ph-id">P1</span>
+          <figcaption class="ph-label"><strong>PHOTO NEEDED: Coworking Area</strong><span>Vertical · 4:5 · wide shot</span></figcaption>
+        </figure>
+        <div class="offer-text">
+          <h2><a href="https://www.businesscentercapellen.lu/about-us/#offices">Co-Working OFfices<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a></h2>
+          <p><strong>Grow your business</strong> from a place that feels right. Our coworking spaces give you a <strong>real business address</strong>, flexible offices, and a community that inspires you to do more. <strong>From basic package to all-inclusive packages, you decide</strong>.</p>
+        </div>
+      </article>
+
+      <article class="offer offer-b">
+        <div class="offer-text">
+          <h2><a href="https://www.businesscentercapellen.lu/about-us/#offices">Private Offices<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a></h2>
+          <p><strong>Your Private Space with no hidden fees</strong>. We believe flexibility isn’t a bonus ➡️ it’s the standard.</p>
+        </div>
+        <figure class="ph">
+          <span class="ph-id">P2</span>
+          <figcaption class="ph-label"><strong>PHOTO NEEDED: Private Office</strong><span>Vertical · 4:5 · wide shot</span></figcaption>
+        </figure>
+      </article>
+
+      <div class="offers-cta">
+        <a class="btn btn-orange btn-large" href="https://www.businesscentercapellen.lu//about-us/#services">Discover Our Services<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THEY TRUST US -->
+  <section class="trust">
+    <div class="wrap">
+      <h2>They trust us</h2>
+      <div class="marquee">
+        <div class="marquee-track">
+          <ul>
+            <li><img src="assets/client-cyheadit.png" alt="CyHeadIT" width="196" height="59"></li>
+            <li><img src="assets/client-kvsmart.png" alt="KVSmart" width="196" height="59"></li>
+            <li><img src="assets/client-beddeleem.png" alt="BeddeleemLux" width="196" height="59"></li>
+            <li><img src="assets/client-cloudpower.png" alt="Cloud Power" width="196" height="59"></li>
+            <li><img src="assets/client-ipc.png" alt="IPCGroupe" width="196" height="59"></li>
+            <li><img src="assets/client-turaco.png" alt="Turaco Solutions" width="196" height="59"></li>
+            <li><img src="assets/client-zementol.png" alt="Zementol" width="196" height="59"></li>
+          </ul>
+          <ul aria-hidden="true">
+            <li><img src="assets/client-cyheadit.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-kvsmart.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-beddeleem.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-cloudpower.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-ipc.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-turaco.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-zementol.png" alt="" width="196" height="59"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BUILDING TOMORROW'S NOW -->
+  <section class="tomorrow">
+    <div class="wrap">
+      <h2>BUILDING TOMORROW'S NOW</h2>
+      <div class="tomorrow-row">
+        <h3>Setting Up Your Business in Capellen (Luxembourg): Combine Legal Compliance with Flexible Workspaces</h3>
+      </div>
+    </div>
+    <figure class="ph">
+      <span class="ph-id">P3</span>
+      <figcaption class="ph-label wrap" style="position:absolute;left:0;right:0;margin-inline:auto"><strong>PHOTO NEEDED: Building Exterior</strong><span>Horizontal · 21:9 full-bleed · wide shot</span></figcaption>
+    </figure>
+  </section>
+
+  <!-- 5. OUR SPACES -->
+  <section class="spaces">
+    <div class="wrap">
+      <div class="spaces-head">
+        <h2>OUR SPACES</h2>
+        <a class="round-link" href="https://www.businesscentercapellen.lu/about-us/" aria-label="About Us"><svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a>
+      </div>
+      <div class="mosaic">
+        <figure class="m1"><span class="real-tag">BCC PHOTO</span><img src="assets/bcc-meeting-room.jpg" alt="Salle de réunion moderne avec table de conférence, projecteur et ambiance lumineuse bleutée." width="1600" height="1200"></figure>
+        <figure class="m2"><span class="real-tag">BCC PHOTO</span><img src="assets/bcc-reception.jpg" alt="Hall d’accueil du Business Center Capellen, Bloc C, avec borne de désinfection et espace de réception." width="1024" height="768"></figure>
+        <figure class="m3"><span class="real-tag">BCC PHOTO</span><img src="assets/bcc-entrance.jpg" alt="Entrée du Business Center Capellen avec espace d’accueil vitré et signalétique BCC." width="1600" height="1200"></figure>
+        <figure class="m4"><span class="real-tag">BCC PHOTO</span><img src="assets/bcc-lounge.jpg" alt="Salle de détente et de réunion équipée d’un baby-foot, d’un téléviseur et d’un espace de travail moderne." width="1600" height="1200"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FIND MORE -->
+  <section class="findmore">
+    <div class="wrap">
+      <h2>Find More About Us And Our Services</h2>
+      <a class="btn btn-ghost btn-large" href="https://www.businesscentercapellen.lu/about-us/">About Us<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a>
+    </div>
+  </section>
+
+  <!-- 7. TESTIMONIALS (content-locked) -->
+  <section class="quotes">
+    <div class="wrap">
+      <h2>Trusted by dozens of clients</h2>
+      <div class="quote-grid">
+        <figure class="quote feature">
+          <div class="stars" role="img" aria-label="Rated 5 out of 5"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+          <blockquote>The Capellen business center offers excellent facilities for setting up and expanding your business, including offices, a mailroom and private parking. The people who work there are very friendly and available to help you with all your needs. The services provided are first-rate in the Luxembourg market.</blockquote>
+          <figcaption><span class="portrait">P5</span><span class="who"><b>CyheadIT</b><span>Loïck Franc, CEO</span><em>PORTRAIT NEEDED (optional)</em></span></figcaption>
+        </figure>
+        <div class="quote-side">
+          <figure class="quote">
+            <div class="stars" role="img" aria-label="Rated 5 out of 5"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+            <blockquote>An excellent base in Luxembourg enables us to be close to our projects as they are carried out.</blockquote>
+            <figcaption><span class="portrait">P6</span><span class="who"><b>BEDDELEEM LUX</b><span>Cédric Bourdon, Project Manager</span><em>PORTRAIT NEEDED (optional)</em></span></figcaption>
+          </figure>
+          <figure class="quote">
+            <div class="stars" role="img" aria-label="Rated 5 out of 5"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+            <blockquote>The BCC is a flexible and ideally located place for a business shared between working on site and creating quotations in the office!</blockquote>
+            <figcaption><span class="portrait">P7</span><span class="who"><b>GGDIS</b><span>Nicolas Gits, CEO</span><em>PORTRAIT NEEDED (optional)</em></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FINAL CTA + MAP -->
+  <section class="final">
+    <div class="wrap">
+      <div class="final-grid">
+        <div class="final-panel">
+          <h2>Let's Build The Future Together</h2>
+          <div><a class="btn btn-orange btn-large" href="https://businesscentercapellen.lu/contact/">Contact Us<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a></div>
+        </div>
+        <figure class="ph">
+          <span class="ph-id">P4</span>
+          <figcaption class="ph-label"><strong>PHOTO NEEDED: Main Entrance</strong><span>Vertical · approx. 4:5 · medium shot</span></figcaption>
+        </figure>
+      </div>
+      <div class="map" role="img" aria-label="Map placeholder">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="ph-label"><strong>MAP: live Google Maps embed goes here</strong><span>Same embed as the current site (query “business center capellen”). Maps cannot be embedded in this mockup preview.</span></div>
+        <a class="btn open" href="https://maps.google.com/maps?q=business%20center%20capellen">Open in Google Maps<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="https://www.businesscentercapellen.lu"><img class="foot-logo" src="assets/bcc-logo.png" alt="BCC – Business Center Capellen" width="569" height="257"></a>
+        <p class="tagline">Flexibility isn’t just convenience, it’s business freedom.</p>
+      </div>
+      <div>
+        <h6>Quick Links</h6>
+        <ul>
+          <li><a href="https://www.businesscentercapellen.lu/about-us/">About Us</a></li>
+          <li><a href="https://www.businesscentercapellen.lu/about-us/#services">Our Services</a></li>
+          <li><a href="https://www.businesscentercapellen.lu/contact/">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Follow</h6>
+        <div class="social">
+          <a href="https://www.linkedin.com/company/business-center-capellen/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.95 1.32-1.95 2.7V21h-4z"/></svg></a>
+          <a href="https://www.facebook.com/people/BCC-Business-Center-Capellen/61560335773376/" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5H16l.4-3h-2.9V8.6c0-.87.25-1.46 1.5-1.46h1.6V4.46A21 21 0 0014.3 4.3c-2.3 0-3.8 1.4-3.8 3.95V10.5H8v3h2.5V21z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h6>Get in touch</h6>
+        <address>info@bcc-lux.eu<br>(+352) 20 600 820<br>Business Center Capellen<br>77, route d'Arlon<br>L-8311 Capellen<br>Luxembourg</address>
+      </div>
+    </div>
+    <p class="legal">©2026. All rights reserved. BCC - Business Center Capellen | Trademark of Cloud Power Luxembourg SA</p>
+  </div>
+</footer>
+
+<section class="appendix" aria-label="Review notes">
+  <div class="wrap">
+    <h2>Review notes (not part of the design)</h2>
+    <p>All visible text is copied from businesscentercapellen.lu. Nothing was rewritten or added, apart from the placeholder labels and the map note. Section order follows the live site, except that “Find More About Us And Our Services” now comes after “OUR SPACES” as a transition into the testimonials.</p>
+    <p>Three live-site images are not used here because they are stock photos, not BCC: the Kirchberg staircase, the hand holding a plant, and the robotic hand. Placeholders for real BCC photos take their place.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>ID</th><th>Asset</th><th>Format</th><th>Where on the page</th></tr></thead>
+        <tbody>
+          <tr><td>V1</td><td>Hero walkthrough video</td><td>Horizontal 16:9, shown at 2:1, 15–20 s loop</td><td>Hero, under the title</td></tr>
+          <tr><td>P1</td><td>Coworking Area</td><td>Vertical 4:5, wide</td><td>Co-Working OFfices (left image)</td></tr>
+          <tr><td>P2</td><td>Private Office</td><td>Vertical 4:5, wide</td><td>Private Offices (right image)</td></tr>
+          <tr><td>P3</td><td>Building Exterior</td><td>Horizontal 21:9, wide</td><td>Full-width under BUILDING TOMORROW'S NOW</td></tr>
+          <tr><td>P4</td><td>Main Entrance</td><td>Vertical approx. 4:5, medium</td><td>Next to Let's Build The Future Together</td></tr>
+          <tr><td>P5–P7</td><td>Client portraits (optional)</td><td>Square 1:1, head and shoulders</td><td>Testimonial cards: Loïck Franc, Cédric Bourdon, Nicolas Gits</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

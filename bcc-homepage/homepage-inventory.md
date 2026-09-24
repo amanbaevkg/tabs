@@ -87,13 +87,11 @@ Nothing has been rewritten.
 - **Get in touch:** info@bcc-lux.eu · (+352) 20 600 820 · Business Center Capellen, 77, route d'Arlon, L-8311 Capellen, Luxembourg
 - Legal line: **©2026. All rights reserved. BCC - Business Center Capellen | Trademark of Cloud Power Luxembourg SA**
 
-### Floating widget (site-wide)
-- Chaty "Contact us" WhatsApp button → `whatsapp.com/send?phone=352661158449`
+The floating contact assistant on the live site is a separate system. It is out of scope and left untouched.
 
 ## Points to confirm before the mockup (reported only; nothing has been changed)
 1. "Co-Working **OF**fices": is the capital F a typo, or should it be kept?
-2. The testimonial says "Cyhead**IT**" but the logo alt text says "CyHead**IT**". Which spelling is correct?
+2. ~~CyheadIT vs CyHeadIT spelling~~ Resolved: the logo artwork reads "CyheadIT", which matches the testimonial. Only the logo's alt text uses "CyHeadIT".
 3. The GGDIS testimonial has no matching logo in the carousel. KVSmart, Cloud Power, IPCGroupe, Turaco Solutions and Zementol have logos but no testimonials.
 4. The testimonial avatars are placeholders. Should the mockup use the client logos, initials, or no avatar?
-5. The WhatsApp number (+352 661 158 449) differs from the phone number in the footer (+352 20 600 820). Should both be kept?
-6. The page has no H1. The mockup would make "Business Center Capellen" the H1 without changing its wording.
+5. The page has no H1. The mockup would make "Business Center Capellen" the H1 without changing its wording.
