@@ -103,32 +103,90 @@
   .h-link:hover svg { transform: translate(2px, -2px); }
 
   /* ---------- 1. hero ---------- */
-  .hero { position: relative; height: 900px; color: var(--light); }
+  .hero { position: relative; height: 840px; color: var(--light); }
   .hero > .ph { position: absolute; inset: 0; }
   .hero > .ph::after { content: ""; position: absolute; inset: -20%; background: radial-gradient(40% 35% at 30% 40%, rgba(140,202,217,.16), transparent 70%), radial-gradient(35% 30% at 72% 62%, rgba(210,202,189,.14), transparent 70%); animation: drift 22s ease-in-out infinite alternate; }
   @keyframes drift { from { transform: translate3d(-4%, -2%, 0) scale(1); } to { transform: translate3d(5%, 3%, 0) scale(1.08); } }
   .hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,43,55,.5) 0%, rgba(30,43,55,.18) 24%, rgba(30,43,55,.22) 62%, rgba(30,43,55,.62) 100%); }
   .hero .wrap { position: relative; height: 100%; }
-  .hero-center { position: absolute; left: var(--gutter); right: var(--gutter); top: 50%; transform: translateY(-46%); display: grid; justify-items: center; gap: 26px; text-align: center; }
+  .hero-center { position: absolute; left: var(--gutter); right: var(--gutter); top: 150px; display: grid; justify-items: center; gap: 22px; text-align: center; }
   .hero-center .label { color: var(--cyan); display: inline-flex; align-items: center; gap: 14px; }
   .hero-center .label::before, .hero-center .label::after { content: ""; width: 36px; height: 1px; background: currentColor; opacity: .6; }
-  .hero h1 { font-size: clamp(40px, 4.9vw, 72px); line-height: 1.02; letter-spacing: -.03em; }
+  .hero h1 { font-size: clamp(38px, 4.4vw, 64px); line-height: 1.02; letter-spacing: -.03em; }
   .hero h1 em { font-family: var(--serif); font-stretch: 100%; font-style: italic; font-weight: 300; letter-spacing: -.01em; }
   .hero-center p { font: 300 20px/1.5 var(--display); color: rgba(243,241,236,.86); max-width: 34ch; }
-  .vtag { bottom: 40px; left: var(--gutter); }
+  .vtag { top: 104px; left: var(--gutter); }
   .scroll-cue { position: absolute; left: 50%; bottom: 36px; width: 1px; height: 64px; background: rgba(243,241,236,.25); overflow: hidden; }
   .scroll-cue::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--light); animation: cue 2.4s cubic-bezier(.6,0,.3,1) infinite; }
   @keyframes cue { to { top: 100%; } }
-  .hero-inset { position: absolute; right: var(--gutter); bottom: -150px; width: 260px; height: 330px; z-index: 4; }
-  .ring { position: absolute; z-index: 5; right: calc(var(--gutter) + 200px); bottom: 110px; width: 132px; height: 132px; border-radius: 50%; background: var(--night); color: #fff; display: grid; place-items: center; text-decoration: none; transition: background-color .3s ease; }
+  
+  .ring { position: absolute; z-index: 5; right: var(--gutter); top: 330px; width: 132px; height: 132px; border-radius: 50%; background: var(--night); color: #fff; display: grid; place-items: center; text-decoration: none; transition: background-color .3s ease; }
   .ring:hover { background: var(--cyan); color: var(--night); }
   .ring svg.txt { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 30s linear infinite; }
   .ring text { font: 500 10.5px var(--mono); letter-spacing: .24em; fill: currentColor; }
   .ring .arr { width: 26px; height: 26px; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* ---------- hero workspace selector ---------- */
+  .finder { position: relative; z-index: 20; margin-top: 26px; width: min(880px, 100%); display: grid; grid-template-columns: 1.35fr 1fr auto; align-items: stretch; background: rgba(239,235,229,.13); -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3); border: 1px solid rgba(243,241,236,.28); border-radius: 999px; padding: 8px; text-align: left; }
+  .field { position: relative; }
+  .field + .field::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 1px; background: rgba(243,241,236,.28); }
+  .field-btn { width: 100%; height: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 16px; padding: 12px 26px; border-radius: 999px; text-align: left; transition: background-color .3s ease; }
+  .field-btn:hover, .field-btn[aria-expanded="true"] { background: rgba(243,241,236,.1); }
+  .field-btn:disabled { cursor: default; opacity: .45; }
+  .field-btn:disabled:hover { background: none; }
+  .field-btn .k { grid-column: 1; font: 500 10.5px/1.2 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); }
+  .field-btn .v { grid-column: 1; font: 400 17px/1.3 var(--display); color: var(--light); white-space: nowrap; }
+  .field-btn .chev { grid-column: 2; grid-row: 1 / span 2; width: 14px; height: 14px; transition: transform .3s ease; }
+  .field-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .menu { position: absolute; left: 0; right: 0; top: calc(100% + 12px); z-index: 30; margin: 0; padding: 8px; list-style: none; background: rgba(239,235,229,.97); color: var(--ink); border-radius: 18px; box-shadow: 0 30px 60px -20px rgba(20,30,40,.45); opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+  .menu.open { opacity: 1; transform: none; pointer-events: auto; }
+  .menu li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 13px 16px; border-radius: 12px; font-size: 15.5px; cursor: pointer; transition: background-color .2s ease; }
+  .menu li:hover, .menu li.hl { background: var(--lime); }
+  .menu li[aria-selected="true"]::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan-deep); }
+  .finder-go { display: inline-flex; align-items: center; gap: 14px; padding: 0 34px; border-radius: 999px; background: var(--light); color: var(--night); font: 500 15px/1 var(--display); letter-spacing: .02em; text-decoration: none; white-space: nowrap; transition: background-color .3s ease, color .3s ease; }
+  .finder-go svg { width: 16px; height: 16px; transition: transform .3s ease; }
+  .finder-go:hover { background: var(--cyan); }
+  .finder-go:hover svg { transform: translate(3px, -3px); }
+
+  /* ---------- pricing: rises out of the hero ---------- */
+  .pricing { position: relative; z-index: 6; margin-top: -190px; padding-bottom: 150px; background: linear-gradient(180deg, transparent 0, transparent 190px, var(--paper) 190px); }
+  .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .pcard { position: relative; display: flex; flex-direction: column; background: var(--paper); padding: 34px 30px 30px; box-shadow: 0 40px 70px -48px rgba(20,30,40,.55); transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease; }
+  .pcard::before { content: ""; position: absolute; left: 0; top: 0; height: 2px; width: 100%; background: var(--cyan-deep); transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .pcard:hover { transform: translateY(-8px); box-shadow: 0 50px 80px -46px rgba(20,30,40,.6); }
+  .pcard:hover::before, .pcard.is-selected::before { transform: scaleX(1); }
+  .pcard.is-selected { box-shadow: 0 0 0 1px var(--cyan-deep), 0 50px 80px -46px rgba(20,30,40,.6); }
+  .pcard h3 { font: 300 27px/1.1 var(--display); font-stretch: 112%; letter-spacing: -.02em; min-height: 60px; }
+  .pcard h3 a { text-decoration: none; }
+  .price { display: flex; align-items: baseline; gap: 8px; margin-top: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--rule-l); }
+  .price .from { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+  .price .amt { font: 300 64px/1 var(--display); font-stretch: 118%; letter-spacing: -.04em; color: var(--ink); }
+  .price .unit { font: 400 16px/1 var(--display); color: var(--ink-2); }
+  .price .unit.tbc { color: var(--mute); }
+  .ptag { align-self: flex-start; margin-top: 12px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .08em; color: var(--ink-2); background: repeating-linear-gradient(-45deg, #E4DED5 0 6px, #D9D2C7 6px 7px); outline: 1px dashed rgba(31,42,51,.3); padding: 5px 8px; }
+  .pc-img { margin-top: 22px; height: 180px; }
+  .pc-img.contain { background: var(--lime); }
+  .pc-img.contain img { object-fit: cover; object-position: 50% 30%; }
+  .facts { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px; font: 300 15.5px/1.5 var(--display); color: var(--ink-2); flex: 1; }
+  .sizes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .sizes span { font: 500 12px/1 var(--mono); padding: 7px 9px; border: 1px solid var(--rule-l); border-radius: 999px; color: var(--ink); transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
+  .sizes span.on { background: var(--navy); border-color: var(--navy); color: var(--light); }
+  .pc-cta { margin-top: 24px; display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--rule-l); font: 500 14.5px/1 var(--display); letter-spacing: .02em; text-decoration: none; }
+  .pc-cta svg { width: 16px; height: 16px; color: var(--cyan-deep); transition: transform .3s ease; }
+  .pcard:hover .pc-cta svg { transform: translate(4px, -4px); }
+  .price-meta { display: grid; grid-template-columns: 4fr 4fr 4fr; gap: 48px; margin-top: 72px; padding-top: 44px; border-top: 1px solid var(--rule-l); }
+  .price-meta h2 { font-size: clamp(34px, 3.2vw, 46px); line-height: 1.02; }
+  .terms { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 10px; }
+  .terms li { display: flex; gap: 12px; align-items: baseline; font-size: 15.5px; color: var(--ink-2); }
+  .terms li::before { content: ""; flex: none; width: 14px; height: 1px; background: var(--cyan-deep); transform: translateY(-4px); }
+  .meta-col h4 { margin: 0 0 18px; font: 500 11px/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+  .meta-col dl { margin: 0; display: grid; gap: 14px; }
+  .meta-col dt { font: 500 15.5px/1.3 var(--display); color: var(--ink); }
+  .meta-col dd { margin: 3px 0 0; font: 300 14.5px/1.5 var(--display); color: var(--ink-2); }
+
   /* ---------- 2a. co-working ---------- */
-  .cowork { background: linear-gradient(180deg, var(--paper) 0%, var(--paper) 70%, #E2E1DD 100%); padding-block: 250px 180px; position: relative; overflow-x: clip; }
+  .cowork { background: linear-gradient(180deg, var(--paper) 0%, var(--paper) 70%, #E2E1DD 100%); padding-block: 120px 180px; position: relative; overflow-x: clip; }
   .cw-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 32px; align-items: start; }
   .cw-img { grid-column: 1 / span 8; margin-left: calc(-1 * max(var(--gutter), (100vw - var(--wrap)) / 2)); height: 720px; }
   .cw-text { grid-column: 7 / span 6; margin-top: 150px; position: relative; z-index: 2; background: var(--paper); box-shadow: 0 30px 60px -40px rgba(30,43,55,.35); padding: 56px 0 56px 64px; display: grid; gap: 32px; }
@@ -280,7 +338,7 @@
   .appendix td:first-child { font: 500 13px/1.4 var(--mono); color: #fff; white-space: nowrap; }
 
   @media (prefers-reduced-motion: reduce) {
-    .marquee-track, .ring svg.txt, .hero > .ph::after, .scroll-cue::after { animation: none; }
+    .marquee-track, .ring svg.txt, .hero > .ph::after { animation: none; }
     *, *::before, *::after { transition: none !important; }
     .gallery { scroll-behavior: auto; }
   }
@@ -291,8 +349,13 @@
     .site-header nav, .h-rule { display: none; }
     .site-header .wrap { grid-template-columns: 1fr auto; }
     .hero { height: 760px; }
-    .hero-inset { width: 170px; height: 220px; bottom: -80px; }
-    .ring { right: 170px; bottom: 60px; width: 100px; height: 100px; }
+    .finder { grid-template-columns: 1fr; border-radius: 22px; }
+    .field + .field::before { display: none; }
+    .finder-go { padding: 16px 24px; justify-content: center; }
+    .hero { height: auto; min-height: 820px; padding-bottom: 240px; }
+    .hero-center { position: relative; top: auto; left: auto; right: auto; padding-top: 170px; }
+    .price-grid, .price-meta { grid-template-columns: 1fr; }
+    .ring { display: none; }
     .cw-grid, .pv-grid, .trust, .voices .wrap, .foot-top, .foot-cols, .findmore .wrap, .spaces-head { grid-template-columns: 1fr; }
     .cw-grid > *, .pv-grid > * { grid-column: auto !important; margin: 0 !important; }
     .cw-img, .pv-img { height: 420px; }
@@ -318,7 +381,7 @@
 
 <div class="ribbon" role="note">
   <div class="wrap">
-    <span><b>BCC homepage</b> · concept v2.1 · desktop 1440 px · internal review, not production</span>
+    <span><b>BCC homepage</b> · concept v2.2 · desktop 1440 px · internal review, not production</span>
     <span>V = video needed · P = photo needed · all text from businesscentercapellen.lu · existing contact assistant unchanged, not shown</span>
   </div>
 </div>
@@ -355,14 +418,115 @@
         <span class="label">77, route d'Arlon · L-8311 Capellen</span>
         <h1 class="xl">Business Center <em>Capellen</em></h1>
         <p>Your trusted partner for office rentals in Capellen (Luxembourg)</p>
+        <form class="finder" id="finder" aria-label="Choose your workspace" onsubmit="return false">
+          <div class="field">
+            <button type="button" class="field-btn" id="ws-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="ws-menu"><span class="k">Choose your workspace</span><span class="v" id="ws-val">Private Offices</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <ul class="menu" id="ws-menu" role="listbox" aria-label="Workspace">
+              <li role="option" data-type="private" aria-selected="true">Private Offices</li>
+              <li role="option" data-type="cowork" aria-selected="false">Co-Working Space</li>
+              <li role="option" data-type="meeting" aria-selected="false">Meeting Rooms</li>
+              <li role="option" data-type="domic" aria-selected="false">Company Domiciliation</li>
+            </ul>
+          </div>
+          <div class="field">
+            <button type="button" class="field-btn" id="sz-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sz-menu"><span class="k">Team size</span><span class="v" id="sz-val">1 PERSON</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <ul class="menu" id="sz-menu" role="listbox" aria-label="Team size">
+              <li role="option" data-size="1" aria-selected="true">1 PERSON</li>
+              <li role="option" data-size="2" aria-selected="false">2 PERSONS</li>
+              <li role="option" data-size="3" aria-selected="false">3 PERSONS</li>
+              <li role="option" data-size="4" aria-selected="false">4 PERSONS</li>
+              <li role="option" data-size="6" aria-selected="false">6 PERSONS</li>
+              <li role="option" data-size="8" aria-selected="false">8 PERSONS</li>
+            </ul>
+          </div>
+          <a class="finder-go" id="finder-go" href="https://businesscentercapellen.lu/contact/">Get a Quote<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        </form>
       </div>
       <span class="tag vtag"><span><i>V1</i><b>VIDEO NEEDED: Building Entrance → Workspace</b></span><span>Full-bleed background · 16:9 · 20–25 s muted loop</span></span>
-      <span class="scroll-cue" aria-hidden="true"></span>
       <a class="ring" href="https://businesscentercapellen.lu/contact/" aria-label="Work with us: contact">
-        <svg class="txt" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66 66m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text><textPath href="#circ">WORK WITH US · WORK WITH US · WORK WITH US ·</textPath></text></svg>
+        <svg class="txt" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66 66m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text textLength="312" lengthAdjust="spacing"><textPath href="#circ" textLength="312" lengthAdjust="spacing">WORK WITH US · WORK WITH US · </textPath></text></svg>
         <svg class="arr" aria-hidden="true"><use href="#arr"/></svg>
       </a>
-      <figure class="photo hero-inset"><img src="assets/bcc-entrance.jpg" alt="Entrée du Business Center Capellen avec espace d’accueil vitré et signalétique BCC." width="1600" height="1200"></figure>
+    </div>
+  </section>
+
+  <!-- PRICING: workspace options, rising out of the hero -->
+  <section class="pricing" id="pricing" aria-label="Workspace options and prices">
+    <div class="wrap">
+      <div class="price-grid">
+        <article class="pcard is-selected" data-type="private">
+          <h3><a href="https://www.businesscentercapellen.lu/about-us/#offices">Private Offices</a></h3>
+          <div class="price"><span class="from">from</span><span class="amt">€ —</span><span class="unit">/ month</span></div>
+          <span class="ptag">€ PRICE NEEDED</span>
+          <figure class="photo pc-img"><img src="assets/bcc-private-office.jpg" alt="Bureau moderne et lumineux au Business Center Capellen, aménagé avec des postes de travail et mobilier ergonomique." width="1600" height="902"></figure>
+          <ul class="facts">
+            <li>From 1 to 8 people offices</li>
+            <li class="sizes" id="sizes"><span data-size="1" class="on">1</span><span data-size="2">2</span><span data-size="3">3</span><span data-size="4">4</span><span data-size="6">6</span><span data-size="8">8</span></li>
+            <li>Furnished or unfurnished</li>
+          </ul>
+          <a class="pc-cta" href="https://businesscentercapellen.lu/contact/">Get a Quote<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        </article>
+        <article class="pcard" data-type="cowork">
+          <h3><a href="https://www.businesscentercapellen.lu/about-us/#offices">Co-Working Space</a></h3>
+          <div class="price"><span class="from">from</span><span class="amt">€ —</span><span class="unit tbc">/ —</span></div>
+          <span class="ptag">€ PRICE + BILLING UNIT NEEDED</span>
+          <figure class="photo pc-img"><img src="assets/bcc-lounge.jpg" alt="Salle de détente et de réunion équipée d’un baby-foot, d’un téléviseur et d’un espace de travail moderne." width="1600" height="1200"></figure>
+          <ul class="facts">
+            <li>From basic package to all-inclusive packages, you decide.</li>
+            <li>Perfect for entrepreneurs, freelancers…</li>
+          </ul>
+          <a class="pc-cta" href="https://businesscentercapellen.lu/contact/">Get a Quote<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        </article>
+        <article class="pcard" data-type="meeting">
+          <h3><a href="https://www.businesscentercapellen.lu/about-us/#services">Meeting Rooms</a></h3>
+          <div class="price"><span class="from">from</span><span class="amt">€ —</span><span class="unit tbc">/ —</span></div>
+          <span class="ptag">€ PRICE + BILLING UNIT NEEDED</span>
+          <figure class="photo pc-img"><img src="assets/bcc-meeting-room.jpg" alt="Salle de réunion moderne avec table de conférence, projecteur et ambiance lumineuse bleutée." width="1600" height="1200"></figure>
+          <ul class="facts">
+            <li>Take advantage of our meeting rooms for in-house meetings or to welcome your customers/suppliers.</li>
+          </ul>
+          <a class="pc-cta" href="https://businesscentercapellen.lu/contact/">Get a Quote<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        </article>
+        <article class="pcard" data-type="domic">
+          <h3><a href="https://www.businesscentercapellen.lu/about-us/#services">Company Domiciliation</a></h3>
+          <div class="price"><span class="from">from</span><span class="amt">€ —</span><span class="unit tbc">/ —</span></div>
+          <span class="ptag">€ PRICE + BILLING UNIT NEEDED</span>
+          <figure class="photo pc-img contain"><img src="assets/bcc-bloc-c-sign.png" alt="Panneau d’entrée du Business Center Capellen au Luxembourg avec le logo de Cloud Power et d’autres entreprises." width="900" height="1125"></figure>
+          <ul class="facts">
+            <li>Company Creation/Domiciliation</li>
+          </ul>
+          <a class="pc-cta" href="https://businesscentercapellen.lu/contact/">Get a Quote<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        </article>
+      </div>
+
+      <div class="price-meta">
+        <div>
+          <h2 class="xl">Flexible packages to suit your needs.</h2>
+          <ul class="terms">
+            <li>No long-term commitment</li>
+            <li>Month-to-month contracts</li>
+            <li>24/7 secure badge access</li>
+            <li>Free parking available at the rear of the building</li>
+          </ul>
+        </div>
+        <div class="meta-col">
+          <h4>Included in the monthly rental charge</h4>
+          <dl>
+            <div><dt>Professional-quality WiFi</dt><dd>Included in the monthly rental charge.</dd></div>
+            <div><dt>Home &amp; Switchboard</dt><dd>Included in the monthly rental charge.</dd></div>
+            <div><dt>Cafétaria &amp; Kitchen</dt><dd>Access to kitchenette included in monthly rental.</dd></div>
+          </dl>
+        </div>
+        <div class="meta-col">
+          <h4>Additional services</h4>
+          <dl>
+            <div><dt>Parking Spaces</dt><dd>Supplement for a reserved named parking space</dd></div>
+            <div><dt>Cloud Services</dt><dd>Pricing is on a monthly basis, according to need.</dd></div>
+            <div><dt>Email room</dt><dd>Pricing is based on volume.</dd></div>
+            <div><dt>Accounting, Legal &amp; HR Department</dt><dd>Additional cost depending on requirements.</dd></div>
+          </dl>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -554,11 +718,13 @@
   <div class="wrap">
     <h2>Review notes (not part of the design)</h2>
     <p>Every heading, paragraph, testimonial, name, role, link and contact detail is copied from businesscentercapellen.lu. The only other text is the placeholder labels, the gallery captions (named from the live site's photo descriptions and the CyheadIT testimonial), and the language names.</p>
+    <p>Pricing: businesscentercapellen.lu publishes no prices (all pages checked on 24 Sept 2026). Every price slot shows “€ —” with a PRICE NEEDED tag. The facts around the prices (office sizes 1–8 people, furnished or unfurnished, month-to-month contracts, what is included in the monthly rental, how additional services are priced) are copied from the About Us page. The hero selector uses the verified categories and office sizes; “Get a Quote” is the site's own button text.</p>
     <p>The language selector is a UI concept only: clicking FR, DE or LU marks it active but the content stays in English. The existing contact assistant is out of scope and will stay exactly as it is.</p>
     <div class="table-scroll">
       <table>
         <thead><tr><th>ID</th><th>Asset</th><th>Format shown</th><th>Where</th></tr></thead>
         <tbody>
+          <tr><td>€</td><td>Prices: Private Offices (per month); Co-Working Space, Meeting Rooms, Company Domiciliation (price and billing unit)</td><td>Supplied by BCC. The official website publishes no prices.</td><td>Pricing panels directly under the hero</td></tr>
           <tr><td>V1</td><td>Video: Building Entrance → Workspace</td><td>16:9, full-bleed, 20–25 s loop</td><td>Hero background</td></tr>
           <tr><td>P1</td><td>Coworking Wide Interior</td><td>Horizontal ≈5:4, large</td><td>Co-Working OFfices</td></tr>
           <tr><td>P2</td><td>Private Office</td><td>Vertical ≈3:4, tall</td><td>Private Offices</td></tr>
@@ -603,6 +769,51 @@
         timer = setTimeout(function () { note.classList.remove('show'); }, 2200);
       });
     });
+
+    // Workspace selector over the hero video
+    var cards = document.querySelectorAll('.pcard');
+    var sizeChips = document.querySelectorAll('#sizes span');
+    var szBtn = document.getElementById('sz-btn');
+    var sizeLabels = { '1': '1 PERSON', '2': '2 PERSONS', '3': '3 PERSONS', '4': '4 PERSONS', '6': '6 PERSONS', '8': '8 PERSONS' };
+    function closeAll(except) {
+      document.querySelectorAll('.field-btn').forEach(function (b) {
+        if (b === except) return;
+        b.setAttribute('aria-expanded', 'false');
+        document.getElementById(b.getAttribute('aria-controls')).classList.remove('open');
+      });
+    }
+    function setupField(btnId, onPick) {
+      var btn = document.getElementById(btnId);
+      var menu = document.getElementById(btn.getAttribute('aria-controls'));
+      var opts = menu.querySelectorAll('li');
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = btn.getAttribute('aria-expanded') !== 'true';
+        closeAll(btn);
+        btn.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      });
+      opts.forEach(function (o) {
+        o.addEventListener('click', function () {
+          opts.forEach(function (x) { x.setAttribute('aria-selected', x === o ? 'true' : 'false'); });
+          btn.querySelector('.v').textContent = o.textContent;
+          closeAll();
+          onPick(o);
+          btn.focus();
+        });
+      });
+    }
+    setupField('ws-btn', function (o) {
+      var type = o.dataset.type;
+      cards.forEach(function (c) { c.classList.toggle('is-selected', c.dataset.type === type); });
+      szBtn.disabled = type !== 'private';
+      szBtn.querySelector('.v').textContent = type === 'private' ? sizeLabels[document.querySelector('#sz-menu [aria-selected="true"]').dataset.size] : '—';
+    });
+    setupField('sz-btn', function (o) {
+      sizeChips.forEach(function (c) { c.classList.toggle('on', c.dataset.size === o.dataset.size); });
+    });
+    document.addEventListener('click', function () { closeAll(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
 
     var g = document.getElementById('gallery');
     var items = g.querySelectorAll('figure');
