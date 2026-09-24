@@ -75,12 +75,22 @@
   .brand img { height: 30px; width: auto; }
   .brand span { font: 600 17px/1 var(--font); letter-spacing: -.01em; }
   .brand span b { color: var(--cyan); font-weight: 600; }
-  .site-header nav { display: flex; gap: 26px; margin-left: auto; font-size: 14px; }
+  .site-header nav { display: flex; align-items: center; gap: 34px; margin-left: auto; font-size: 14.5px; }
   .site-header nav a { text-decoration: none; opacity: .78; position: relative; padding-block: 6px; transition: opacity .2s ease; }
   .site-header nav a:hover { opacity: 1; }
   .site-header nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
   .site-header nav a:hover::after { transform: scaleX(1); }
   .site-header .slash { padding: 12px 22px; font-size: 14px; }
+  .dd { position: relative; }
+  .dd-top { display: inline-flex; align-items: center; gap: 6px; }
+  .dd-top svg { width: 14px; height: 14px; transition: transform .3s ease; }
+  .dd:hover .dd-top svg, .dd:focus-within .dd-top svg { transform: rotate(180deg); }
+  .dd-menu { position: absolute; left: -22px; top: calc(100% + 14px); min-width: 250px; display: grid; padding: 10px; background: rgba(0,26,30,.96); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid var(--line-d); box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+  .dd-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -16px; height: 16px; }
+  .dd:hover .dd-menu, .dd:focus-within .dd-menu { opacity: 1; transform: none; pointer-events: auto; }
+  .site-header nav .dd-menu a { opacity: .8; padding: 11px 12px; }
+  .site-header nav .dd-menu a:hover { opacity: 1; background: rgba(18,211,216,.08); }
+  .site-header nav .dd-menu a::after { display: none; }
 
   /* ---------- 1. hero ---------- */
   .hero { position: relative; height: 900px; background: radial-gradient(90% 70% at 78% 40%, #073842 0%, var(--abyss) 62%); color: var(--on-dark); overflow: hidden; }
@@ -94,6 +104,11 @@
   .hero h1 .l2 { display: block; color: var(--cyan); position: relative; width: max-content; max-width: 100%; }
   .hero h1 .l2::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.08em; height: .06em; background: var(--cyan); transform-origin: left; animation: draw 1.4s .5s cubic-bezier(.6,0,.2,1) both; }
   @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .hero-sub { font: 400 22px/1.45 var(--font); color: var(--on-dark-2); max-width: 30ch; }
+  .scroll-to { width: 54px; height: 54px; display: grid; place-items: center; color: var(--on-dark); border: 1px solid rgba(233,246,246,.3); border-radius: 50%; transition: border-color .3s ease, color .3s ease; }
+  .scroll-to svg { width: 20px; height: 20px; animation: nudge 2.2s ease-in-out infinite; }
+  .scroll-to:hover { border-color: var(--cyan); color: var(--cyan); }
+  @keyframes nudge { 50% { transform: translateY(4px); } }
   .make-easy { display: inline-flex; align-items: center; gap: 14px; font: 500 22px/1 var(--font); letter-spacing: -.01em; text-decoration: none; color: var(--on-dark); width: max-content; }
   .make-easy svg { width: 20px; height: 20px; color: var(--cyan); transition: transform .3s ease; }
   .make-easy:hover svg { transform: translateX(6px); }
@@ -173,8 +188,9 @@
   @keyframes blip { 0% { opacity: 0; } 8% { opacity: 1; } 60%, 100% { opacity: 0; } }
 
   /* ---------- 3. figures ---------- */
-  .figures { position: relative; z-index: 2; background: var(--teal); color: var(--on-dark); padding-block: 120px calc(var(--step) + 90px); }
-  .figures .wrap { display: grid; grid-template-columns: 3fr 9fr; gap: 64px; }
+  .figures { position: relative; z-index: 3; background: var(--teal); color: var(--on-dark); padding-block: 120px calc(var(--step) + 90px); }
+  .figures .wrap { display: block; }
+  .fig { grid-template-columns: 300px 1fr !important; }
   .fig-side { display: grid; align-content: space-between; gap: 40px; }
   .fig-side .mono { color: var(--on-dark-2); }
   .fig-list { display: grid; }
@@ -188,22 +204,8 @@
   .gauge i { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: var(--cyan); box-shadow: 0 0 12px rgba(18,211,216,.7); transform-origin: left; transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
   .fig.pre .gauge i { transform: scaleX(0) !important; }
 
-  /* ---------- 4. get answers ---------- */
-  .answers { position: relative; z-index: 1; background: var(--mist); color: var(--teal); padding-block: calc(var(--step) + 110px) 160px; }
-  .answers h2 { font-weight: 700; font-size: clamp(56px, 6.4vw, 96px); line-height: .92; letter-spacing: -.05em; margin-bottom: 80px; }
-  .path { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; position: relative; }
-  .path::before { content: ""; position: absolute; left: 0; right: 0; top: 30px; height: 1px; background: var(--line-l); }
-  .stop { position: relative; display: grid; gap: 18px; padding-top: 70px; text-decoration: none; }
-  .stop::before { content: ""; position: absolute; left: 0; top: 16px; width: 12px; height: 28px; background: var(--teal); transform: skewX(calc(-1 * var(--slant))); transition: background-color .3s ease, width .4s cubic-bezier(.2,.7,.2,1); }
-  .stop:hover::before { background: var(--cyan); width: 44px; }
-  .stop h3 { font-weight: 650; font-size: 34px; line-height: 1.05; letter-spacing: -.03em; }
-  .stop p { font-size: 17.5px; line-height: 1.6; color: var(--slate); max-width: 34ch; }
-  .stop .go { display: inline-flex; align-items: center; gap: 10px; font: 500 12.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--cyan-ink); }
-  .stop .go svg { width: 15px; height: 15px; transition: transform .3s ease; }
-  .stop:hover .go svg { transform: translateX(5px); }
-
   /* ---------- 5. why choose ---------- */
-  .why { position: relative; z-index: 2; background: var(--abyss); color: var(--on-dark); padding-block: 140px calc(var(--step) + 110px); overflow: hidden; }
+  .why { position: relative; z-index: 2; background: var(--abyss); color: var(--on-dark); padding-block: calc(var(--step) + 120px) calc(var(--step) + 110px); overflow: hidden; }
   .why .wrap { display: grid; grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
   .why h2 { position: sticky; top: 140px; font-weight: 700; font-size: clamp(48px, 5vw, 76px); line-height: .95; letter-spacing: -.045em; }
   .why h2 span { color: var(--cyan); }
@@ -253,15 +255,31 @@
   .qa .link svg { width: 15px; height: 15px; flex: none; transition: transform .3s ease; }
   .qa .link:hover svg { transform: translateX(5px); }
 
-  /* ---------- 8. closing + footer ---------- */
-  .closing { background: var(--abyss); color: var(--on-dark); padding-block: 150px 110px; position: relative; overflow: hidden; }
-  .closing::before { content: ""; position: absolute; right: 8%; top: -20%; width: 260px; height: 140%; background: linear-gradient(180deg, rgba(18,211,216,.0), rgba(18,211,216,.16), rgba(18,211,216,0)); transform: skewX(calc(-1 * var(--slant))); }
-  .closing .wrap { position: relative; display: flex; justify-content: space-between; align-items: end; gap: 40px; }
-  .closing h2 { font-weight: 700; font-size: clamp(56px, 7vw, 108px); line-height: .92; letter-spacing: -.055em; }
-  .closing h2 span { color: var(--cyan); }
-  .closing p { color: var(--on-dark-2); font-size: 20px; margin-top: 22px; }
-  .site-footer { background: var(--abyss); color: var(--on-dark-2); padding-block: 0 40px; }
-  .foot { display: grid; grid-template-columns: 4fr 3fr 3fr 2fr; gap: 40px; padding-block: 64px; border-top: 1px solid var(--line-d); }
+  /* ---------- 7. contact: the final action ---------- */
+  .contact { position: relative; background: var(--abyss); color: var(--on-dark); padding-block: 150px 110px; overflow: hidden; }
+  .contact::before { content: ""; position: absolute; right: 8%; top: -20%; width: 260px; height: 140%; background: linear-gradient(180deg, rgba(18,211,216,0), rgba(18,211,216,.14), rgba(18,211,216,0)); transform: skewX(calc(-1 * var(--slant))); pointer-events: none; }
+  .contact .wrap { position: relative; }
+  .contact-top { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 88px; }
+  .contact h2 { font-weight: 700; font-size: clamp(64px, 8vw, 124px); line-height: .9; letter-spacing: -.055em; }
+  .contact h2 span { color: var(--cyan); }
+  .contact-cta { display: flex; align-items: center; gap: 30px; }
+  .text-link { display: inline-flex; align-items: center; gap: 10px; font: 500 15px/1 var(--font); color: var(--on-dark); text-decoration: none; padding-block: 8px; border-bottom: 1px solid rgba(233,246,246,.35); transition: border-color .3s ease, color .3s ease; }
+  .text-link svg { width: 15px; height: 15px; transition: transform .3s ease; }
+  .text-link:hover { color: var(--cyan); border-color: var(--cyan); }
+  .text-link:hover svg { transform: translateX(4px); }
+  .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; position: relative; counter-reset: stop; }
+  .path::before { content: ""; position: absolute; left: 0; right: 0; top: 30px; height: 1px; background: var(--line-d); }
+  .stop { position: relative; display: grid; gap: 16px; align-content: start; padding-top: 70px; }
+  .stop::before { content: ""; position: absolute; left: 0; top: 16px; width: 12px; height: 28px; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); transition: width .5s cubic-bezier(.2,.7,.2,1); }
+  .stop:hover::before { width: 44px; }
+  .stop h3 { font-weight: 650; font-size: 30px; line-height: 1.05; letter-spacing: -.03em; color: var(--on-dark); }
+  .stop p { font-size: 17px; line-height: 1.6; color: var(--on-dark-2); max-width: 34ch; }
+  .details { margin: 96px 0 0; padding-top: 36px; border-top: 1px solid var(--line-d); display: grid; grid-template-columns: 2fr 3fr 4fr 3fr; gap: 32px; }
+  .details dt { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #6f8e92; margin-bottom: 10px; }
+  .details dd { margin: 0; font-size: 18px; color: var(--on-dark); }
+  .site-footer { background: var(--abyss); color: var(--on-dark-2); padding-block: 0 36px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 40px; padding-block: 48px; border-top: 1px solid var(--line-d); }
+  .foot-links { display: flex !important; gap: 36px !important; }
   .foot h4 { margin-bottom: 20px; font: 500 11.5px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #6f8e92; }
   .foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; }
   .foot a { text-decoration: none; } .foot a:hover { color: var(--cyan); }
@@ -295,15 +313,16 @@
     .hero { height: auto; }
     .hero .wrap { grid-template-columns: 1fr; padding-block: 120px calc(var(--step) + 40px); }
     .mark-stage { height: 260px; } .mark { width: 220px; } .mark-ring { width: 260px; height: 260px; } .mark-ring.r2 { width: 200px; height: 200px; }
-    .rail { display: none; }
-    .dna-head, .dna-grid, .figures .wrap, .why .wrap, .about .wrap, .faq .wrap, .foot, .path { grid-template-columns: 1fr; }
+    .dna-head, .dna-grid, .figures .wrap, .why .wrap, .about .wrap, .faq .wrap, .path { grid-template-columns: 1fr; }
     .index { position: static; }
     .panel { grid-template-columns: 1fr; padding: 28px; min-height: 0; }
     .panel .glyph { grid-column: 1; grid-row: auto; width: 160px; height: 160px; }
     .fig { grid-template-columns: 1fr; } .fig .num { grid-row: auto; font-size: 72px; } .gauge { grid-column: 1; }
     .value { grid-template-columns: 1fr; gap: 12px; } .value h3 { font-size: 42px; }
     .why h2 { position: static; }
-    .closing .wrap { flex-direction: column; align-items: flex-start; }
+    .contact-top { flex-direction: column; align-items: flex-start; }
+    .details { grid-template-columns: 1fr; }
+    .foot { flex-direction: column; align-items: flex-start; }
   }
 </style>
 
@@ -323,12 +342,16 @@
   <div class="wrap">
     <a class="brand" href="https://www.cloud-power.eu/"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
     <nav aria-label="Main">
-      <a href="https://www.cloud-power.eu/our-services/">Our Services</a>
-      <a href="https://www.cloud-power.eu/ai/">AI</a>
-      <a href="https://www.cloud-power.eu/managed-services/">Managed Services</a>
-      <a href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">SOC as a Service</a>
-      <a href="https://www.cloud-power.eu/consulting/">Consulting</a>
-      <a href="https://www.cloud-power.eu/digital-conception/">Digital Conception</a>
+      <div class="dd">
+        <a href="https://www.cloud-power.eu/our-services/" class="dd-top" aria-haspopup="true">Our Services<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <div class="dd-menu">
+          <a href="https://www.cloud-power.eu/managed-services/">Managed Services</a>
+          <a href="https://www.cloud-power.eu/ai/">AI</a>
+          <a href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">SOC as a Service</a>
+          <a href="https://www.cloud-power.eu/consulting/">Consulting</a>
+          <a href="https://www.cloud-power.eu/digital-conception/">Digital Conception</a>
+        </div>
+      </div>
       <a href="https://www.cloud-power.eu/cloud-power-news/">News</a>
     </nav>
     <a class="slash solid" href="https://www.cloud-power.eu/contact-us/">Contact Us</a>
@@ -341,29 +364,17 @@
     <canvas id="streaks" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="hero-copy">
-        <span class="hero-kicker mono">Cloud Power Luxembourg</span>
+        <span class="hero-kicker mono">Make IT Easy</span>
         <h1><span class="l1">Your IT Challenges,</span><span class="l2">Our Solutions</span></h1>
-        <a class="make-easy" href="https://www.cloud-power.eu/our-services/">Make IT Easy<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        <p class="hero-sub">A human-sized company that understands your needs</p>
         <div class="hero-ctas">
-          <a class="slash solid" href="https://www.cloud-power.eu/contact-us/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
-          <a class="slash ghost" href="https://odoo.cloud-power.eu/book/89996c28">Schedule an appointment</a>
+          <a class="slash solid" href="https://odoo.cloud-power.eu/book/89996c28">Schedule an appointment<svg aria-hidden="true"><use href="#arr"/></svg></a>
+          <a class="scroll-to" href="#dna" aria-label="Our DNA"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
         </div>
       </div>
       <div class="mark-stage" id="mark-stage" aria-hidden="true">
         <span class="mark-ring"></span><span class="mark-ring r2"></span>
         <img class="mark" id="mark" src="assets/cp-logo.webp" alt="" width="500" height="303">
-      </div>
-    </div>
-    <div class="rail">
-      <div class="wrap">
-        <ul>
-          <li><a href="#svc-managed">Managed Services</a></li>
-          <li><a href="#svc-ai">Artificial Intelligence</a></li>
-          <li><a href="#svc-digital">Digital Conception</a></li>
-          <li><a href="#svc-cloud">Private Cloud</a></li>
-          <li><a href="#svc-consulting">Consulting</a></li>
-          <li><a href="#svc-soc">SOC as a service</a></li>
-        </ul>
       </div>
     </div>
   </section>
@@ -373,7 +384,7 @@
     <div class="wrap">
       <div class="dna-head">
         <h2 class="rv">Our <span>DNA</span></h2>
-        <p class="dna-sub rv">A human-sized company that understands your needs</p>
+        <p class="dna-sub rv">Our teams are here to help you with most of your projects.</p>
       </div>
       <div class="dna-grid">
         <ol class="index" id="index">
@@ -394,7 +405,7 @@
               <g class="anim knob3"><circle class="ft" cx="100" cy="170" r="9"/></g>
             </svg>
             <p>Free yourself from specific tasks. We can take them off your hands.</p>
-            <div class="tags"><span>Private Cloud</span><span>Infrastructure</span><span>Performance Review</span><span>Back-up as a service</span></div>
+            <div class="tags"><span>Prioritize your projects</span><span>Optimize your internal resources</span><span>Reallocate your expenses</span></div>
             <a class="more" href="https://www.cloud-power.eu/managed-services/" aria-label="Managed Services"><svg aria-hidden="true"><use href="#diag"/></svg></a>
           </article>
           <article class="panel has-more" id="svc-ai">
@@ -430,8 +441,7 @@
               <g class="anim layer d1"><path class="s" d="M60 130L120 156L180 130L120 104Z"/></g>
               <g class="anim layer"><path class="c" d="M60 90L120 116L180 90L120 64Z" style="fill:rgba(18,211,216,.12)"/></g>
             </svg>
-            <p>Website | SaaS | Virtual Desktop Environnement | Private document sharing | IaaS | PaaS</p>
-            <div class="tags"><span>Website</span><span>Software as a service</span><span>Virtual Desktop Environnement</span><span>Private document sharing</span><span>Infrastructure as a service</span><span>Platform as a service</span></div>
+            <div class="tags"><span>Website</span><span>Software as a service</span><span>Virtual Desktop Environnement</span><span>Private document sharing</span><span>Infrastructure as a service</span><span>Platform as a service</span><span>Backup as a service</span></div>
             <a class="more" href="https://www.cloud-power.eu/managed-services/" aria-label="Private Cloud"><svg aria-hidden="true"><use href="#diag"/></svg></a>
           </article>
           <article class="panel has-more" id="svc-consulting">
@@ -463,12 +473,8 @@
   </section>
 
   <!-- 3. FIGURES (with their published sources) -->
-  <section class="figures step-down-l pull-up" style="margin-top:0">
+  <section class="figures step-down-l">
     <div class="wrap">
-      <div class="fig-side">
-        <span class="mono">Figures published on cloud-power.eu, with sources</span>
-        <div><a class="slash solid" href="https://odoo.cloud-power.eu/book/89996c28">Schedule an appointment<svg aria-hidden="true"><use href="#arr"/></svg></a></div>
-      </div>
       <div class="fig-list">
         <div class="fig rv" data-value="70"><div class="num"><span class="count">70</span><small>%</small></div><p class="txt">of outsourcing strategies are related to cost reduction</p><div class="gauge"><i style="transform:scaleX(.70)"></i></div><p class="src">Source: outsourceaccelerator - Deloitte</p></div>
         <div class="fig rv" data-value="80"><div class="num"><span class="count">80</span><small>%</small></div><p class="txt">of companies claim to have improved their operations in the first few months after adopting the Cloud Technology</p><div class="gauge"><i style="transform:scaleX(.80)"></i></div><p class="src">Source: lxahub.com</p></div>
@@ -478,20 +484,8 @@
     </div>
   </section>
 
-  <!-- 4. GET ANSWERS -->
-  <section class="answers pull-up">
-    <div class="wrap">
-      <h2 class="rv">Get Answers</h2>
-      <div class="path">
-        <a class="stop rv" href="https://odoo.cloud-power.eu/book/89996c28"><h3>Schedule an Appointment</h3><p>Feel free to schedule an appoitnment to tell us more about your project</p><span class="go">Click Here<svg aria-hidden="true"><use href="#arr"/></svg></span></a>
-        <a class="stop rv" href="https://www.cloud-power.eu/contact-us/"><h3>Project Analysis</h3><p>our teams will work on your project to provide you with the offer that best suits your needs.</p><span class="go">Click Here<svg aria-hidden="true"><use href="#arr"/></svg></span></a>
-        <a class="stop rv" href="https://www.cloud-power.eu/contact-us/"><h3>Let's Go</h3><p>Take your IT project to the next level</p><span class="go">Click Here<svg aria-hidden="true"><use href="#arr"/></svg></span></a>
-      </div>
-    </div>
-  </section>
-
   <!-- 5. WHY CHOOSE CLOUD POWER -->
-  <section class="why step-down-r">
+  <section class="why step-down-r pull-up">
     <div class="wrap">
       <h2>Why choose <span>Cloud Power</span> ?</h2>
       <div class="values">
@@ -516,7 +510,6 @@
         <p class="lead rv">The world is changing, and has never been so connected. Access to technology and Internet has become as commonplace as access to water..</p>
         <p class="rv">Our society has evolved: our relationship with work, our friends, our family, as well as our way of life.</p>
         <p class="rv">Since January 2017, Cloud Power wants to differentiate by taking advantage of new technologies and digital projects, to be inspired by innovation and to evolve the customer behaviour facing the IT or the Cloud.</p>
-        <a class="slash dark rv" href="https://www.cloud-power.eu/contact-us/">Feel Free To Contact us<svg aria-hidden="true"><use href="#arr"/></svg></a>
       </div>
     </div>
   </section>
@@ -530,8 +523,6 @@
           <button type="button" id="qa1" aria-expanded="true" aria-controls="qa1-b">What are Managed Services ?<span class="pm" aria-hidden="true"></span></button>
           <div class="body" id="qa1-b" role="region" aria-labelledby="qa1"><div><div class="inner">
             <p>Managed services go beyond a traditional vendor relationship — they’re a strategic alliance. By entrusting a provider with the responsibility for specific outcomes or operations, businesses gain more than just support; they unlock proactive optimization, around-the-clock management, and expert guidance. This partnership empowers organizations to focus on what they do best, while the provider ensures high performance, reliability, and continuous improvement aligned with business goals.</p>
-            <ul><li>Private Cloud</li><li>Infrastructure</li><li>Performance Review</li><li>Back-up as a service</li><li>…</li></ul>
-            <a class="link" href="https://www.cloud-power.eu/managed-services/">Click here to discover our managed services offer<svg aria-hidden="true"><use href="#arr"/></svg></a>
           </div></div></div>
         </div>
         <div class="qa">
@@ -542,21 +533,33 @@
             <p>Far from being reactive, the modern SOC adopts a proactive posture. Security professionals no longer wait for incidents to occur — they prepare for them, knowing that cyberattacks are inevitable.</p>
             <p>Combining innovative technologies with expert analysis, the SOC continuously evolves to match the sophistication of modern threats. From advanced phishing campaigns to stealth intrusions, today’s attacks demand intelligent, adaptive defenses — and the SOC delivers exactly that.</p>
             <p>A cornerstone of business resilience, the SOC ensures not only protection but continuity — keeping systems running, data safe, and organizations one step ahead.</p>
-            <a class="link" href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">Explore our SOC solutions and find the right fit for your organization<svg aria-hidden="true"><use href="#arr"/></svg></a>
           </div></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 8. CLOSING -->
-  <section class="closing">
+  <!-- 7. CONTACT: the one final action -->
+  <section class="contact" id="contact">
     <div class="wrap">
-      <div>
-        <h2 class="rv">Any Questions ?<br><span>Need a Quote ?</span></h2>
-        <p class="rv">Feel free to contact us</p>
+      <div class="contact-top">
+        <h2 class="rv">Get <span>Answers</span></h2>
+        <div class="contact-cta rv">
+          <a class="slash solid" href="https://odoo.cloud-power.eu/book/89996c28">Schedule an appointment<svg aria-hidden="true"><use href="#arr"/></svg></a>
+          <a class="text-link" href="https://www.cloud-power.eu/contact-us/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        </div>
       </div>
-      <a class="slash solid rv" href="https://www.cloud-power.eu/contact-us/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+      <ol class="path">
+        <li class="stop rv"><h3>Schedule an Appointment</h3><p>Feel free to schedule an appoitnment to tell us more about your project</p></li>
+        <li class="stop rv"><h3>Project Analysis</h3><p>our teams will work on your project to provide you with the offer that best suits your needs.</p></li>
+        <li class="stop rv"><h3>Let's Go</h3><p>Take your IT project to the next level</p></li>
+      </ol>
+      <dl class="details rv">
+        <div><dt>Phone</dt><dd>+352 20 600 820</dd></div>
+        <div><dt>Email</dt><dd>sales@cloud-power.eu</dd></div>
+        <div><dt>Address</dt><dd>77, Route d'Arlon 8311 Capellen, Luxembourg</dd></div>
+        <div><dt>Hours</dt><dd>Mon-Fri 9:00 - 17:00</dd></div>
+      </dl>
     </div>
   </section>
 </main>
@@ -564,33 +567,13 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="foot">
-      <div><a class="brand" href="https://www.cloud-power.eu/"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a></div>
-      <div>
-        <h4>Our Services</h4>
-        <ul>
-          <li><a href="https://www.cloud-power.eu/ai/">AI</a></li>
-          <li><a href="https://www.cloud-power.eu/managed-services/">Managed Services</a></li>
-          <li><a href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">SOC as a Service</a></li>
-          <li><a href="https://www.cloud-power.eu/consulting/">Consulting</a></li>
-          <li><a href="https://www.cloud-power.eu/digital-conception/">Digital Conception</a></li>
-          <li><a href="https://www.cloud-power.eu/cloud-power-news/">News</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact Us</h4>
-        <dl>
-          <div><dt>Address</dt><dd>77, Route d'Arlon 8311 Capellen, Luxembourg</dd></div>
-          <div><dt>Hours</dt><dd>Mon-Fri 9:00 - 17:00</dd></div>
-        </dl>
-      </div>
-      <div>
-        <h4>&nbsp;</h4>
-        <dl>
-          <div><dt>Phone</dt><dd>+352 20 600 820</dd></div>
-          <div><dt>Email</dt><dd>sales@cloud-power.eu</dd></div>
-          <div><dt>Linkedin</dt><dd><a href="https://www.linkedin.com/company/cplux">linkedin.com/company/cplux</a></dd></div>
-        </dl>
-      </div>
+      <a class="brand" href="https://www.cloud-power.eu/"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
+      <ul class="foot-links">
+        <li><a href="https://www.cloud-power.eu/our-services/">Our Services</a></li>
+        <li><a href="https://www.cloud-power.eu/cloud-power-news/">News</a></li>
+        <li><a href="https://www.cloud-power.eu/contact-us/">Contact Us</a></li>
+        <li><a href="https://www.linkedin.com/company/cplux">Linkedin</a></li>
+      </ul>
     </div>
     <p class="legal">© 2025 Cloud Power Luxembourg SA</p>
   </div>
@@ -600,7 +583,8 @@
   <div class="wrap">
     <h2>Review notes (not part of the design)</h2>
     <p>Source of all content: cloud-power.eu (homepage, Our Services, Managed Services, AI, SOC as a Service, Digital Conception, Consulting and Contact Us pages, read on 24 Sept 2026). Service descriptions and tags come from those pages. The four figures and their sources are the ones on the homepage.</p>
-    <p>Added presentation elements only: the "Cloud Power" wordmark next to the logo, the kicker "Cloud Power Luxembourg", the index counter (01/06), the label over the figures, the "Since January 2017" caption and the outlined year. No photos or videos are needed: every visual is drawn in code.</p>
+    <p>v2.1 content cleanup: each section has one job (hero = positioning, Our DNA = what Cloud Power does, figures = context, Why = trust, About = story, FAQ = explanation, Get Answers = the one final action). Contact actions reduced from 9 to 4 (header Contact Us, hero and final Schedule an appointment, final Contact Us). Service names reduced from 5 appearances to 2 (header menu, Our DNA).</p>
+    <p>Added presentation elements only: the "Cloud Power" wordmark next to the logo, the index counter (01/06), the "Since January 2017" caption and the outlined year. No photos or videos are needed: every visual is drawn in code.</p>
     <p>Spelling kept exactly as on the live site, to fix on both: <code>appoitnment</code> (Get Answers), <code>Environnement</code> (Private Cloud), <code>Soc</code> in "What is Soc as a Service ?", the double full stop after "access to water..".</p>
   </div>
 </section>
