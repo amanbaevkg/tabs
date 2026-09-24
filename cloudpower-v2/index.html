@@ -1,0 +1,708 @@
+<title>Cloud Power Slash Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  /* Single deliberate look (a mockup of the website itself), so it does not follow the viewer's theme. */
+  :root {
+    color-scheme: light;
+    --abyss: #001A1E;        /* deepest teal, hero and footer */
+    --teal: #002F35;         /* Cloud Power primary */
+    --teal-2: #07404A;       /* raised teal */
+    --mint: #EEFFFD;         /* Cloud Power secondary */
+    --paper: #F4FAF9;        /* light chapters */
+    --mist: #E2EEEC;         /* light raised */
+    --slate: #3E4042;        /* Cloud Power text */
+    --mute: #6B7A7D;
+    --cyan: #12D3D8;         /* logo cyan */
+    --cyan-hi: #5FF0F2;
+    --cyan-ink: #077E83;     /* cyan dark enough for text on light */
+    --on-dark: #E9F6F6;
+    --on-dark-2: #9DB6B9;
+    --line-d: rgba(233,246,246,.14);
+    --line-l: rgba(0,47,53,.13);
+    --slant: 19deg;          /* the angle of the slash in the CP logo */
+    --font: "Geist", "Inter", "Helvetica Neue", Arial, sans-serif;
+    --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+    --wrap: 1320px;
+    --gutter: 60px;
+    --step: 110px;           /* height of the slash-step between sections */
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: clip; overflow-anchor: none; }
+  body { margin: 0; background: var(--paper); color: var(--slate); font: 400 17px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3, h4, p, figure, blockquote { margin: 0; }
+  h1, h2, h3 { text-wrap: balance; color: inherit; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+  :focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+  .wrap { width: 100%; max-width: calc(var(--wrap) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+
+  /* ---------- review ribbon (not part of the design) ---------- */
+  .ribbon { background: #1d2224; color: #d9e2e3; font: 400 12px/1.4 var(--mono); }
+  .ribbon .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 8px; }
+  .ribbon b { color: #fff; font-weight: 500; }
+
+  /* ---------- slash buttons: parallelograms at the logo angle ---------- */
+  .slash { position: relative; display: inline-flex; align-items: center; gap: 12px; padding: 16px 30px; font: 600 15px/1 var(--font); letter-spacing: .01em; text-decoration: none; isolation: isolate; transition: color .3s ease; }
+  .slash::before { content: ""; position: absolute; inset: 0; z-index: -1; transform: skewX(calc(-1 * var(--slant))); transition: background-color .3s ease, box-shadow .3s ease, border-color .3s ease; }
+  .slash svg { width: 15px; height: 15px; transition: transform .3s ease; }
+  .slash:hover svg { transform: translateX(4px); }
+  .slash.solid { color: var(--abyss); }
+  .slash.solid::before { background: var(--cyan); }
+  .slash.solid:hover::before { background: var(--cyan-hi); box-shadow: 0 0 34px rgba(18,211,216,.45); }
+  .slash.ghost { color: var(--on-dark); }
+  .slash.ghost::before { border: 1px solid rgba(233,246,246,.35); }
+  .slash.ghost:hover::before { border-color: var(--cyan); background: rgba(18,211,216,.08); }
+  .slash.dark { color: var(--mint); }
+  .slash.dark::before { background: var(--teal); }
+  .slash.dark:hover::before { background: var(--teal-2); }
+
+  /* ---------- slash-step section edge ---------- */
+  /* a horizontal edge that drops by --step through a stroke at the logo angle */
+  .step-down-r { clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--step)), 64% calc(100% - var(--step)), calc(64% - 38px) 100%, 0 100%); }
+  .step-down-l { clip-path: polygon(0 0, 100% 0, 100% 100%, calc(36% + 38px) 100%, 36% calc(100% - var(--step)), 0 calc(100% - var(--step))); }
+  .pull-up { margin-top: calc(-1 * var(--step)); }
+
+  /* ---------- header ---------- */
+  .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 60; height: 80px; margin-bottom: -80px; color: var(--on-dark); transition: background-color .4s ease, box-shadow .4s ease, transform .45s cubic-bezier(.2,.7,.2,1); }
+  .site-header.solid { background: rgba(0,26,30,.78); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); box-shadow: 0 1px 0 var(--line-d); }
+  .site-header.away { transform: translateY(-100%); }
+  .site-header .wrap { height: 100%; display: flex; align-items: center; gap: 40px; }
+  .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; flex: none; }
+  .brand img { height: 30px; width: auto; }
+  .brand span { font: 600 17px/1 var(--font); letter-spacing: -.01em; }
+  .brand span b { color: var(--cyan); font-weight: 600; }
+  .site-header nav { display: flex; gap: 26px; margin-left: auto; font-size: 14px; }
+  .site-header nav a { text-decoration: none; opacity: .78; position: relative; padding-block: 6px; transition: opacity .2s ease; }
+  .site-header nav a:hover { opacity: 1; }
+  .site-header nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+  .site-header nav a:hover::after { transform: scaleX(1); }
+  .site-header .slash { padding: 12px 22px; font-size: 14px; }
+
+  /* ---------- 1. hero ---------- */
+  .hero { position: relative; height: 900px; background: radial-gradient(90% 70% at 78% 40%, #073842 0%, var(--abyss) 62%); color: var(--on-dark); overflow: hidden; }
+  #streaks { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero .wrap { position: relative; height: 100%; display: grid; grid-template-columns: 7fr 5fr; align-items: center; gap: 40px; padding-bottom: var(--step); }
+  .hero-copy { display: grid; gap: 34px; padding-top: 40px; }
+  .hero-kicker { color: var(--cyan); display: inline-flex; align-items: center; gap: 14px; }
+  .hero-kicker::before { content: ""; width: 3px; height: 18px; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); }
+  .hero h1 { font-weight: 700; font-size: clamp(56px, 7vw, 104px); line-height: .95; letter-spacing: -.05em; }
+  .hero h1 .l1 { display: block; color: var(--on-dark); }
+  .hero h1 .l2 { display: block; color: var(--cyan); position: relative; width: max-content; max-width: 100%; }
+  .hero h1 .l2::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.08em; height: .06em; background: var(--cyan); transform-origin: left; animation: draw 1.4s .5s cubic-bezier(.6,0,.2,1) both; }
+  @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .make-easy { display: inline-flex; align-items: center; gap: 14px; font: 500 22px/1 var(--font); letter-spacing: -.01em; text-decoration: none; color: var(--on-dark); width: max-content; }
+  .make-easy svg { width: 20px; height: 20px; color: var(--cyan); transition: transform .3s ease; }
+  .make-easy:hover svg { transform: translateX(6px); }
+  .hero-ctas { display: flex; gap: 22px; align-items: center; }
+  .mark-stage { position: relative; height: 520px; perspective: 1100px; display: grid; place-items: center; }
+  .mark { width: 420px; height: auto; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.7,.2,1); filter: drop-shadow(0 30px 60px rgba(0,0,0,.45)) drop-shadow(0 0 40px rgba(18,211,216,.25)); animation: floaty 7s ease-in-out infinite; }
+  @keyframes floaty { 50% { translate: 0 -12px; } }
+  .mark-ring { position: absolute; width: 520px; height: 520px; border-radius: 50%; border: 1px solid var(--line-d); }
+  .mark-ring.r2 { width: 380px; height: 380px; border-style: dashed; border-color: rgba(18,211,216,.22); animation: spin 60s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .rail { position: absolute; left: 0; right: 0; bottom: 0; height: var(--step); z-index: 2; }
+  .rail .wrap { height: 100%; display: flex; align-items: center; }
+  .rail ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0; width: 64%; }
+  .rail li { flex: 1; }
+  .rail a { display: flex; align-items: center; gap: 10px; padding: 12px 14px 12px 0; font-size: 14px; color: var(--on-dark-2); text-decoration: none; transition: color .25s ease; white-space: nowrap; }
+  .rail a::before { content: ""; width: 2px; height: 14px; background: currentColor; opacity: .6; transform: skewX(calc(-1 * var(--slant))); transition: background-color .25s ease, opacity .25s ease; }
+  .rail a:hover { color: var(--on-dark); }
+  .rail a:hover::before { background: var(--cyan); opacity: 1; }
+
+  /* ---------- 2. our DNA: scroll-driven service index ---------- */
+  .dna { background: var(--paper); color: var(--teal); padding-block: 80px 190px; }
+  .dna-head { display: grid; grid-template-columns: 7fr 5fr; gap: 40px; align-items: end; margin-bottom: 90px; }
+  .dna h2 { font-weight: 700; font-size: clamp(64px, 8.5vw, 132px); line-height: .9; letter-spacing: -.055em; }
+  .dna h2 span { color: var(--cyan-ink); }
+  .dna-sub { font: 400 22px/1.45 var(--font); color: var(--slate); max-width: 26ch; padding-bottom: 10px; }
+  .dna-grid { display: grid; grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
+  .index { position: sticky; top: 130px; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-l); }
+  .index li { border-bottom: 1px solid var(--line-l); }
+  .index a { display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 14px; padding: 20px 0; text-decoration: none; font: 500 20px/1.2 var(--font); letter-spacing: -.01em; color: var(--mute); transition: color .3s ease, padding .4s cubic-bezier(.2,.7,.2,1); }
+  .index a::before { content: ""; width: 3px; height: 20px; justify-self: center; background: var(--line-l); transform: skewX(calc(-1 * var(--slant))); transition: background-color .3s ease, height .3s ease; }
+  .index a .n { font: 400 12px/1 var(--mono); letter-spacing: .08em; opacity: 0; transition: opacity .3s ease; }
+  .index a:hover { color: var(--teal); }
+  .index li.on a { color: var(--teal); padding-left: 10px; }
+  .index li.on a::before { background: var(--cyan); height: 28px; }
+  .index li.on a .n { opacity: 1; color: var(--cyan-ink); }
+  .panels { display: grid; gap: 28px; }
+  .panel { position: relative; min-height: 560px; padding: 56px 56px 48px; background: #fff; border: 1px solid var(--line-l); display: grid; grid-template-columns: 1fr 240px; grid-template-rows: auto 1fr auto; gap: 26px 40px; scroll-margin-top: 130px; transition: border-color .5s ease, box-shadow .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+  .panel::before { content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 4px; background: var(--cyan); transform: scaleY(0); transform-origin: top; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+  .panel.on { border-color: rgba(0,47,53,.22); box-shadow: 0 40px 80px -50px rgba(0,47,53,.45); }
+  .panel.on::before { transform: scaleY(1); }
+  .panel h3 { grid-column: 1; font-weight: 650; font-size: 46px; line-height: 1; letter-spacing: -.035em; color: var(--teal); }
+  .panel h3 a { text-decoration: none; }
+  .panel p { grid-column: 1; font-size: 18px; line-height: 1.65; color: var(--slate); max-width: 46ch; }
+  .panel .glyph { grid-column: 2; grid-row: 1 / span 2; width: 240px; height: 240px; }
+  .tags { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; align-self: end; }
+  .tags span { font: 400 12.5px/1 var(--mono); letter-spacing: .02em; padding: 9px 12px; border: 1px solid var(--line-l); color: var(--teal); background: var(--paper); transition: background-color .3s ease, border-color .3s ease; }
+  .panel:hover .tags span { border-color: rgba(7,126,131,.35); }
+  .panel .more { position: absolute; right: 48px; bottom: 44px; width: 52px; height: 52px; display: grid; place-items: center; color: var(--teal); text-decoration: none; isolation: isolate; }
+  .panel .more::before { content: ""; position: absolute; inset: 0; z-index: -1; border: 1px solid var(--line-l); transform: skewX(calc(-1 * var(--slant))); transition: background-color .3s ease, border-color .3s ease; }
+  .panel .more:hover::before { background: var(--cyan); border-color: var(--cyan); }
+  .panel .more svg { width: 18px; height: 18px; }
+  .panel.has-more .tags { padding-right: 90px; }
+
+  /* glyphs: small animated drawings, one per service; they run while their panel is active */
+  .glyph * { vector-effect: non-scaling-stroke; }
+  .glyph .s { fill: none; stroke: var(--teal); stroke-width: 1.5; }
+  .glyph .c { fill: none; stroke: var(--cyan); stroke-width: 2; }
+  .glyph .f { fill: var(--cyan); }
+  .glyph .ft { fill: var(--teal); }
+  .panel .glyph .anim { animation-play-state: paused; }
+  .panel.on .glyph .anim { animation-play-state: running; }
+  .knob1 { animation: k1 4s ease-in-out infinite; } .knob2 { animation: k2 4s ease-in-out infinite; } .knob3 { animation: k1 4s ease-in-out infinite reverse; }
+  @keyframes k1 { 50% { transform: translateX(70px); } } @keyframes k2 { 50% { transform: translateX(-60px); } }
+  .node { transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-in-out infinite; }
+  .node.d1 { animation-delay: .4s; } .node.d2 { animation-delay: .8s; } .node.d3 { animation-delay: 1.2s; }
+  @keyframes pulse { 50% { transform: scale(1.6); opacity: .55; } }
+  .flow { stroke-dasharray: 6 8; animation: flow 1.6s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -28; } }
+  .drawn { stroke-dasharray: 400; animation: drawn 5s ease-in-out infinite; }
+  @keyframes drawn { 0% { stroke-dashoffset: 400; } 45%, 70% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -400; } }
+  .layer { animation: lift 5s ease-in-out infinite; } .layer.d1 { animation-delay: .35s; } .layer.d2 { animation-delay: .7s; }
+  @keyframes lift { 50% { transform: translateY(-10px); } }
+  .pillar { transform-box: fill-box; transform-origin: bottom; animation: rise 3.6s ease-in-out infinite; } .pillar.d1 { animation-delay: .3s; } .pillar.d2 { animation-delay: .6s; }
+  @keyframes rise { 0%, 100% { transform: scaleY(.55); } 50% { transform: scaleY(1); } }
+  .sweep { transform-origin: 120px 120px; animation: spin 3.2s linear infinite; }
+  .blip { animation: blip 3.2s ease-out infinite; opacity: 0; } .blip.d1 { animation-delay: 1.1s; } .blip.d2 { animation-delay: 2.2s; }
+  @keyframes blip { 0% { opacity: 0; } 8% { opacity: 1; } 60%, 100% { opacity: 0; } }
+
+  /* ---------- 3. figures ---------- */
+  .figures { position: relative; z-index: 2; background: var(--teal); color: var(--on-dark); padding-block: 120px calc(var(--step) + 90px); }
+  .figures .wrap { display: grid; grid-template-columns: 3fr 9fr; gap: 64px; }
+  .fig-side { display: grid; align-content: space-between; gap: 40px; }
+  .fig-side .mono { color: var(--on-dark-2); }
+  .fig-list { display: grid; }
+  .fig { display: grid; grid-template-columns: 250px 1fr; gap: 12px 48px; align-items: center; padding-block: 34px; border-top: 1px solid var(--line-d); }
+  .fig:last-child { border-bottom: 1px solid var(--line-d); }
+  .fig .num { grid-row: 1 / span 2; font: 700 104px/1 var(--font); letter-spacing: -.06em; color: var(--cyan); font-variant-numeric: tabular-nums; }
+  .fig .num small { font-size: .5em; letter-spacing: -.02em; margin-left: 4px; }
+  .fig .txt { font-size: 20px; line-height: 1.45; color: var(--on-dark); max-width: 44ch; }
+  .fig .src { font: 400 12px/1.4 var(--mono); letter-spacing: .04em; color: var(--on-dark-2); }
+  .gauge { grid-column: 2; height: 2px; background: var(--line-d); position: relative; overflow: hidden; }
+  .gauge i { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: var(--cyan); box-shadow: 0 0 12px rgba(18,211,216,.7); transform-origin: left; transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+  .fig.pre .gauge i { transform: scaleX(0) !important; }
+
+  /* ---------- 4. get answers ---------- */
+  .answers { position: relative; z-index: 1; background: var(--mist); color: var(--teal); padding-block: calc(var(--step) + 110px) 160px; }
+  .answers h2 { font-weight: 700; font-size: clamp(56px, 6.4vw, 96px); line-height: .92; letter-spacing: -.05em; margin-bottom: 80px; }
+  .path { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; position: relative; }
+  .path::before { content: ""; position: absolute; left: 0; right: 0; top: 30px; height: 1px; background: var(--line-l); }
+  .stop { position: relative; display: grid; gap: 18px; padding-top: 70px; text-decoration: none; }
+  .stop::before { content: ""; position: absolute; left: 0; top: 16px; width: 12px; height: 28px; background: var(--teal); transform: skewX(calc(-1 * var(--slant))); transition: background-color .3s ease, width .4s cubic-bezier(.2,.7,.2,1); }
+  .stop:hover::before { background: var(--cyan); width: 44px; }
+  .stop h3 { font-weight: 650; font-size: 34px; line-height: 1.05; letter-spacing: -.03em; }
+  .stop p { font-size: 17.5px; line-height: 1.6; color: var(--slate); max-width: 34ch; }
+  .stop .go { display: inline-flex; align-items: center; gap: 10px; font: 500 12.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--cyan-ink); }
+  .stop .go svg { width: 15px; height: 15px; transition: transform .3s ease; }
+  .stop:hover .go svg { transform: translateX(5px); }
+
+  /* ---------- 5. why choose ---------- */
+  .why { position: relative; z-index: 2; background: var(--abyss); color: var(--on-dark); padding-block: 140px calc(var(--step) + 110px); overflow: hidden; }
+  .why .wrap { display: grid; grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
+  .why h2 { position: sticky; top: 140px; font-weight: 700; font-size: clamp(48px, 5vw, 76px); line-height: .95; letter-spacing: -.045em; }
+  .why h2 span { color: var(--cyan); }
+  .values { display: grid; }
+  .value { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: baseline; padding-block: 40px; border-top: 1px solid var(--line-d); position: relative; }
+  .value:last-child { border-bottom: 1px solid var(--line-d); }
+  .value::before { content: ""; position: absolute; left: 0; top: -1px; height: 1px; width: 100%; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+  .value:hover::before { transform: scaleX(1); }
+  .value h3 { font-weight: 300; font-size: 64px; line-height: 1; letter-spacing: -.05em; color: var(--on-dark); transition: color .3s ease, transform .5s cubic-bezier(.2,.7,.2,1); }
+  .value:hover h3 { color: var(--cyan); transform: translateX(12px); }
+  .value p { font-size: 18px; line-height: 1.6; color: var(--on-dark-2); transition: color .3s ease; }
+  .value:hover p { color: var(--on-dark); }
+
+  /* ---------- 6. about ---------- */
+  .about { position: relative; z-index: 1; background: var(--paper); color: var(--teal); padding-block: calc(var(--step) + 120px) 160px; }
+  .about .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center; }
+  .since { position: relative; aspect-ratio: 1 / 1; max-width: 100%; background: var(--abyss); display: grid; place-items: center; overflow: hidden; }
+  .since img { width: 58%; height: auto; position: relative; z-index: 1; margin-bottom: 16%; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+  .since:hover img { transform: scale(1.04) rotate(-2deg); }
+  .since .year { position: absolute; right: 24px; bottom: -30px; font: 800 150px/1 var(--font); letter-spacing: -.06em; color: transparent; -webkit-text-stroke: 1px rgba(18,211,216,.3); }
+  .since .cap { position: absolute; left: 28px; top: 26px; color: var(--on-dark-2); }
+  .about h2 { font-weight: 700; font-size: clamp(48px, 5.4vw, 80px); line-height: .95; letter-spacing: -.05em; margin-bottom: 36px; }
+  .about p { font-size: 19px; line-height: 1.7; color: var(--slate); max-width: 58ch; }
+  .about p + p { margin-top: 18px; }
+  .about p.lead { font-size: 25px; line-height: 1.45; letter-spacing: -.015em; color: var(--teal); }
+  .about .slash { margin-top: 40px; }
+
+  /* ---------- 7. FAQ ---------- */
+  .faq { background: var(--mist); color: var(--teal); padding-block: 150px; }
+  .faq .wrap { display: grid; grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
+  .faq h2 { font-weight: 700; font-size: clamp(44px, 4.4vw, 66px); line-height: .95; letter-spacing: -.045em; }
+  .qa { border-top: 1px solid var(--line-l); }
+  .qa:last-child { border-bottom: 1px solid var(--line-l); }
+  .qa button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 34px 0; text-align: left; font: 600 30px/1.15 var(--font); letter-spacing: -.025em; color: var(--teal); }
+  .qa .pm { position: relative; width: 44px; height: 44px; flex: none; }
+  .qa .pm::before, .qa .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 18px; height: 2px; margin: -1px 0 0 -9px; background: var(--teal); transition: transform .4s ease, background-color .3s ease; }
+  .qa .pm::after { transform: rotate(90deg); }
+  .qa button[aria-expanded="true"] .pm::after { transform: rotate(0deg); }
+  .qa button:hover .pm::before, .qa button:hover .pm::after { background: var(--cyan-ink); }
+  .qa .body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.2,.7,.2,1); }
+  .qa .body > div { overflow: hidden; }
+  .qa button[aria-expanded="true"] + .body { grid-template-rows: 1fr; }
+  .qa .inner { padding: 0 0 40px; display: grid; gap: 16px; max-width: 70ch; font-size: 17.5px; line-height: 1.7; color: var(--slate); }
+  .qa ul { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .qa li { font: 400 12.5px/1 var(--mono); padding: 9px 12px; border: 1px solid var(--line-l); background: #fff; color: var(--teal); }
+  .qa .link { display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; font: 500 12.5px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--cyan-ink); text-decoration: none; }
+  .qa .link svg { width: 15px; height: 15px; flex: none; transition: transform .3s ease; }
+  .qa .link:hover svg { transform: translateX(5px); }
+
+  /* ---------- 8. closing + footer ---------- */
+  .closing { background: var(--abyss); color: var(--on-dark); padding-block: 150px 110px; position: relative; overflow: hidden; }
+  .closing::before { content: ""; position: absolute; right: 8%; top: -20%; width: 260px; height: 140%; background: linear-gradient(180deg, rgba(18,211,216,.0), rgba(18,211,216,.16), rgba(18,211,216,0)); transform: skewX(calc(-1 * var(--slant))); }
+  .closing .wrap { position: relative; display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+  .closing h2 { font-weight: 700; font-size: clamp(56px, 7vw, 108px); line-height: .92; letter-spacing: -.055em; }
+  .closing h2 span { color: var(--cyan); }
+  .closing p { color: var(--on-dark-2); font-size: 20px; margin-top: 22px; }
+  .site-footer { background: var(--abyss); color: var(--on-dark-2); padding-block: 0 40px; }
+  .foot { display: grid; grid-template-columns: 4fr 3fr 3fr 2fr; gap: 40px; padding-block: 64px; border-top: 1px solid var(--line-d); }
+  .foot h4 { margin-bottom: 20px; font: 500 11.5px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #6f8e92; }
+  .foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; }
+  .foot a { text-decoration: none; } .foot a:hover { color: var(--cyan); }
+  .foot .brand img { height: 40px; }
+  .foot .brand span { font-size: 20px; color: var(--on-dark); }
+  .foot dl { margin: 0; display: grid; gap: 12px; font-size: 15px; }
+  .foot dt { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #6f8e92; margin-bottom: 4px; }
+  .foot dd { margin: 0; color: var(--on-dark); }
+  .legal { padding-top: 26px; border-top: 1px solid var(--line-d); font-size: 13.5px; }
+
+  /* ---------- reveal on scroll (only for elements that start below the fold) ---------- */
+  .rv { transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  .rv.pre { opacity: 0; transform: translate(-28px, 34px); }
+
+  /* ---------- review appendix ---------- */
+  .appendix { background: #1d2224; color: #d9e2e3; padding-block: 60px 80px; font-size: 15px; }
+  .appendix h2 { font: 500 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+  .appendix p { max-width: 80ch; color: #b9c4c6; margin-bottom: 10px; }
+  .appendix code { font-family: var(--mono); font-size: 13px; color: #fff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .rv.pre { opacity: 1; transform: none; }
+  }
+
+  /* Desktop is the concept under review; these rules only keep narrow screens readable. */
+  @media (max-width: 900px) {
+    :root { --gutter: 16px; --step: 60px; }
+    .site-header nav { display: none; }
+    .site-header .slash { margin-left: auto; }
+    .hero { height: auto; }
+    .hero .wrap { grid-template-columns: 1fr; padding-block: 120px calc(var(--step) + 40px); }
+    .mark-stage { height: 260px; } .mark { width: 220px; } .mark-ring { width: 260px; height: 260px; } .mark-ring.r2 { width: 200px; height: 200px; }
+    .rail { display: none; }
+    .dna-head, .dna-grid, .figures .wrap, .why .wrap, .about .wrap, .faq .wrap, .foot, .path { grid-template-columns: 1fr; }
+    .index { position: static; }
+    .panel { grid-template-columns: 1fr; padding: 28px; min-height: 0; }
+    .panel .glyph { grid-column: 1; grid-row: auto; width: 160px; height: 160px; }
+    .fig { grid-template-columns: 1fr; } .fig .num { grid-row: auto; font-size: 72px; } .gauge { grid-column: 1; }
+    .value { grid-template-columns: 1fr; gap: 12px; } .value h3 { font-size: 42px; }
+    .why h2 { position: static; }
+    .closing .wrap { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arr" viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="diag" viewBox="0 0 24 24"><path d="M6 18L18 6M8.5 6H18v9.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+</svg>
+
+<div class="ribbon" role="note">
+  <div class="wrap">
+    <span><b>Cloud Power</b> · homepage concept V2 (Claude) · desktop 1440 px · for comparison with the approved mockup</span>
+    <span>all text from cloud-power.eu · no invented services, figures or claims</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="https://www.cloud-power.eu/"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
+    <nav aria-label="Main">
+      <a href="https://www.cloud-power.eu/our-services/">Our Services</a>
+      <a href="https://www.cloud-power.eu/ai/">AI</a>
+      <a href="https://www.cloud-power.eu/managed-services/">Managed Services</a>
+      <a href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">SOC as a Service</a>
+      <a href="https://www.cloud-power.eu/consulting/">Consulting</a>
+      <a href="https://www.cloud-power.eu/digital-conception/">Digital Conception</a>
+      <a href="https://www.cloud-power.eu/cloud-power-news/">News</a>
+    </nav>
+    <a class="slash solid" href="https://www.cloud-power.eu/contact-us/">Contact Us</a>
+  </div>
+</header>
+
+<main>
+  <!-- 1. HERO -->
+  <section class="hero step-down-r" id="top">
+    <canvas id="streaks" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="hero-kicker mono">Cloud Power Luxembourg</span>
+        <h1><span class="l1">Your IT Challenges,</span><span class="l2">Our Solutions</span></h1>
+        <a class="make-easy" href="https://www.cloud-power.eu/our-services/">Make IT Easy<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        <div class="hero-ctas">
+          <a class="slash solid" href="https://www.cloud-power.eu/contact-us/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+          <a class="slash ghost" href="https://odoo.cloud-power.eu/book/89996c28">Schedule an appointment</a>
+        </div>
+      </div>
+      <div class="mark-stage" id="mark-stage" aria-hidden="true">
+        <span class="mark-ring"></span><span class="mark-ring r2"></span>
+        <img class="mark" id="mark" src="assets/cp-logo.webp" alt="" width="500" height="303">
+      </div>
+    </div>
+    <div class="rail">
+      <div class="wrap">
+        <ul>
+          <li><a href="#svc-managed">Managed Services</a></li>
+          <li><a href="#svc-ai">Artificial Intelligence</a></li>
+          <li><a href="#svc-digital">Digital Conception</a></li>
+          <li><a href="#svc-cloud">Private Cloud</a></li>
+          <li><a href="#svc-consulting">Consulting</a></li>
+          <li><a href="#svc-soc">SOC as a service</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. OUR DNA -->
+  <section class="dna" id="dna">
+    <div class="wrap">
+      <div class="dna-head">
+        <h2 class="rv">Our <span>DNA</span></h2>
+        <p class="dna-sub rv">A human-sized company that understands your needs</p>
+      </div>
+      <div class="dna-grid">
+        <ol class="index" id="index">
+          <li class="on"><a href="#svc-managed"><span class="t">Managed Services</span><span class="n">01/06</span></a></li>
+          <li><a href="#svc-ai"><span class="t">Artificial Intelligence</span><span class="n">02/06</span></a></li>
+          <li><a href="#svc-digital"><span class="t">Digital Conception</span><span class="n">03/06</span></a></li>
+          <li><a href="#svc-cloud"><span class="t">Private Cloud</span><span class="n">04/06</span></a></li>
+          <li><a href="#svc-consulting"><span class="t">Consulting</span><span class="n">05/06</span></a></li>
+          <li><a href="#svc-soc"><span class="t">SOC as a service</span><span class="n">06/06</span></a></li>
+        </ol>
+        <div class="panels">
+          <article class="panel has-more on" id="svc-managed">
+            <h3><a href="https://www.cloud-power.eu/managed-services/">Managed Services</a></h3>
+            <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
+              <path class="s" d="M30 70H210M30 120H210M30 170H210"/>
+              <g class="anim knob1"><circle class="ft" cx="80" cy="70" r="9"/></g>
+              <g class="anim knob2"><circle class="f" cx="160" cy="120" r="9"/></g>
+              <g class="anim knob3"><circle class="ft" cx="100" cy="170" r="9"/></g>
+            </svg>
+            <p>Free yourself from specific tasks. We can take them off your hands.</p>
+            <div class="tags"><span>Private Cloud</span><span>Infrastructure</span><span>Performance Review</span><span>Back-up as a service</span></div>
+            <a class="more" href="https://www.cloud-power.eu/managed-services/" aria-label="Managed Services"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+          </article>
+          <article class="panel has-more" id="svc-ai">
+            <h3><a href="https://www.cloud-power.eu/ai/">Artificial Intelligence</a></h3>
+            <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
+              <path class="c anim flow" d="M50 60L120 120L190 70M50 180L120 120L190 170M120 120V40M120 120V200"/>
+              <circle class="ft anim node" cx="120" cy="120" r="12"/>
+              <circle class="f anim node d1" cx="50" cy="60" r="7"/><circle class="f anim node d2" cx="190" cy="70" r="7"/>
+              <circle class="f anim node d3" cx="50" cy="180" r="7"/><circle class="f anim node d1" cx="190" cy="170" r="7"/>
+              <circle class="ft anim node d2" cx="120" cy="40" r="6"/><circle class="ft anim node d3" cx="120" cy="200" r="6"/>
+            </svg>
+            <p>Our AI solution helps organizations adopt and scale AI responsibly by reducing tool fragmentation, speeding development, and providing enterprise-grade support, governance, and flexibility; a strategic foundation for teams advancing their generative AI or ML operations.</p>
+            <div class="tags"><span>AI for HR</span><span>AI for Sales</span><span>AI for IT</span><span>AI for Customer Service</span><span>AI for Productivity</span><span>AI for Finance</span><span>AI for Healthcare</span></div>
+            <a class="more" href="https://www.cloud-power.eu/ai/" aria-label="Artificial Intelligence"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+          </article>
+          <article class="panel has-more" id="svc-digital">
+            <h3><a href="https://www.cloud-power.eu/digital-conception/">Digital Conception</a></h3>
+            <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
+              <rect class="s anim drawn" x="24" y="50" width="150" height="110" rx="4"/>
+              <path class="s" d="M24 70H174"/>
+              <rect class="c anim drawn" x="150" y="90" width="66" height="116" rx="8" style="animation-delay:.6s"/>
+              <path class="c" d="M172 194h22"/>
+              <path class="s anim drawn" d="M44 96h70M44 116h96M44 136h52" style="animation-delay:1s"/>
+            </svg>
+            <p>Discover a Smarter Way to improve your digital renown</p>
+            <div class="tags"><span>Website conception</span><span>Mobile App</span><span>Platform Conception</span></div>
+            <a class="more" href="https://www.cloud-power.eu/digital-conception/" aria-label="Digital Conception"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+          </article>
+          <article class="panel has-more" id="svc-cloud">
+            <h3><a href="https://www.cloud-power.eu/managed-services/">Private Cloud</a></h3>
+            <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
+              <g class="anim layer d2"><path class="s" d="M60 170L120 196L180 170L120 144Z"/></g>
+              <g class="anim layer d1"><path class="s" d="M60 130L120 156L180 130L120 104Z"/></g>
+              <g class="anim layer"><path class="c" d="M60 90L120 116L180 90L120 64Z" style="fill:rgba(18,211,216,.12)"/></g>
+            </svg>
+            <p>Website | SaaS | Virtual Desktop Environnement | Private document sharing | IaaS | PaaS</p>
+            <div class="tags"><span>Website</span><span>Software as a service</span><span>Virtual Desktop Environnement</span><span>Private document sharing</span><span>Infrastructure as a service</span><span>Platform as a service</span></div>
+            <a class="more" href="https://www.cloud-power.eu/managed-services/" aria-label="Private Cloud"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+          </article>
+          <article class="panel has-more" id="svc-consulting">
+            <h3><a href="https://www.cloud-power.eu/consulting/">Consulting</a></h3>
+            <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
+              <path class="s" d="M30 200H210"/>
+              <rect class="ft anim pillar" x="52" y="80" width="34" height="120"/>
+              <rect class="f anim pillar d1" x="103" y="50" width="34" height="150"/>
+              <rect class="ft anim pillar d2" x="154" y="96" width="34" height="104"/>
+            </svg>
+            <p>Skilled experts, ready to join your teams</p>
+            <div class="tags"><span>Development</span><span>Infrastructure</span><span>Expertise</span></div>
+            <a class="more" href="https://www.cloud-power.eu/consulting/" aria-label="Consulting"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+          </article>
+          <article class="panel has-more" id="svc-soc">
+            <h3><a href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">SOC as a Service</a></h3>
+            <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
+              <circle class="s" cx="120" cy="120" r="96"/><circle class="s" cx="120" cy="120" r="62"/><circle class="s" cx="120" cy="120" r="28"/>
+              <g class="anim sweep"><path d="M120 120L120 24A96 96 0 0 1 188 52Z" style="fill:rgba(18,211,216,.22)"/><path class="c" d="M120 120L120 24"/></g>
+              <circle class="f anim blip" cx="158" cy="80" r="5"/><circle class="f anim blip d1" cx="84" cy="164" r="5"/><circle class="f anim blip d2" cx="176" cy="150" r="5"/>
+            </svg>
+            <p>A 24/7 local security support team for your organization's information systems, ensuring optimum service and value for money.</p>
+            <div class="tags"><span>24/7 expert supervision of your information system</span><span>A complete CERT security package</span><span>A local team</span></div>
+            <a class="more" href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/" aria-label="SOC as a Service"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. FIGURES (with their published sources) -->
+  <section class="figures step-down-l pull-up" style="margin-top:0">
+    <div class="wrap">
+      <div class="fig-side">
+        <span class="mono">Figures published on cloud-power.eu, with sources</span>
+        <div><a class="slash solid" href="https://odoo.cloud-power.eu/book/89996c28">Schedule an appointment<svg aria-hidden="true"><use href="#arr"/></svg></a></div>
+      </div>
+      <div class="fig-list">
+        <div class="fig rv" data-value="70"><div class="num"><span class="count">70</span><small>%</small></div><p class="txt">of outsourcing strategies are related to cost reduction</p><div class="gauge"><i style="transform:scaleX(.70)"></i></div><p class="src">Source: outsourceaccelerator - Deloitte</p></div>
+        <div class="fig rv" data-value="80"><div class="num"><span class="count">80</span><small>%</small></div><p class="txt">of companies claim to have improved their operations in the first few months after adopting the Cloud Technology</p><div class="gauge"><i style="transform:scaleX(.80)"></i></div><p class="src">Source: lxahub.com</p></div>
+        <div class="fig rv" data-value="28"><div class="num"><span class="count">28</span><small>%</small></div><p class="txt">of executives don't have enough time for the digital transition</p><div class="gauge"><i style="transform:scaleX(.28)"></i></div><p class="src">Source: independant.io</p></div>
+        <div class="fig rv" data-value="65"><div class="num"><span class="count">65</span><small>%</small></div><p class="txt">of cyber attacks impact business</p><div class="gauge"><i style="transform:scaleX(.65)"></i></div><p class="src">Source: cesin.fr</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. GET ANSWERS -->
+  <section class="answers pull-up">
+    <div class="wrap">
+      <h2 class="rv">Get Answers</h2>
+      <div class="path">
+        <a class="stop rv" href="https://odoo.cloud-power.eu/book/89996c28"><h3>Schedule an Appointment</h3><p>Feel free to schedule an appoitnment to tell us more about your project</p><span class="go">Click Here<svg aria-hidden="true"><use href="#arr"/></svg></span></a>
+        <a class="stop rv" href="https://www.cloud-power.eu/contact-us/"><h3>Project Analysis</h3><p>our teams will work on your project to provide you with the offer that best suits your needs.</p><span class="go">Click Here<svg aria-hidden="true"><use href="#arr"/></svg></span></a>
+        <a class="stop rv" href="https://www.cloud-power.eu/contact-us/"><h3>Let's Go</h3><p>Take your IT project to the next level</p><span class="go">Click Here<svg aria-hidden="true"><use href="#arr"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. WHY CHOOSE CLOUD POWER -->
+  <section class="why step-down-r">
+    <div class="wrap">
+      <h2>Why choose <span>Cloud Power</span> ?</h2>
+      <div class="values">
+        <div class="value rv"><h3>Commitment</h3><p>Because we understand the needs of small and medium-sized businesses, we’ll do our best to make sure your project runs smoothly.</p></div>
+        <div class="value rv"><h3>Experience</h3><p>With years of experience in IT projects, we’ve built a solid background delivering reliable and innovative solutions.</p></div>
+        <div class="value rv"><h3>Trust</h3><p>We make a point of establishing a relationship of trust with our customers. We want to help you succeed.</p></div>
+        <div class="value rv"><h3>Integrity</h3><p>We’ll propose the right solution for your needs. No unnecessary expenses.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ABOUT -->
+  <section class="about pull-up">
+    <div class="wrap">
+      <figure class="since rv">
+        <span class="cap mono">Since January 2017</span>
+        <img src="assets/cp-identity.webp" alt="" width="500" height="500">
+        <span class="year" aria-hidden="true">2017</span>
+      </figure>
+      <div>
+        <h2 class="rv">About Our Company</h2>
+        <p class="lead rv">The world is changing, and has never been so connected. Access to technology and Internet has become as commonplace as access to water..</p>
+        <p class="rv">Our society has evolved: our relationship with work, our friends, our family, as well as our way of life.</p>
+        <p class="rv">Since January 2017, Cloud Power wants to differentiate by taking advantage of new technologies and digital projects, to be inspired by innovation and to evolve the customer behaviour facing the IT or the Cloud.</p>
+        <a class="slash dark rv" href="https://www.cloud-power.eu/contact-us/">Feel Free To Contact us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section class="faq">
+    <div class="wrap">
+      <h2 class="rv">Frequently Asked Questions</h2>
+      <div>
+        <div class="qa">
+          <button type="button" id="qa1" aria-expanded="true" aria-controls="qa1-b">What are Managed Services ?<span class="pm" aria-hidden="true"></span></button>
+          <div class="body" id="qa1-b" role="region" aria-labelledby="qa1"><div><div class="inner">
+            <p>Managed services go beyond a traditional vendor relationship — they’re a strategic alliance. By entrusting a provider with the responsibility for specific outcomes or operations, businesses gain more than just support; they unlock proactive optimization, around-the-clock management, and expert guidance. This partnership empowers organizations to focus on what they do best, while the provider ensures high performance, reliability, and continuous improvement aligned with business goals.</p>
+            <ul><li>Private Cloud</li><li>Infrastructure</li><li>Performance Review</li><li>Back-up as a service</li><li>…</li></ul>
+            <a class="link" href="https://www.cloud-power.eu/managed-services/">Click here to discover our managed services offer<svg aria-hidden="true"><use href="#arr"/></svg></a>
+          </div></div></div>
+        </div>
+        <div class="qa">
+          <button type="button" id="qa2" aria-expanded="false" aria-controls="qa2-b">What is Soc as a Service ?<span class="pm" aria-hidden="true"></span></button>
+          <div class="body" id="qa2-b" role="region" aria-labelledby="qa2"><div><div class="inner">
+            <p>In today’s digital landscape, the Security Operations Center (SOC) has become an essential ally for organizations looking to protect their most valuable assets. More than just a monitoring tool, the SOC acts as an operational extension of internal teams — offering real-time visibility, advanced threat detection, and rapid incident response.</p>
+            <p>Its mission: to anticipate, detect, and respond to cyber threats. By understanding both current and emerging risks, the SOC helps secure business, personal, and confidential data — preserving trust and reputation across all stakeholders.</p>
+            <p>Far from being reactive, the modern SOC adopts a proactive posture. Security professionals no longer wait for incidents to occur — they prepare for them, knowing that cyberattacks are inevitable.</p>
+            <p>Combining innovative technologies with expert analysis, the SOC continuously evolves to match the sophistication of modern threats. From advanced phishing campaigns to stealth intrusions, today’s attacks demand intelligent, adaptive defenses — and the SOC delivers exactly that.</p>
+            <p>A cornerstone of business resilience, the SOC ensures not only protection but continuity — keeping systems running, data safe, and organizations one step ahead.</p>
+            <a class="link" href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">Explore our SOC solutions and find the right fit for your organization<svg aria-hidden="true"><use href="#arr"/></svg></a>
+          </div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CLOSING -->
+  <section class="closing">
+    <div class="wrap">
+      <div>
+        <h2 class="rv">Any Questions ?<br><span>Need a Quote ?</span></h2>
+        <p class="rv">Feel free to contact us</p>
+      </div>
+      <a class="slash solid rv" href="https://www.cloud-power.eu/contact-us/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <div><a class="brand" href="https://www.cloud-power.eu/"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a></div>
+      <div>
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="https://www.cloud-power.eu/ai/">AI</a></li>
+          <li><a href="https://www.cloud-power.eu/managed-services/">Managed Services</a></li>
+          <li><a href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">SOC as a Service</a></li>
+          <li><a href="https://www.cloud-power.eu/consulting/">Consulting</a></li>
+          <li><a href="https://www.cloud-power.eu/digital-conception/">Digital Conception</a></li>
+          <li><a href="https://www.cloud-power.eu/cloud-power-news/">News</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Us</h4>
+        <dl>
+          <div><dt>Address</dt><dd>77, Route d'Arlon 8311 Capellen, Luxembourg</dd></div>
+          <div><dt>Hours</dt><dd>Mon-Fri 9:00 - 17:00</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h4>&nbsp;</h4>
+        <dl>
+          <div><dt>Phone</dt><dd>+352 20 600 820</dd></div>
+          <div><dt>Email</dt><dd>sales@cloud-power.eu</dd></div>
+          <div><dt>Linkedin</dt><dd><a href="https://www.linkedin.com/company/cplux">linkedin.com/company/cplux</a></dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="legal">© 2025 Cloud Power Luxembourg SA</p>
+  </div>
+</footer>
+
+<section class="appendix" aria-label="Review notes">
+  <div class="wrap">
+    <h2>Review notes (not part of the design)</h2>
+    <p>Source of all content: cloud-power.eu (homepage, Our Services, Managed Services, AI, SOC as a Service, Digital Conception, Consulting and Contact Us pages, read on 24 Sept 2026). Service descriptions and tags come from those pages. The four figures and their sources are the ones on the homepage.</p>
+    <p>Added presentation elements only: the "Cloud Power" wordmark next to the logo, the kicker "Cloud Power Luxembourg", the index counter (01/06), the label over the figures, the "Since January 2017" caption and the outlined year. No photos or videos are needed: every visual is drawn in code.</p>
+    <p>Spelling kept exactly as on the live site, to fix on both: <code>appoitnment</code> (Get Answers), <code>Environnement</code> (Private Cloud), <code>Soc</code> in "What is Soc as a Service ?", the double full stop after "access to water..".</p>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Header: transparent over the hero, solid after it, hides on scroll down
+    var header = document.querySelector('.site-header');
+    var hero = document.querySelector('.hero');
+    var lastY = window.scrollY;
+    function onScroll() {
+      var y = window.scrollY, h = hero.offsetHeight;
+      header.classList.toggle('solid', y > 40);
+      if (y > h && y > lastY + 2) header.classList.add('away');
+      else if (y < lastY - 2 || y <= h) header.classList.remove('away');
+      lastY = y;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    // Hero: streak field at the logo angle, brighter near the cursor
+    var cv = document.getElementById('streaks'), ctx = cv.getContext('2d');
+    var W = 0, H = 0, dpr = 1, streaks = [], mouse = { x: -9999, y: -9999 }, running = true;
+    var TAN = Math.tan(19 * Math.PI / 180);
+    function size() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      streaks = [];
+      var n = Math.round(W / 14);
+      for (var i = 0; i < n; i++) streaks.push({ x: Math.random() * (W + H * TAN), y: Math.random() * H, len: 40 + Math.random() * 140, v: .25 + Math.random() * .8, a: .05 + Math.random() * .18 });
+    }
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < streaks.length; i++) {
+        var s = streaks[i];
+        if (!reduce) { s.y -= s.v; s.x += s.v * TAN; if (s.y + s.len < 0) { s.y = H + Math.random() * 60; s.x = Math.random() * (W + H * TAN) - H * TAN * .2; } }
+        var x2 = s.x + s.len * TAN, y2 = s.y - s.len;
+        var mx = (s.x + x2) / 2, my = (s.y + y2) / 2;
+        var d = Math.hypot(mx - mouse.x, my - mouse.y);
+        var glow = Math.max(0, 1 - d / 220);
+        var g = ctx.createLinearGradient(s.x, s.y, x2, y2);
+        var col = glow > 0 ? '18,211,216' : '157,210,214';
+        g.addColorStop(0, 'rgba(' + col + ',0)');
+        g.addColorStop(1, 'rgba(' + col + ',' + Math.min(1, s.a + glow * .8) + ')');
+        ctx.strokeStyle = g; ctx.lineWidth = 1 + glow * 1.2;
+        ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(x2, y2); ctx.stroke();
+      }
+      if (running && !reduce) requestAnimationFrame(frame);
+    }
+    size(); frame();
+    window.addEventListener('resize', function () { size(); if (reduce) frame(); });
+    hero.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; if (reduce) frame(); });
+    hero.addEventListener('pointerleave', function () { mouse.x = mouse.y = -9999; if (reduce) frame(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { var vis = es[0].isIntersecting; if (vis && !running) { running = true; if (!reduce) requestAnimationFrame(frame); } running = vis; }).observe(hero);
+
+    // Hero: logo mark tilts toward the cursor
+    var mark = document.getElementById('mark');
+    if (!reduce) hero.addEventListener('pointermove', function (e) {
+      var r = hero.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+      mark.style.transform = 'rotateY(' + (px * 22) + 'deg) rotateX(' + (-py * 18) + 'deg)';
+    });
+    hero.addEventListener('pointerleave', function () { mark.style.transform = ''; });
+
+    // Our DNA: the panel in the middle of the screen drives the index
+    var panels = document.querySelectorAll('.panel'), items = document.querySelectorAll('#index li');
+    function activate(id) {
+      panels.forEach(function (p) { p.classList.toggle('on', p.id === id); });
+      items.forEach(function (li) { li.classList.toggle('on', li.querySelector('a').getAttribute('href') === '#' + id); });
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) activate(e.target.id); }); }, { rootMargin: '-45% 0px -45% 0px' });
+      panels.forEach(function (p) { io.observe(p); });
+    }
+    document.querySelectorAll('a[href^="#svc-"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var t = document.querySelector(a.getAttribute('href')); if (!t) return;
+        e.preventDefault(); t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); activate(t.id);
+      });
+    });
+
+    // Reveal + count-up, only for elements that start below the first screen
+    var rvs = document.querySelectorAll('.rv');
+    if ('IntersectionObserver' in window && !reduce) {
+      var fold = window.innerHeight;
+      var ro = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target; el.classList.remove('pre'); ro.unobserve(el);
+          var c = el.querySelector('.count');
+          if (c) { var to = +el.dataset.value, t0 = null; (function tick(t) { t0 = t0 || t; var k = Math.min(1, (t - t0) / 1400); c.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); })(performance.now()); }
+        });
+      }, { threshold: .18 });
+      rvs.forEach(function (el) {
+        if (el.getBoundingClientRect().top > fold) { el.classList.add('pre'); var c = el.querySelector('.count'); if (c) c.textContent = '0'; ro.observe(el); }
+      });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.qa button').forEach(function (b) {
+      b.addEventListener('click', function () { b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); });
+    });
+  })();
+</script>
