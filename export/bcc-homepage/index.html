@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>BCC – Business Center Capellen</title>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arr" viewBox="0 0 24 24"><path d="M6 18L18 6M8.5 6H18v9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></symbol>
+  <symbol id="right" viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="left" viewBox="0 0 24 24"><path d="M21 12H4M10 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+</svg>
+
+<div class="ribbon" role="note">
+  <div class="wrap">
+    <span><b>BCC homepage</b> · concept v2.1 · desktop 1440 px · internal review, not production</span>
+    <span>V = video needed · P = photo needed · all text from businesscentercapellen.lu · existing contact assistant unchanged, not shown</span>
+  </div>
+</div>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="https://www.businesscentercapellen.lu"><img src="assets/images/bcc-logo.png" alt="BCC – Business Center Capellen" width="569" height="257"></a>
+    <nav aria-label="Main">
+      <a href="https://www.businesscentercapellen.lu/about-us/">About Us</a>
+      <a href="https://www.businesscentercapellen.lu/about-us/#services">Our Services</a>
+      <a href="https://www.businesscentercapellen.lu/contact/">Contact Us</a>
+    </nav>
+    <div class="h-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="lang-en" aria-pressed="true" title="English" lang="en">EN</button>
+        <button type="button" id="lang-fr" aria-pressed="false" title="Français" lang="fr">FR</button>
+        <button type="button" id="lang-de" aria-pressed="false" title="Deutsch" lang="de">DE</button>
+        <button type="button" id="lang-lu" aria-pressed="false" title="Lëtzebuergesch" lang="lb">LU</button>
+        <span class="lang-note" id="lang-note" aria-live="polite"></span>
+      </div>
+      <span class="h-rule" aria-hidden="true"></span>
+      <a class="h-link" href="https://businesscentercapellen.lu/contact/">Contact<svg aria-hidden="true"><use href="#arr"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- 1. HERO: full-bleed video, typography over image, inset photo crossing into next section -->
+  <section class="hero">
+    <div class="ph dark" aria-label="Video placeholder V1"></div>
+    <!-- When the real hero video is ready, save it as assets/video/hero.mp4 (and a still as assets/images/hero-poster.jpg),
+         then uncomment the next line. It covers the placeholder; delete the placeholder div and the V1 tag afterwards.
+    <video class="hero-video" src="assets/video/hero.mp4" poster="assets/images/hero-poster.jpg" autoplay muted loop playsinline></video>
+    -->
+    <div class="hero-shade"></div>
+    <div class="wrap">
+      <div class="hero-center">
+        <span class="label">77, route d'Arlon · L-8311 Capellen</span>
+        <h1 class="xl">Business Center <em>Capellen</em></h1>
+        <p>Your trusted partner for office rentals in Capellen (Luxembourg)</p>
+      </div>
+      <span class="tag vtag"><span><i>V1</i><b>VIDEO NEEDED: Building Entrance → Workspace</b></span><span>Full-bleed background · 16:9 · 20–25 s muted loop</span></span>
+      <span class="scroll-cue" aria-hidden="true"></span>
+      <a class="ring" href="https://businesscentercapellen.lu/contact/" aria-label="Work with us: contact">
+        <svg class="txt" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66 66m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text><textPath href="#circ">WORK WITH US · WORK WITH US · WORK WITH US ·</textPath></text></svg>
+        <svg class="arr" aria-hidden="true"><use href="#arr"/></svg>
+      </a>
+      <figure class="photo hero-inset"><img src="assets/images/bcc-entrance.jpg" alt="Entrée du Business Center Capellen avec espace d’accueil vitré et signalétique BCC." width="1600" height="1200"></figure>
+    </div>
+  </section>
+
+  <!-- 2a. CO-WORKING -->
+  <section class="cowork" id="offices">
+    <div class="wrap cw-grid">
+      <div class="ph cw-img"><span class="tag tl"><span><i>P1</i><b>PHOTO NEEDED: Coworking Wide Interior</b></span><span>Horizontal · approx. 5:4 · wide · bleeds to left edge</span></span></div>
+      <div class="cw-text">
+        <h2 class="xl offer-title"><a href="https://www.businesscentercapellen.lu/about-us/#offices">Co-Working OFfices<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a></h2>
+        <p class="offer-body"><strong>Grow your business</strong> from a place that feels right. Our coworking spaces give you a <strong>real business address</strong>, flexible offices, and a community that inspires you to do more. <strong>From basic package to all-inclusive packages, you decide</strong>.</p>
+      </div>
+      <figure class="photo cw-second"><img src="assets/images/bcc-lounge.jpg" alt="Salle de détente et de réunion équipée d’un baby-foot, d’un téléviseur et d’un espace de travail moderne." width="1600" height="1200"></figure>
+    </div>
+  </section>
+
+  <!-- 2b. PRIVATE OFFICES + THEY TRUST US (one navy chapter) -->
+  <section class="private">
+    <div class="wrap">
+      <div class="pv-grid">
+        <div class="pv-text">
+          <h2 class="xl offer-title"><a href="https://www.businesscentercapellen.lu/about-us/#offices">Private Offices<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a></h2>
+          <p class="offer-body"><strong>Your Private Space with no hidden fees</strong>. We believe flexibility isn’t a bonus ➡️ it’s the standard.</p>
+        </div>
+        <div class="ph pv-img"><span class="tag br"><span><i>P2</i><b>PHOTO NEEDED: Private Office</b></span><span>Vertical · approx. 3:4 · wide · bleeds to right edge</span></span></div>
+        <div class="ph pv-detail"><span class="tag bl"><span><i>P3</i><b>PHOTO NEEDED: Private Office Detail</b></span><span>Square 1:1 · close-up</span></span></div>
+      </div>
+
+      <div class="services-row">
+        <a href="https://www.businesscentercapellen.lu//about-us/#services"><span class="xl big">Discover Our Services</span><span class="circle"><svg aria-hidden="true"><use href="#right"/></svg></span></a>
+      </div>
+
+      <div class="trust">
+        <h2 class="xl">They trust us</h2>
+        <div class="marquee">
+          <div class="marquee-track">
+            <ul>
+              <li><img src="assets/images/client-cyheadit.png" alt="CyHeadIT" width="196" height="59"></li>
+              <li><img src="assets/images/client-kvsmart.png" alt="KVSmart" width="196" height="59"></li>
+              <li><img src="assets/images/client-beddeleem.png" alt="BeddeleemLux" width="196" height="59"></li>
+              <li><img src="assets/images/client-cloudpower.png" alt="Cloud Power" width="196" height="59"></li>
+              <li><img src="assets/images/client-ipc.png" alt="IPCGroupe" width="196" height="59"></li>
+              <li><img src="assets/images/client-turaco.png" alt="Turaco Solutions" width="196" height="59"></li>
+              <li><img src="assets/images/client-zementol.png" alt="Zementol" width="196" height="59"></li>
+            </ul>
+            <ul aria-hidden="true">
+              <li><img src="assets/images/client-cyheadit.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-kvsmart.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-beddeleem.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-cloudpower.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-ipc.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-turaco.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-zementol.png" alt="" width="196" height="59"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. BUILDING TOMORROW'S NOW: architectural full-bleed with card crossing into next section -->
+  <section class="tomorrow">
+    <div class="ph dark"></div>
+    <div class="shade"></div>
+    <div class="wrap">
+      <h2 class="xl"><span>BUILDING</span><span class="t2">TOMORROW'S</span><span class="t3">NOW</span></h2>
+      <span class="tag on-dark ptag3"><span><i>P4</i><b>PHOTO NEEDED: Building Exterior, Architectural</b></span><span>Horizontal · 16:9 full-bleed · wide, low angle</span></span>
+      <div class="tomorrow-card">
+        <h3>Setting Up Your Business in Capellen (Luxembourg): Combine Legal Compliance with Flexible Workspaces</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. OUR SPACES: staggered horizontal gallery -->
+  <section class="spaces">
+    <div class="wrap spaces-head">
+      <h2 class="xl">OUR SPACES</h2>
+      <div class="spaces-ctrl">
+        <span class="count" id="count">01 / 06</span>
+        <button class="nav-btn" type="button" id="g-prev" aria-label="Previous space"><svg aria-hidden="true"><use href="#left"/></svg></button>
+        <button class="nav-btn" type="button" id="g-next" aria-label="Next space"><svg aria-hidden="true"><use href="#right"/></svg></button>
+        <a class="nav-btn about" href="https://www.businesscentercapellen.lu/about-us/" aria-label="About Us"><svg aria-hidden="true"><use href="#arr"/></svg></a>
+      </div>
+    </div>
+    <div class="gallery" id="gallery" tabindex="0" aria-label="Our spaces gallery">
+      <figure class="g1"><div class="photo frame"><img src="assets/images/bcc-meeting-room.jpg" alt="Salle de réunion moderne avec table de conférence, projecteur et ambiance lumineuse bleutée." width="1600" height="1200"></div><figcaption><span>Meeting room</span><span class="label">BCC photo</span></figcaption></figure>
+      <figure class="g2"><div class="ph frame"><span class="tag bl"><span><i>P5</i><b>PHOTO NEEDED: Mailroom</b></span><span>Vertical · approx. 4:5</span></span></div><figcaption><span>Mailroom</span><span class="label">Placeholder</span></figcaption></figure>
+      <figure class="g3"><div class="photo frame"><img src="assets/images/bcc-reception.jpg" alt="Hall d’accueil du Business Center Capellen, Bloc C, avec borne de désinfection et espace de réception." width="1024" height="768"></div><figcaption><span>Reception hall, Bloc C</span><span class="label">BCC photo</span></figcaption></figure>
+      <figure class="g4"><div class="photo frame"><img src="assets/images/bcc-lounge.jpg" alt="Salle de détente et de réunion équipée d’un baby-foot, d’un téléviseur et d’un espace de travail moderne." width="1600" height="1200"></div><figcaption><span>Lounge and meeting room</span><span class="label">BCC photo</span></figcaption></figure>
+      <figure class="g5"><div class="ph frame"><span class="tag bl"><span><i>P6</i><b>PHOTO NEEDED: Private Parking</b></span><span>Horizontal · approx. 3:2</span></span></div><figcaption><span>Private parking</span><span class="label">Placeholder</span></figcaption></figure>
+      <figure class="g6"><div class="ph frame"><span class="tag bl"><span><i>P7</i><b>PHOTO NEEDED: Common Area</b></span><span>Vertical · approx. 4:5</span></span></div><figcaption><span>Common area</span><span class="label">Placeholder</span></figcaption></figure>
+    </div>
+    <div class="wrap"><div class="progress"><span id="bar"></span></div></div>
+  </section>
+
+  <!-- 5. FIND MORE -->
+  <section class="findmore">
+    <div class="wrap">
+      <h2 class="xl">Find More About Us And Our Services</h2>
+      <a class="btn btn-dark" href="https://www.businesscentercapellen.lu/about-us/">About Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+    </div>
+  </section>
+
+  <!-- 6. TESTIMONIALS (word-for-word) -->
+  <section class="voices">
+    <div class="wrap">
+      <div class="voices-head">
+        <div class="qmark" aria-hidden="true">“</div>
+        <h2 class="xl">Trusted by dozens of clients</h2>
+      </div>
+      <div class="v-list">
+        <figure class="voice v1">
+          <blockquote>The Capellen business center offers excellent facilities for setting up and expanding your business, including offices, a mailroom and private parking. The people who work there are very friendly and available to help you with all your needs. The services provided are first-rate in the Luxembourg market.</blockquote>
+          <figcaption class="who"><span class="stars" role="img" aria-label="Rated 5 out of 5"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span><span class="co">CyheadIT</span><span class="nm">Loïck Franc, CEO</span></figcaption>
+        </figure>
+        <figure class="voice v2">
+          <figcaption class="who"><span class="stars" role="img" aria-label="Rated 5 out of 5"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span><span class="co">BEDDELEEM LUX</span><span class="nm">Cédric Bourdon, Project Manager</span></figcaption>
+          <blockquote>An excellent base in Luxembourg enables us to be close to our projects as they are carried out.</blockquote>
+        </figure>
+        <figure class="voice v3">
+          <blockquote>The BCC is a flexible and ideally located place for a business shared between working on site and creating quotations in the office!</blockquote>
+          <figcaption class="who"><span class="stars" role="img" aria-label="Rated 5 out of 5"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span><span class="co">GGDIS</span><span class="nm">Nicolas Gits, CEO</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FINAL CTA -->
+  <section class="final">
+    <div class="ph dark"></div>
+    <div class="shade"></div>
+    <div class="wrap">
+      <h2 class="xl"><span>Let's Build The</span><span class="f2">Future Together</span></h2>
+      <div><a class="btn btn-light" href="https://businesscentercapellen.lu/contact/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a></div>
+      <span class="tag on-dark ptag8"><span><i>P8</i><b>PHOTO NEEDED: Entrance at Dusk</b></span><span>Horizontal · 16:9 full-bleed · wide, lights on</span></span>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="map" role="img" aria-label="Map placeholder">
+    <span class="pin" aria-hidden="true"></span>
+    <span class="tag on-dark"><span><i>MAP</i><b>Live Google Maps embed in production</b></span><span>Same embed as the current site. Embedded maps can't run inside this mockup preview.</span></span>
+    <a class="btn btn-line-d" href="https://maps.google.com/maps?q=business%20center%20capellen">Open in Google Maps<svg aria-hidden="true"><use href="#arr"/></svg></a>
+  </div>
+  <div class="wrap">
+    <div class="foot-top">
+      <p class="tagline">Flexibility isn’t just convenience, it’s business freedom.</p>
+      <a href="https://www.businesscentercapellen.lu" style="justify-self:end"><img class="foot-logo" src="assets/images/bcc-logo.png" alt="BCC – Business Center Capellen" width="569" height="257"></a>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <h6>Get in touch</h6>
+        <div class="contact-big"><span>info@bcc-lux.eu</span><span>(+352) 20 600 820</span></div>
+      </div>
+      <div>
+        <h6>Quick Links</h6>
+        <ul>
+          <li><a href="https://www.businesscentercapellen.lu/about-us/">About Us</a></li>
+          <li><a href="https://www.businesscentercapellen.lu/about-us/#services">Our Services</a></li>
+          <li><a href="https://www.businesscentercapellen.lu/contact/">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Follow</h6>
+        <div class="social">
+          <a href="https://www.linkedin.com/company/business-center-capellen/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.95 1.32-1.95 2.7V21h-4z"/></svg></a>
+          <a href="https://www.facebook.com/people/BCC-Business-Center-Capellen/61560335773376/" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5H16l.4-3h-2.9V8.6c0-.87.25-1.46 1.5-1.46h1.6V4.46A21 21 0 0014.3 4.3c-2.3 0-3.8 1.4-3.8 3.95V10.5H8v3h2.5V21z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h6>Address</h6>
+        <address>Business Center Capellen<br>77, route d'Arlon<br>L-8311 Capellen<br>Luxembourg</address>
+      </div>
+      <div>
+        <h6>Language</h6>
+        <ul class="langs">
+          <li><span>EN</span>English</li>
+          <li><span>FR</span>Français</li>
+          <li><span>DE</span>Deutsch</li>
+          <li><span>LU</span>Lëtzebuergesch</li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">©2026. All rights reserved. BCC - Business Center Capellen | Trademark of Cloud Power Luxembourg SA</p>
+  </div>
+</footer>
+
+<section class="appendix" aria-label="Review notes">
+  <div class="wrap">
+    <h2>Review notes (not part of the design)</h2>
+    <p>Every heading, paragraph, testimonial, name, role, link and contact detail is copied from businesscentercapellen.lu. The only other text is the placeholder labels, the gallery captions (named from the live site's photo descriptions and the CyheadIT testimonial), and the language names.</p>
+    <p>The language selector is a UI concept only: clicking FR, DE or LU marks it active but the content stays in English. The existing contact assistant is out of scope and will stay exactly as it is.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>ID</th><th>Asset</th><th>Format shown</th><th>Where</th></tr></thead>
+        <tbody>
+          <tr><td>V1</td><td>Video: Building Entrance → Workspace</td><td>16:9, full-bleed, 20–25 s loop</td><td>Hero background</td></tr>
+          <tr><td>P1</td><td>Coworking Wide Interior</td><td>Horizontal ≈5:4, large</td><td>Co-Working OFfices</td></tr>
+          <tr><td>P2</td><td>Private Office</td><td>Vertical ≈3:4, tall</td><td>Private Offices</td></tr>
+          <tr><td>P3</td><td>Private Office Detail</td><td>Square 1:1, close-up</td><td>Private Offices, overlapping P2</td></tr>
+          <tr><td>P4</td><td>Building Exterior, Architectural</td><td>16:9 full-bleed</td><td>BUILDING TOMORROW'S NOW</td></tr>
+          <tr><td>P5</td><td>Mailroom</td><td>Vertical ≈4:5</td><td>OUR SPACES gallery, slide 2</td></tr>
+          <tr><td>P6</td><td>Private Parking</td><td>Horizontal ≈3:2</td><td>OUR SPACES gallery, slide 5</td></tr>
+          <tr><td>P7</td><td>Common Area</td><td>Vertical ≈4:5</td><td>OUR SPACES gallery, slide 6</td></tr>
+          <tr><td>P8</td><td>Entrance at Dusk</td><td>16:9 full-bleed</td><td>Let's Build The Future Together</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script src="js/main.js"></script>
+</body>
+</html>
