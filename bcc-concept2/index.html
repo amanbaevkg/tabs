@@ -1,0 +1,551 @@
+<title>BCC Open Plan Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..700&display=swap">
+<style>
+  /* Single deliberate light look: this mockup shows the website itself, so it does not follow the viewer's theme. */
+  :root {
+    color-scheme: light;
+    --bg: #F3F2EE;        /* off-white page */
+    --bg-2: #E8E6E0;      /* light warm grey band */
+    --paper: #FBFAF7;     /* lightest surface */
+    --ink: #121417;
+    --ink-2: #474C52;
+    --mute: #7C8187;
+    --line: rgba(18,20,23,.14);
+    --accent: #0A8FC2;    /* the blue of the BCC logo, deepened for text on light */
+    --accent-soft: #DCEEF5;
+    --font: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --wrap: 1320px;
+    --gutter: 60px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: clip; overflow-anchor: none; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 18px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
+  h1, h2, h3 { text-wrap: balance; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .wrap { width: 100%; max-width: calc(var(--wrap) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+  .eyebrow { font: 600 13px/1 var(--font); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .big { font-weight: 850; text-transform: uppercase; letter-spacing: -.035em; line-height: .88; }
+
+  /* ---------- review ribbon (not part of the design) ---------- */
+  .ribbon { background: #202326; color: #dfe1e3; font: 400 12px/1.4 ui-monospace, Menlo, monospace; }
+  .ribbon .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 8px; }
+  .ribbon b { color: #fff; font-weight: 600; }
+
+  /* ---------- buttons: plain, rectangular, direct ---------- */
+  .btn { display: inline-flex; align-items: center; gap: 14px; padding: 18px 28px; background: var(--ink); color: var(--paper); font: 600 15px/1 var(--font); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: background-color .3s ease; }
+  .btn svg { width: 16px; height: 16px; transition: transform .3s ease; }
+  .btn:hover { background: var(--accent); }
+  .btn:hover svg { transform: translateX(4px); }
+  .link { display: inline-flex; align-items: center; gap: 10px; font: 600 15px/1 var(--font); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; padding-bottom: 6px; border-bottom: 2px solid var(--ink); transition: color .25s ease, border-color .25s ease; }
+  .link svg { width: 15px; height: 15px; transition: transform .3s ease; }
+  .link:hover { color: var(--accent); border-color: var(--accent); }
+  .link:hover svg { transform: translateX(4px); }
+
+  /* ---------- header ---------- */
+  .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(243,242,238,.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease; }
+  .site-header.scrolled { box-shadow: 0 1px 0 var(--line); }
+  .site-header.away { transform: translateY(-100%); }
+  .site-header .wrap { height: 84px; display: flex; align-items: center; gap: 48px; }
+  .logo img { height: 40px; width: auto; }
+  .site-header nav { display: flex; gap: 34px; margin-left: auto; font: 500 15px/1 var(--font); }
+  .site-header nav a { text-decoration: none; padding-block: 8px; position: relative; }
+  .site-header nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+  .site-header nav a:hover::after, .site-header nav a.on::after { transform: scaleX(1); }
+  .lang { font: 500 13px/1 var(--font); color: var(--mute); letter-spacing: .06em; }
+  .lang b { color: var(--ink); font-weight: 600; }
+  .site-header .btn { padding: 14px 20px; font-size: 13px; }
+
+  /* ---------- 1. hero ---------- */
+  .hero { padding-top: 40px; }
+  .hero-head { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: end; }
+  .hero h1 { font-size: clamp(64px, 8.6vw, 124px); }
+  .hero h1 span { display: block; }
+  .hero h1 .c { color: var(--accent); }
+  .hero-sub { font: 400 21px/1.4 var(--font); color: var(--ink-2); padding-bottom: 12px; }
+  .hero-photo { position: relative; margin-top: 36px; height: 700px; overflow: hidden; }
+  .hero-photo img { width: 100%; height: 118%; object-fit: cover; object-position: 50% 62%; will-change: transform; animation: settle 2.6s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes settle { from { scale: 1.12; } to { scale: 1; } }
+
+  /* key facts */
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+  .fact { padding: 34px 28px 34px 0; display: grid; gap: 6px; }
+  .fact + .fact { padding-left: 28px; border-left: 1px solid var(--line); }
+  .fact b { font: 800 44px/1 var(--font); letter-spacing: -.03em; }
+  .fact span { font-size: 16px; color: var(--ink-2); line-height: 1.4; }
+
+  /* intro statement */
+  .intro { padding-block: 130px 150px; }
+  .intro .wrap { display: grid; grid-template-columns: 3fr 9fr; gap: 40px; }
+  .intro p.lead { font: 500 clamp(30px, 3vw, 44px)/1.22 var(--font); letter-spacing: -.02em; max-width: 30ch; }
+  .intro p.lead em { font-style: normal; color: var(--accent); }
+  .intro .who { margin-top: 30px; font-size: 19px; color: var(--ink-2); max-width: 56ch; }
+
+  /* ---------- section heads ---------- */
+  .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 40px; padding-top: 22px; border-top: 2px solid var(--ink); margin-bottom: 64px; }
+  .sec-head h2 { font-size: clamp(64px, 8.4vw, 124px); }
+  .sec-head .aside { max-width: 360px; font-size: 18px; color: var(--ink-2); padding-bottom: 10px; }
+
+  /* ---------- 2. private offices ---------- */
+  .private { padding-block: 40px 150px; }
+  .pv { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: start; }
+  .pv-photos { position: relative; }
+  .pv-main { height: 640px; overflow: hidden; }
+  .pv-main img { width: 100%; height: 100%; object-fit: cover; }
+  .pv-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+  .pv-pair figure { position: relative; height: 260px; overflow: hidden; }
+  .pv-pair img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+  .pv-pair figure:hover img { transform: scale(1.04); }
+  .pv-pair figcaption { position: absolute; left: 0; bottom: 0; background: var(--paper); padding: 10px 14px; font: 600 13px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; }
+  .pv-text { position: sticky; top: 120px; display: grid; gap: 34px; }
+  .pv-text .lead { font: 500 28px/1.3 var(--font); letter-spacing: -.015em; }
+  .sizes-title { font: 700 16px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; }
+  .sizes { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--line); }
+  .sizes span { display: grid; place-items: center; gap: 2px; padding: 18px 0 16px; font: 800 34px/1 var(--font); letter-spacing: -.02em; transition: background-color .25s ease, color .25s ease; }
+  .sizes span + span { border-left: 1px solid var(--line); }
+  .sizes span small { font: 600 10.5px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+  .sizes span:hover { background: var(--ink); color: var(--paper); }
+  .sizes span:hover small { color: var(--bg-2); }
+  .note { font-size: 16px; color: var(--ink-2); }
+  .included { border-top: 1px solid var(--line); padding-top: 22px; display: grid; gap: 10px; }
+  .included h3 { font: 700 16px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; }
+  .included p { font-size: 16.5px; color: var(--ink-2); }
+
+  /* ---------- 3. co-working ---------- */
+  .cowork { background: var(--bg-2); padding-block: 0 150px; }
+  .cw-band { position: relative; height: 760px; overflow: hidden; }
+  .cw-band img { width: 100%; height: 120%; object-fit: cover; object-position: 50% 55%; will-change: transform; }
+  .cw-band h2 { position: absolute; left: var(--gutter); bottom: -0.1em; color: var(--paper); font-size: clamp(90px, 13vw, 200px); text-shadow: 0 10px 50px rgba(0,0,0,.25); }
+  .cw-body { display: grid; grid-template-columns: 5fr 4fr 3fr; gap: 56px; padding-top: 80px; align-items: start; }
+  .cw-body .lead { font: 500 30px/1.28 var(--font); letter-spacing: -.02em; }
+  .cw-body .lead strong { font-weight: 700; }
+  .cw-body p { color: var(--ink-2); }
+  .cw-side { height: 440px; overflow: hidden; }
+  .cw-side img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+  .cw-side + figcaption, .cap { margin-top: 12px; font: 600 12.5px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+
+  /* ---------- 4. services ---------- */
+  .services { padding-block: 150px; }
+  .svc-grid { display: grid; grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
+  .svc-photo { position: sticky; top: 120px; }
+  .svc-photo .frame { height: 620px; overflow: hidden; }
+  .svc-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .svc-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+  .svc-list li { padding: 30px 28px 32px 0; border-bottom: 1px solid var(--line); display: grid; gap: 10px; align-content: start; transition: background-color .3s ease; position: relative; }
+  .svc-list li:nth-child(even) { padding-left: 28px; border-left: 1px solid var(--line); }
+  .svc-list li::before { content: ""; position: absolute; left: 0; top: -1px; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .svc-list li:hover::before { transform: scaleX(1); }
+  .svc-list h3 { font: 700 23px/1.15 var(--font); letter-spacing: -.01em; }
+  .svc-list p { font-size: 16px; line-height: 1.55; color: var(--ink-2); }
+  .svc-list .tag { font: 600 11.5px/1 var(--font); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+
+  /* ---------- 5. they trust us ---------- */
+  .trust { background: var(--paper); padding-block: 90px; border-block: 1px solid var(--line); }
+  .trust .wrap { display: grid; grid-template-columns: 3fr 9fr; gap: 40px; align-items: center; }
+  .trust h2 { font-size: 52px; }
+  .logos { display: grid; grid-template-columns: repeat(7, 1fr); border-left: 1px solid var(--line); }
+  .logos li { list-style: none; height: 120px; display: grid; place-items: center; padding: 0 16px; border-right: 1px solid var(--line); }
+  .logos { margin: 0; padding: 0; }
+  .logos img { max-height: 44px; width: auto; max-width: 100%; filter: grayscale(1); opacity: .8; transition: filter .35s ease, opacity .35s ease, transform .35s ease; }
+  .logos li:hover img { filter: none; opacity: 1; transform: scale(1.06); }
+
+  /* ---------- 6. our spaces ---------- */
+  .spaces { padding-block: 150px 130px; overflow: hidden; }
+  .gal-ctrl { display: flex; gap: 10px; }
+  .gal-ctrl button { width: 58px; height: 58px; display: grid; place-items: center; border: 1px solid var(--ink); transition: background-color .25s ease, color .25s ease; }
+  .gal-ctrl button:hover { background: var(--ink); color: var(--paper); }
+  .gal-ctrl svg { width: 20px; height: 20px; }
+  .gallery { display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-left: max(var(--gutter), calc((100vw - var(--wrap)) / 2)); padding-right: var(--gutter); cursor: grab; }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery.drag { cursor: grabbing; scroll-snap-type: none; }
+  .gallery figure { flex: none; scroll-snap-align: start; scroll-margin-left: max(var(--gutter), calc((100vw - var(--wrap)) / 2)); }
+  .gallery .frame { height: 560px; overflow: hidden; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: transform 1.1s cubic-bezier(.2,.7,.2,1); }
+  .gallery figure:hover img { transform: scale(1.035); }
+  .gallery figcaption { display: flex; justify-content: space-between; margin-top: 14px; font: 600 13px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; }
+  .gallery figcaption span { color: var(--mute); }
+  .w-l { width: 760px; } .w-m { width: 520px; } .w-s { width: 420px; }
+  .bar { margin-top: 44px; height: 2px; background: var(--line); position: relative; }
+  .bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 20%; background: var(--ink); transition: left .25s ease, width .25s ease; }
+
+  /* ---------- 7. testimonials ---------- */
+  .voices { background: var(--bg-2); padding-block: 150px; }
+  .v-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; }
+  .v-main blockquote { font: 500 clamp(28px, 2.7vw, 40px)/1.3 var(--font); letter-spacing: -.02em; }
+  .v-main blockquote::before { content: "“"; display: block; font: 800 150px/.6 var(--font); color: var(--accent); height: 70px; }
+  .v-side { display: grid; gap: 0; align-content: start; border-top: 1px solid var(--line); }
+  .v-side figure { padding-block: 32px; border-bottom: 1px solid var(--line); display: grid; gap: 18px; }
+  .v-side blockquote { font: 500 21px/1.45 var(--font); }
+  .who-q { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: 15.5px; color: var(--ink-2); }
+  .who-q b { font: 800 15px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+  .v-main .who-q { margin-top: 34px; }
+  .stars { color: var(--accent); letter-spacing: 3px; font-size: 14px; }
+
+  /* ---------- 8. location ---------- */
+  .location { padding-block: 150px 0; }
+  .loc { display: grid; grid-template-columns: 5fr 7fr; gap: 0; align-items: stretch; background: var(--paper); }
+  .loc-photo { min-height: 640px; overflow: hidden; }
+  .loc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .loc-text { padding: 72px 72px 64px; display: grid; gap: 36px; align-content: space-between; }
+  .loc-text .lead { font: 500 34px/1.22 var(--font); letter-spacing: -.02em; }
+  .loc-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; }
+  .loc-dl dt { font: 600 12px/1 var(--font); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .loc-dl dd { font-size: 18px; line-height: 1.5; }
+
+  /* ---------- 9. contact ---------- */
+  .contact { padding-block: 150px 120px; }
+  .contact .wrap { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: end; }
+  .contact h2 { font-size: clamp(56px, 7vw, 104px); }
+  .contact h2 span { color: var(--accent); display: block; font-size: .52em; letter-spacing: -.02em; margin-top: .35em; }
+  .contact-side { display: grid; gap: 34px; padding-bottom: 12px; }
+  .contact-side p { font-size: 22px; color: var(--ink-2); }
+  .contact-dl { display: grid; gap: 14px; border-top: 1px solid var(--line); padding-top: 26px; font-size: 19px; }
+  .contact-dl div { display: flex; justify-content: space-between; gap: 20px; }
+  .contact-dl dt { font: 600 12px/1.9 var(--font); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+
+  /* ---------- footer ---------- */
+  .site-footer { border-top: 2px solid var(--ink); padding-block: 40px 44px; }
+  .site-footer .wrap { display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center; }
+  .site-footer .logo img { height: 34px; }
+  .tagline { font: 500 17px/1.3 var(--font); color: var(--ink-2); }
+  .foot-links { display: flex; gap: 26px; font-size: 15px; }
+  .foot-links a { text-decoration: none; } .foot-links a:hover { color: var(--accent); }
+  .legal { grid-column: 1 / -1; font-size: 13.5px; color: var(--mute); }
+
+  /* ---------- motion: reveals only for content below the first screen ---------- */
+  .rv { transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  .rv.pre { opacity: 0; transform: translateY(40px); }
+  .rimg { transition: clip-path 1.3s cubic-bezier(.6,0,.2,1); clip-path: inset(0 0 0 0); }
+  .rimg.pre { clip-path: inset(100% 0 0 0); }
+
+  /* ---------- review appendix ---------- */
+  .appendix { background: #202326; color: #dfe1e3; padding-block: 60px 80px; font-size: 15px; }
+  .appendix h2 { font: 600 13px/1 var(--font); letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+  .appendix p { max-width: 82ch; color: #b8bcc0; margin-bottom: 10px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .rv.pre { opacity: 1; transform: none; } .rimg.pre { clip-path: none; }
+  }
+  /* Desktop is the concept under review; these rules only keep narrow screens readable. */
+  @media (max-width: 900px) {
+    :root { --gutter: 16px; }
+    .site-header nav, .lang { display: none; }
+    .site-header .btn { margin-left: auto; }
+    .hero-head, .intro .wrap, .pv, .cw-body, .svc-grid, .trust .wrap, .v-grid, .loc, .contact .wrap, .site-footer .wrap { grid-template-columns: 1fr; }
+    .hero-photo { height: 380px; } .facts { grid-template-columns: 1fr 1fr; } .fact:nth-child(3) { padding-left: 0; border-left: 0; }
+    .sec-head { flex-direction: column; align-items: flex-start; }
+    .pv-main { height: 340px; } .pv-text, .svc-photo { position: static; } .svc-photo .frame { height: 320px; }
+    .cw-band { height: 420px; } .svc-list { grid-template-columns: 1fr; } .svc-list li:nth-child(even) { padding-left: 0; border-left: 0; }
+    .logos { grid-template-columns: repeat(3, 1fr); } .w-l, .w-m, .w-s { width: 80vw; } .gallery .frame { height: 320px; }
+    .loc-text { padding: 32px 20px; } .loc-dl { grid-template-columns: 1fr; } .loc-photo { min-height: 320px; }
+    .intro, .services, .spaces, .voices, .location, .contact { padding-block: 80px; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arr" viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="left" viewBox="0 0 24 24"><path d="M21 12H4M10 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+</svg>
+
+<div class="ribbon" role="note">
+  <div class="wrap">
+    <span><b>BCC homepage</b> · Concept 2 (light, photo-led) · desktop 1440 px · internal review</span>
+    <span>real BCC photos · all text from businesscentercapellen.lu · existing contact assistant unchanged, not shown</span>
+  </div>
+</div>
+
+<header class="site-header" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="https://www.businesscentercapellen.lu"><img src="assets/bcc-logo.png" alt="BCC – Business Center Capellen" width="569" height="257"></a>
+    <nav aria-label="Main">
+      <a href="#private">Private Offices</a>
+      <a href="#coworking">Co-Working</a>
+      <a href="#services">Services</a>
+      <a href="#spaces">Our Spaces</a>
+      <a href="#location">Location</a>
+    </nav>
+    <span class="lang" aria-label="Language"><b>EN</b> · FR · DE · LU</span>
+    <a class="btn" href="https://www.businesscentercapellen.lu/contact/">Contact Us</a>
+  </div>
+</header>
+
+<main>
+  <!-- 1. HERO: the name, the promise, the real building -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-head">
+        <h1 class="big"><span>Business Center</span><span class="c">Capellen</span></h1>
+        <p class="hero-sub">Your trusted partner for office rentals in Capellen (Luxembourg)</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <figure class="hero-photo"><img class="par" data-speed="0.12" src="assets/hero-c01.jpg" alt="Bureau C.01 at Business Center Capellen: furnished shared desks, black office chairs and the BCC logo on the window." width="2400" height="1800"></figure>
+      <div class="facts">
+        <div class="fact"><b>1 to 8</b><span>From 1 to 8 people offices</span></div>
+        <div class="fact"><b>Monthly</b><span>Month-to-month contracts</span></div>
+        <div class="fact"><b>24/7</b><span>24/7 secure badge access</span></div>
+        <div class="fact"><b>&lt; 15 min</b><span>less than 15min from the center of Luxembourg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- intro statement -->
+  <section class="intro">
+    <div class="wrap">
+      <span class="eyebrow rv">About Us</span>
+      <div>
+        <p class="lead rv">Your business evolves, your office should too. At Business Center Capellen, <em>flexibility isn’t an extra, it’s our foundation.</em> Whether you’re expanding, downsizing, or launching your venture, our spaces adapt to your pace.</p>
+        <p class="who rv">Perfect for entrepreneurs, freelancers, and small teams who want to stay lean, agile, and focused on growth.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PRIVATE OFFICES -->
+  <section class="private" id="private">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="big rv">Private<br>Offices</h2>
+        <p class="aside rv">Your Private Space with no hidden fees. We believe flexibility isn’t a bonus ➡️ it’s the standard.</p>
+      </div>
+      <div class="pv">
+        <div class="pv-photos">
+          <figure class="pv-main rimg"><img class="par" data-speed="0.06" src="assets/private-desk.jpg" alt="Private office at BCC with a desk, an office chair, cabinets and a window with the BCC logo." width="1051" height="808" style="height:112%"></figure>
+          <div class="pv-pair">
+            <figure class="rimg"><img src="assets/private-furnished.jpg" alt="Furnished private office with a desk and a round meeting table." width="800" height="549"><figcaption>Furnished</figcaption></figure>
+            <figure class="rimg"><img src="assets/private-unfurnished.jpg" alt="Unfurnished private office with two windows." width="1600" height="1290"><figcaption>Unfurnished</figcaption></figure>
+          </div>
+        </div>
+        <div class="pv-text">
+          <p class="lead rv">From 1 to 8 people offices</p>
+          <div class="rv">
+            <div class="sizes" aria-label="Office sizes">
+              <span>1<small>Person</small></span><span>2<small>Persons</small></span><span>3<small>Persons</small></span><span>4<small>Persons</small></span><span>6<small>Persons</small></span><span>8<small>Persons</small></span>
+            </div>
+            <p class="note" style="margin-top:14px">Furnished or unfurnished</p>
+          </div>
+          <div class="included rv">
+            <h3>Turnkey solution</h3>
+            <p>Our office space are designed to comply with Luxembourg regulations.</p>
+            <p>Included: desk(s), chair(s), coat rack, high-speed wifi, locked cupboard with company name, drawer cabinet(s) on castors, and access to parking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CO-WORKING -->
+  <section class="cowork" id="coworking">
+    <div class="cw-band">
+      <img class="par" data-speed="0.14" src="assets/cowork-c02.jpg" alt="Bureau C.02: shared white desks with acoustic dividers and black office chairs." width="2400" height="1800">
+      <h2 class="big">Co-Working</h2>
+    </div>
+    <div class="wrap">
+      <div class="cw-body">
+        <p class="lead rv"><strong>Grow your business</strong> from a place that feels right. Our coworking spaces give you a <strong>real business address</strong>, flexible offices, and a community that inspires you to do more.</p>
+        <div class="rv" style="display:grid;gap:22px">
+          <p><strong>From basic package to all-inclusive packages, you decide.</strong></p>
+          <p>Enjoy a pleasant, welcoming workspace at a very attractive price, less than 15min from the center of Luxembourg.</p>
+          <p>Perfect for entrepreneurs, freelancers…</p>
+        </div>
+        <figure class="rv"><div class="cw-side rimg"><img src="assets/cowork-c02-banner.jpg" alt="Co-working desks in bureau C.02 with the BCC banner." width="1600" height="1200"></div><figcaption class="cap">Bureau C.02</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="big rv">What we offer</h2>
+        <p class="aside rv">Benefit from the services and facilities you need to create a productive and pleasant working environment.</p>
+      </div>
+      <div class="svc-grid">
+        <figure class="svc-photo"><div class="frame rimg"><img src="assets/reception.jpg" alt="Reception hall of Business Center Capellen with mail shelves and the tenant board." width="1400" height="1867"></div><figcaption class="cap">Reception · Bloc C</figcaption></figure>
+        <ul class="svc-list">
+          <li class="rv"><span class="tag">Included</span><h3>Professional-quality WiFi</h3><p>Included in the monthly rental charge.</p></li>
+          <li class="rv"><span class="tag">Included</span><h3>Home &amp; Switchboard</h3><p>Included in the monthly rental charge.</p></li>
+          <li class="rv"><span class="tag">Included</span><h3>Cafétaria &amp; Kitchen</h3><p>Access to kitchenette included in monthly rental.</p></li>
+          <li class="rv"><h3>Meeting rooms</h3><p>Take advantage of our meeting rooms for in-house meetings or to welcome your customers/suppliers.</p></li>
+          <li class="rv"><h3>Parking Spaces</h3><p>Free parking available at the rear of the building | Supplement for a reserved named parking space</p></li>
+          <li class="rv"><h3>Email room</h3><p>BCC offers a mail opening, dematerialization and emailing service for all your incoming mail. Pricing is based on volume.</p></li>
+          <li class="rv"><h3>Office supplies</h3><p>Take advantage of our central purchasing group for office supplies. Consumption rebilled on the monthly rental payment.</p></li>
+          <li class="rv"><h3>Cloud Services</h3><p>BCC, in partnership with Cloud Power Luxembourg, offers its tenants the possibility of using a private cloud for their IT infrastructure and virtual desktop. Pricing is on a monthly basis, according to need.</p></li>
+          <li class="rv"><h3>Accounting, Legal &amp; HR Department</h3><p>Additional cost depending on requirements.</p></li>
+          <li class="rv"><h3>Company Domiciliation</h3><p>Company Creation/Domiciliation</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THEY TRUST US -->
+  <section class="trust">
+    <div class="wrap">
+      <h2 class="big">They trust us</h2>
+      <ul class="logos">
+        <li><img src="assets/client-cyheadit-ink.png" alt="CyHeadIT" width="196" height="59"></li>
+        <li><img src="assets/client-kvsmart-ink.png" alt="KVSmart" width="196" height="59"></li>
+        <li><img src="assets/client-beddeleem-ink.png" alt="BeddeleemLux" width="196" height="59"></li>
+        <li><img src="assets/client-cloudpower-ink.png" alt="Cloud Power" width="196" height="59"></li>
+        <li><img src="assets/client-ipc-ink.png" alt="IPCGroupe" width="196" height="59"></li>
+        <li><img src="assets/client-turaco-ink.png" alt="Turaco Solutions" width="196" height="59"></li>
+        <li><img src="assets/client-zementol-ink.png" alt="Zementol" width="196" height="59"></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. OUR SPACES -->
+  <section class="spaces" id="spaces">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="big rv">Our Spaces</h2>
+        <div class="gal-ctrl"><button type="button" id="prev" aria-label="Previous photo"><svg aria-hidden="true"><use href="#left"/></svg></button><button type="button" id="next" aria-label="Next photo"><svg aria-hidden="true"><use href="#arr"/></svg></button></div>
+      </div>
+    </div>
+    <div class="gallery" id="gallery" tabindex="0" aria-label="Our spaces">
+      <figure class="w-l"><div class="frame"><img src="assets/kitchen.jpg" alt="Kitchen with microwaves, coffee machines, dishwasher and a black dining table." width="1800" height="1350"></div><figcaption>Cafétaria &amp; Kitchen<span>01</span></figcaption></figure>
+      <figure class="w-s"><div class="frame"><img src="assets/common-room.jpg" alt="Long black table with chairs and a table-football game." width="1400" height="1867"></div><figcaption>Cafétaria &amp; Kitchen<span>02</span></figcaption></figure>
+      <figure class="w-l"><div class="frame"><img src="assets/bcc-meeting-room.jpg" alt="Meeting room with a conference table and a projector." width="1600" height="1200"></div><figcaption>Meeting rooms<span>03</span></figcaption></figure>
+      <figure class="w-m"><div class="frame"><img src="assets/office-c01b.jpg" alt="Shared desks in bureau C.01." width="1600" height="1200"></div><figcaption>Bureau C.01<span>04</span></figcaption></figure>
+      <figure class="w-l"><div class="frame"><img src="assets/private-corner.jpg" alt="Corner private office with two large windows carrying the BCC logo." width="1080" height="784"></div><figcaption>Private Offices<span>05</span></figcaption></figure>
+      <figure class="w-s"><div class="frame"><img src="assets/waiting.jpg" alt="Waiting area with three chairs and a small table." width="1400" height="1867"></div><figcaption>Reception<span>06</span></figcaption></figure>
+    </div>
+    <div class="wrap"><div class="bar"><i id="bar"></i></div></div>
+  </section>
+
+  <!-- 7. TESTIMONIALS -->
+  <section class="voices">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="big rv">Trusted by dozens of clients</h2>
+      </div>
+      <div class="v-grid">
+        <figure class="v-main rv">
+          <blockquote>The Capellen business center offers excellent facilities for setting up and expanding your business, including offices, a mailroom and private parking. The people who work there are very friendly and available to help you with all your needs. The services provided are first-rate in the Luxembourg market.</blockquote>
+          <figcaption class="who-q"><b>CyheadIT</b>Loïck Franc, CEO <span class="stars" aria-label="Rated 5 out of 5">★★★★★</span></figcaption>
+        </figure>
+        <div class="v-side">
+          <figure class="rv"><blockquote>An excellent base in Luxembourg enables us to be close to our projects as they are carried out.</blockquote><figcaption class="who-q"><b>BEDDELEEM LUX</b>Cédric Bourdon, Project Manager <span class="stars" aria-label="Rated 5 out of 5">★★★★★</span></figcaption></figure>
+          <figure class="rv"><blockquote>The BCC is a flexible and ideally located place for a business shared between working on site and creating quotations in the office!</blockquote><figcaption class="who-q"><b>GGDIS</b>Nicolas Gits, CEO <span class="stars" aria-label="Rated 5 out of 5">★★★★★</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. LOCATION -->
+  <section class="location" id="location">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="big rv">Location</h2>
+        <a class="link rv" href="https://maps.google.com/maps?q=business%20center%20capellen">Open in Google Maps<svg aria-hidden="true"><use href="#arr"/></svg></a>
+      </div>
+      <div class="loc">
+        <div class="loc-photo rimg"><img src="assets/sign-bloc-c.jpg" alt="Business Center Capellen totem sign, Bloc C, with tenant logos." width="992" height="1334"></div>
+        <div class="loc-text">
+          <p class="lead rv">Based in Capellen, few minutes from Luxembourg City and the Belgian border.</p>
+          <dl class="loc-dl rv">
+            <div><dt>Address</dt><dd>Business Center Capellen<br>77, route d'Arlon<br>L-8311 Capellen<br>Luxembourg</dd></div>
+            <div><dt>Parking</dt><dd>Free parking available at the rear of the building</dd></div>
+            <div><dt>Access</dt><dd>24/7 secure badge access</dd></div>
+            <div><dt>Getting here</dt><dd>less than 15min from the center of Luxembourg</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTACT: one clear action -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2 class="big rv">Come to visit us<span>Discover your future office</span></h2>
+      <div class="contact-side rv">
+        <a class="btn" href="https://www.businesscentercapellen.lu/contact/">Schedule a visit<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        <dl class="contact-dl">
+          <div><dt>Phone</dt><dd>(+352) 20 600 820</dd></div>
+          <div><dt>Email</dt><dd>info@bcc-lux.eu</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="logo" href="https://www.businesscentercapellen.lu"><img src="assets/bcc-logo.png" alt="BCC – Business Center Capellen" width="569" height="257"></a>
+    <p class="tagline">Flexibility isn’t just convenience, it’s business freedom.</p>
+    <div class="foot-links"><a href="https://www.linkedin.com/company/business-center-capellen/">LinkedIn</a><a href="https://www.facebook.com/people/BCC-Business-Center-Capellen/61560335773376/">Facebook</a></div>
+    <p class="legal">©2026. All rights reserved. BCC - Business Center Capellen | Trademark of Cloud Power Luxembourg SA</p>
+  </div>
+</footer>
+
+<section class="appendix" aria-label="Review notes">
+  <div class="wrap">
+    <h2>Review notes (not part of the design)</h2>
+    <p>Photography: all images are real BCC photos from the uploaded folders, except the meeting room, which comes from the current website. Captions name spaces only with words BCC already uses (Furnished, Unfurnished, Cafétaria &amp; Kitchen, Meeting rooms, Reception, bureau numbers from the file names).</p>
+    <p>Text: from the BCC homepage and About Us page. “Company Domiciliation” and “Company Creation/Domiciliation” are the site's own labels. The large figures in the fact row repeat the verified sentence underneath them. The only added words are the navigation labels, “Included”, “Parking”, “Access”, “Getting here”, and the gallery numbers.</p>
+    <p>Spelling kept as on the live site: “Our office space are designed…”.</p>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // header: hairline once scrolled, hides on scroll down, returns on scroll up; highlights the section in view
+    var hdr = document.getElementById('hdr'), lastY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      hdr.classList.toggle('scrolled', y > 10);
+      if (y > 600 && y > lastY + 2) hdr.classList.add('away'); else if (y < lastY - 2) hdr.classList.remove('away');
+      lastY = y;
+    }, { passive: true });
+    var links = document.querySelectorAll('.site-header nav a');
+    if ('IntersectionObserver' in window) {
+      var so = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); }); });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      ['private', 'coworking', 'services', 'spaces', 'location'].forEach(function (id) { so.observe(document.getElementById(id)); });
+    }
+
+    // gentle parallax on large photos
+    var par = document.querySelectorAll('.par');
+    function parallax() {
+      var vh = window.innerHeight;
+      par.forEach(function (img) {
+        var r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        var k = (r.top + r.height / 2 - vh / 2) / vh;
+        img.style.transform = 'translate3d(0,' + (-k * parseFloat(img.dataset.speed) * r.height - parseFloat(img.dataset.speed) * r.height * .5) + 'px,0)';
+      });
+    }
+    if (!reduce) { window.addEventListener('scroll', function () { requestAnimationFrame(parallax); }, { passive: true }); parallax(); }
+
+    // reveals, only for elements that start below the first screen
+    if ('IntersectionObserver' in window && !reduce) {
+      var fold = window.innerHeight;
+      var ro = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('pre'); ro.unobserve(e.target); } }); }, { threshold: .15 });
+      document.querySelectorAll('.rv').forEach(function (el) { if (el.getBoundingClientRect().top > fold) { el.classList.add('pre'); ro.observe(el); } });
+      // clipped photos report no visible area, so watch their parent and uncover the photo from there
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.querySelectorAll(':scope > .rimg').forEach(function (c) { c.classList.remove('pre'); }); io.unobserve(e.target); } }); }, { threshold: .1 });
+      document.querySelectorAll('.rimg').forEach(function (el) { if (el.getBoundingClientRect().top > fold) { el.classList.add('pre'); io.observe(el.parentElement); } });
+    }
+
+    // Our Spaces: arrows, drag to scroll, progress bar
+    var g = document.getElementById('gallery'), items = g.querySelectorAll('figure'), bar = document.getElementById('bar');
+    function update() { var max = g.scrollWidth - g.clientWidth, w = Math.max(10, g.clientWidth / g.scrollWidth * 100); bar.style.width = w + '%'; bar.style.left = (max > 0 ? g.scrollLeft / max * (100 - w) : 0) + '%'; }
+    function current() { var best = 0; items.forEach(function (it, i) { if (it.offsetLeft - items[0].offsetLeft <= g.scrollLeft + 40) best = i; }); return best; }
+    function go(step) { var i = Math.max(0, Math.min(items.length - 1, current() + step)); g.scrollTo({ left: items[i].offsetLeft - items[0].offsetLeft, behavior: reduce ? 'auto' : 'smooth' }); }
+    document.getElementById('prev').addEventListener('click', function () { go(-1); });
+    document.getElementById('next').addEventListener('click', function () { go(1); });
+    g.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); update();
+    var down = false, sx = 0, sl = 0;
+    g.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = g.scrollLeft; g.classList.add('drag'); });
+    window.addEventListener('pointermove', function (e) { if (down) g.scrollLeft = sl - (e.clientX - sx); });
+    window.addEventListener('pointerup', function () { if (down) { down = false; g.classList.remove('drag'); } });
+  })();
+</script>
