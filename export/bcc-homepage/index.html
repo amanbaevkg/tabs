@@ -17,7 +17,7 @@
 
 <div class="ribbon" role="note">
   <div class="wrap">
-    <span><b>BCC homepage</b> · concept v2.1 · desktop 1440 px · internal review, not production</span>
+    <span><b>BCC homepage</b> · concept v2.3 · desktop 1440 px · internal review, not production</span>
     <span>V = video needed · P = photo needed · all text from businesscentercapellen.lu · existing contact assistant unchanged, not shown</span>
   </div>
 </div>
@@ -58,14 +58,36 @@
         <span class="label">77, route d'Arlon · L-8311 Capellen</span>
         <h1 class="xl">Business Center <em>Capellen</em></h1>
         <p>Your trusted partner for office rentals in Capellen (Luxembourg)</p>
+        <form class="finder" id="finder" aria-label="Choose your workspace" onsubmit="return false">
+          <div class="field">
+            <button type="button" class="field-btn" id="ws-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="ws-menu"><span class="k">Choose your workspace</span><span class="v" id="ws-val">Private Offices</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <ul class="menu" id="ws-menu" role="listbox" aria-label="Workspace">
+              <li role="option" data-type="private" aria-selected="true">Private Offices</li>
+              <li role="option" data-type="cowork" aria-selected="false">Co-Working Space</li>
+              <li role="option" data-type="meeting" aria-selected="false">Meeting Rooms</li>
+              <li role="option" data-type="domic" aria-selected="false">Company Domiciliation</li>
+            </ul>
+          </div>
+          <div class="field">
+            <button type="button" class="field-btn" id="sz-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sz-menu"><span class="k">Team size</span><span class="v" id="sz-val">1 PERSON</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <ul class="menu" id="sz-menu" role="listbox" aria-label="Team size">
+              <li role="option" data-size="1" aria-selected="true">1 PERSON</li>
+              <li role="option" data-size="2" aria-selected="false">2 PERSONS</li>
+              <li role="option" data-size="3" aria-selected="false">3 PERSONS</li>
+              <li role="option" data-size="4" aria-selected="false">4 PERSONS</li>
+              <li role="option" data-size="6" aria-selected="false">6 PERSONS</li>
+              <li role="option" data-size="8" aria-selected="false">8 PERSONS</li>
+            </ul>
+          </div>
+          <a class="finder-go" id="finder-go" href="https://businesscentercapellen.lu/contact/">Get a Quote<svg aria-hidden="true"><use href="#arr"/></svg></a>
+        </form>
       </div>
       <span class="tag vtag"><span><i>V1</i><b>VIDEO NEEDED: Building Entrance → Workspace</b></span><span>Full-bleed background · 16:9 · 20–25 s muted loop</span></span>
       <span class="scroll-cue" aria-hidden="true"></span>
       <a class="ring" href="https://businesscentercapellen.lu/contact/" aria-label="Work with us: contact">
-        <svg class="txt" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66 66m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text><textPath href="#circ">WORK WITH US · WORK WITH US · WORK WITH US ·</textPath></text></svg>
+        <svg class="txt" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66 66m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text textLength="312" lengthAdjust="spacing"><textPath href="#circ" textLength="312" lengthAdjust="spacing">WORK WITH US · WORK WITH US · </textPath></text></svg>
         <svg class="arr" aria-hidden="true"><use href="#arr"/></svg>
       </a>
-      <figure class="photo hero-inset"><img src="assets/images/bcc-entrance.jpg" alt="Entrée du Business Center Capellen avec espace d’accueil vitré et signalétique BCC." width="1600" height="1200"></figure>
     </div>
   </section>
 
@@ -97,27 +119,33 @@
         <a href="https://www.businesscentercapellen.lu//about-us/#services"><span class="xl big">Discover Our Services</span><span class="circle"><svg aria-hidden="true"><use href="#right"/></svg></span></a>
       </div>
 
+    </div>
+  </section>
+
+  <!-- THEY TRUST US: light band so the client logos read at first glance -->
+  <section class="trust-band">
+    <div class="wrap">
       <div class="trust">
         <h2 class="xl">They trust us</h2>
         <div class="marquee">
           <div class="marquee-track">
             <ul>
-              <li><img src="assets/images/client-cyheadit.png" alt="CyHeadIT" width="196" height="59"></li>
-              <li><img src="assets/images/client-kvsmart.png" alt="KVSmart" width="196" height="59"></li>
-              <li><img src="assets/images/client-beddeleem.png" alt="BeddeleemLux" width="196" height="59"></li>
-              <li><img src="assets/images/client-cloudpower.png" alt="Cloud Power" width="196" height="59"></li>
-              <li><img src="assets/images/client-ipc.png" alt="IPCGroupe" width="196" height="59"></li>
-              <li><img src="assets/images/client-turaco.png" alt="Turaco Solutions" width="196" height="59"></li>
-              <li><img src="assets/images/client-zementol.png" alt="Zementol" width="196" height="59"></li>
+              <li><img src="assets/images/client-cyheadit-ink.png" alt="CyHeadIT" width="196" height="59"></li>
+              <li><img src="assets/images/client-kvsmart-ink.png" alt="KVSmart" width="196" height="59"></li>
+              <li><img src="assets/images/client-beddeleem-ink.png" alt="BeddeleemLux" width="196" height="59"></li>
+              <li><img src="assets/images/client-cloudpower-ink.png" alt="Cloud Power" width="196" height="59"></li>
+              <li><img src="assets/images/client-ipc-ink.png" alt="IPCGroupe" width="196" height="59"></li>
+              <li><img src="assets/images/client-turaco-ink.png" alt="Turaco Solutions" width="196" height="59"></li>
+              <li><img src="assets/images/client-zementol-ink.png" alt="Zementol" width="196" height="59"></li>
             </ul>
             <ul aria-hidden="true">
-              <li><img src="assets/images/client-cyheadit.png" alt="" width="196" height="59"></li>
-              <li><img src="assets/images/client-kvsmart.png" alt="" width="196" height="59"></li>
-              <li><img src="assets/images/client-beddeleem.png" alt="" width="196" height="59"></li>
-              <li><img src="assets/images/client-cloudpower.png" alt="" width="196" height="59"></li>
-              <li><img src="assets/images/client-ipc.png" alt="" width="196" height="59"></li>
-              <li><img src="assets/images/client-turaco.png" alt="" width="196" height="59"></li>
-              <li><img src="assets/images/client-zementol.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-cyheadit-ink.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-kvsmart-ink.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-beddeleem-ink.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-cloudpower-ink.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-ipc-ink.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-turaco-ink.png" alt="" width="196" height="59"></li>
+              <li><img src="assets/images/client-zementol-ink.png" alt="" width="196" height="59"></li>
             </ul>
           </div>
         </div>

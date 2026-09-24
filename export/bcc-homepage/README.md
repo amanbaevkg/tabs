@@ -1,4 +1,4 @@
-# BCC – Business Center Capellen · homepage concept v2.1 (desktop mockup)
+# BCC – Business Center Capellen · homepage concept v2.3 (desktop mockup)
 
 A static HTML/CSS/JS mockup for internal review. It is not the production website. It needs no build step, framework or internet connection.
 
@@ -26,7 +26,7 @@ bcc-homepage/
 ├── js/
 │   └── main.js           header on scroll, language selector, Our Spaces gallery
 └── assets/
-    ├── images/           BCC logo, 4 BCC photos, 7 client logos
+    ├── images/           BCC logo, 3 BCC photos, 7 client logos (dark "ink" versions)
     ├── fonts/            Archivo, Newsreader, IBM Plex Mono (woff2)
     └── video/            empty: put the hero video here (see below)
 ```
@@ -42,6 +42,8 @@ bcc-homepage/
   - hover transitions on photos, links and buttons
 
   All of them switch off for visitors who have "Reduce motion" turned on.
+- **Workspace selector** (`js/main.js`): the frosted bar over the hero video. "Choose your workspace" lists Private Offices, Co-Working Space, Meeting Rooms and Company Domiciliation. "Team size" (1–8 persons) is active only for Private Offices. "Get a Quote" opens the BCC contact page.
+- **They trust us:** a light band with each client logo on its own tile, in a slow infinite carousel that pauses on hover. The logo files are dark, fully opaque versions of the originals, so they read clearly on the light background.
 - **Header behaviour** (`js/main.js`): transparent over the hero, then a solid slim bar; it hides when scrolling down and returns when scrolling up.
 - **Language selector:** a UI concept only. EN/FR/DE/LU mark themselves active; the content stays in English.
 - **Placeholders:** striped boxes labelled V1 and P1–P8, sized to the final image shape. Replace each box with an `<img>` (or `<video>`) of the same size.
