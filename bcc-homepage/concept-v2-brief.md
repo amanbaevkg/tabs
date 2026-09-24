@@ -1,6 +1,8 @@
 # BCC homepage concept v2: changes, reasons and asset brief
 
-Mockup: `mockup-v2/index.html` (desktop, 1440 px). Concept v1 in `mockup/` is kept for comparison.
+Mockup: `mockup-v2/index.html` (desktop, 1440 px), now revision v2.1.
+
+**v2.1 changes:** softer connected palette (warm off-white, sand, stone, grey-blue haze, slate navy; no black, no orange); hero rebuilt around the full-width video with a centred title at 72 px instead of 226 px; lighter header (logo left, thin nav, text "Contact" link, hides on scroll down and returns on scroll up). Everything else unchanged. Concept v1 in `mockup/` is kept for comparison.
 Content: every heading, paragraph, testimonial, name, role, link and contact detail is copied from businesscentercapellen.lu.
 Reference: Mindspace (mindspace.me) was studied from desktop screenshots for its level of craft. No text, colour, component or layout was copied from it.
 
@@ -8,7 +10,7 @@ Reference: Mindspace (mindspace.me) was studied from desktop screenshots for its
 
 | Area | Current BCC site | Concept v2 |
 |------|------------------|------------|
-| Colour | White, black, orange buttons, cyan logo | Deep navy `#0D1822`, warm stone `#D6CFC4`, limestone `#ECE7DF`, off-white `#F6F4F0`. Cyan only as a fine accent (underlines, arrows, map pin). **No orange.** |
+| Colour | White, black, orange buttons, cyan logo | (v2.1) Warm off-white `#EFEBE5`, sand `#E3DDD3`, stone `#D2CABD`, grey-blue haze `#D3D8D8`, slate navy `#33434F` / `#263441`. Cyan only as a fine accent (underlines, arrows, map pin). **No orange.** |
 | Typography | Archivo Black (heavy) + Inter | Archivo **Expanded Light** for headlines (wide, thin, architectural), Newsreader italic serif for one word per statement, IBM Plex Mono for small labels |
 | Header | White bar, nav left, logo centre, "Contact" right | Transparent over the hero video, turns solid off-white after the hero. Nav left, logo centre, **EN · FR · DE · LU** selector and an outlined "Contact" on the right |
 | Hero | Title left, stock staircase photo right, badge | Full-screen video background; "Business / Center / *Capellen*" set across three staggered lines at 226 px; subline and address in a slim column top right; a real BCC entrance photo overlaps the hero edge into the next section, with the "Work with us" ring |
@@ -66,7 +68,8 @@ Real BCC photos already used: entrance (hero overlap), lounge with table footbal
 - **Route:** approach the building from outside, then the main entrance door, the reception hall, the corridor, and finally the coworking area or a meeting room.
 - **What appears:** facade and entrance, reception, bright workspaces. One or two people working in the background are fine (with releases); no close-up faces, no readable screens or documents.
 - **Camera:** gimbal or stabilised phone, slow steady forward walk (slower than normal walking). In the final room, one slow sideways slide of 2–3 m. No pans, no zoom, no handheld shake.
-- **Format:** horizontal 16:9, 4K (3840 × 2160) preferred, 25 or 50 fps. Keep the lower-left area calm, because the headline sits there. No sound needed.
+- **Format:** horizontal 16:9, 4K (3840 × 2160) preferred, 25 or 50 fps. No sound needed.
+- **Framing (v2.1 hero):** the title now sits in the centre of the frame, so keep the centre fairly calm (walls, floor, soft light) and let the detail and movement happen in the outer thirds. Avoid bright windows directly in the centre. The lower-right corner sits under the overlapping entrance photo.
 - **Length:** final edit 20–25 s. Record either one continuous walk of 60–90 s, or 5 clips of 8–10 s each: exterior approach · door · reception · corridor · workspace slide.
 - **Also needed:** one sharp still frame from the best moment (poster image shown while loading).
 
