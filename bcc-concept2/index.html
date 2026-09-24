@@ -57,8 +57,17 @@
   .site-header nav a { text-decoration: none; padding-block: 8px; position: relative; }
   .site-header nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
   .site-header nav a:hover::after, .site-header nav a.on::after { transform: scaleX(1); }
-  .lang { font: 500 13px/1 var(--font); color: var(--mute); letter-spacing: .06em; }
-  .lang b { color: var(--ink); font-weight: 600; }
+  .lang { position: relative; }
+  .lang-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 4px; font: 600 14px/1 var(--font); letter-spacing: .06em; }
+  .lang-btn svg { width: 12px; height: 12px; transition: transform .25s ease; }
+  .lang-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .lang-menu { position: absolute; right: 0; top: calc(100% + 10px); min-width: 190px; margin: 0; padding: 6px; list-style: none; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 24px 48px -20px rgba(18,20,23,.3); opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 60; }
+  .lang-menu.open { opacity: 1; transform: none; pointer-events: auto; }
+  .lang-menu button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 12px; text-align: left; font: 500 15px/1 var(--font); transition: background-color .2s ease; }
+  .lang-menu button:hover { background: var(--bg); }
+  .lang-menu button span { font: 600 11.5px/1 var(--font); letter-spacing: .1em; color: var(--mute); }
+  .lang-menu button[aria-checked="true"] { color: var(--accent); }
+  .lang-menu button[aria-checked="true"] span { color: var(--accent); }
   .site-header .btn { padding: 14px 20px; font-size: 13px; }
 
   /* ---------- 1. hero ---------- */
@@ -148,11 +157,14 @@
   .trust { background: var(--paper); padding-block: 90px; border-block: 1px solid var(--line); }
   .trust .wrap { display: grid; grid-template-columns: 3fr 9fr; gap: 40px; align-items: center; }
   .trust h2 { font-size: 52px; }
-  .logos { display: grid; grid-template-columns: repeat(7, 1fr); border-left: 1px solid var(--line); }
-  .logos li { list-style: none; height: 120px; display: grid; place-items: center; padding: 0 16px; border-right: 1px solid var(--line); }
-  .logos { margin: 0; padding: 0; }
-  .logos img { max-height: 44px; width: auto; max-width: 100%; filter: grayscale(1); opacity: .8; transition: filter .35s ease, opacity .35s ease, transform .35s ease; }
-  .logos li:hover img { filter: none; opacity: 1; transform: scale(1.06); }
+  .logos-wrap { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .logos-track { display: flex; width: max-content; animation: logos 55s linear infinite; }
+  .logos-wrap:hover .logos-track { animation-play-state: paused; }
+  @keyframes logos { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+  .logos { display: flex; margin: 0; padding: 0; list-style: none; }
+  .logos li { flex: none; width: 210px; height: 120px; display: grid; place-items: center; padding: 0 22px; border-left: 1px solid var(--line); }
+  .logos img { max-height: 46px; width: auto; max-width: 100%; transition: transform .35s ease; }
+  .logos li:hover img { transform: scale(1.07); }
 
   /* ---------- 6. our spaces ---------- */
   .spaces { padding-block: 150px 130px; overflow: hidden; }
@@ -242,7 +254,7 @@
     .sec-head { flex-direction: column; align-items: flex-start; }
     .pv-main { height: 340px; } .pv-text, .svc-photo { position: static; } .svc-photo .frame { height: 320px; }
     .cw-band { height: 420px; } .svc-list { grid-template-columns: 1fr; } .svc-list li:nth-child(even) { padding-left: 0; border-left: 0; }
-    .logos { grid-template-columns: repeat(3, 1fr); } .w-l, .w-m, .w-s { width: 80vw; } .gallery .frame { height: 320px; }
+    .w-l, .w-m, .w-s { width: 80vw; } .gallery .frame { height: 320px; }
     .loc-text { padding: 32px 20px; } .loc-dl { grid-template-columns: 1fr; } .loc-photo { min-height: 320px; }
     .intro, .services, .spaces, .voices, .location, .contact { padding-block: 80px; }
   }
@@ -270,7 +282,15 @@
       <a href="#spaces">Our Spaces</a>
       <a href="#location">Location</a>
     </nav>
-    <span class="lang" aria-label="Language"><b>EN</b> · FR · DE · LU</span>
+    <div class="lang">
+      <button type="button" class="lang-btn" id="lang-btn" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Language: English"><span id="lang-code">EN</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+      <ul class="lang-menu" id="lang-menu" role="menu" aria-label="Language">
+        <li><button type="button" role="menuitemradio" aria-checked="true" data-code="EN" lang="en">English<span>EN</span></button></li>
+        <li><button type="button" role="menuitemradio" aria-checked="false" data-code="FR" lang="fr">Français<span>FR</span></button></li>
+        <li><button type="button" role="menuitemradio" aria-checked="false" data-code="DE" lang="de">Deutsch<span>DE</span></button></li>
+        <li><button type="button" role="menuitemradio" aria-checked="false" data-code="LU" lang="lb">Lëtzebuergesch<span>LU</span></button></li>
+      </ul>
+    </div>
     <a class="btn" href="https://www.businesscentercapellen.lu/contact/">Contact Us</a>
   </div>
 </header>
@@ -387,15 +407,28 @@
   <section class="trust">
     <div class="wrap">
       <h2 class="big">They trust us</h2>
-      <ul class="logos">
-        <li><img src="assets/client-cyheadit-ink.png" alt="CyHeadIT" width="196" height="59"></li>
-        <li><img src="assets/client-kvsmart-ink.png" alt="KVSmart" width="196" height="59"></li>
-        <li><img src="assets/client-beddeleem-ink.png" alt="BeddeleemLux" width="196" height="59"></li>
-        <li><img src="assets/client-cloudpower-ink.png" alt="Cloud Power" width="196" height="59"></li>
-        <li><img src="assets/client-ipc-ink.png" alt="IPCGroupe" width="196" height="59"></li>
-        <li><img src="assets/client-turaco-ink.png" alt="Turaco Solutions" width="196" height="59"></li>
-        <li><img src="assets/client-zementol-ink.png" alt="Zementol" width="196" height="59"></li>
-      </ul>
+      <div class="logos-wrap">
+        <div class="logos-track">
+          <ul class="logos">
+            <li><img src="assets/client-cyheadit-ink.png" alt="CyHeadIT" width="196" height="59"></li>
+            <li><img src="assets/client-kvsmart-ink.png" alt="KVSmart" width="196" height="59"></li>
+            <li><img src="assets/client-beddeleem-ink.png" alt="BeddeleemLux" width="196" height="59"></li>
+            <li><img src="assets/client-cloudpower-ink.png" alt="Cloud Power" width="196" height="59"></li>
+            <li><img src="assets/client-ipc-ink.png" alt="IPCGroupe" width="196" height="59"></li>
+            <li><img src="assets/client-turaco-ink.png" alt="Turaco Solutions" width="196" height="59"></li>
+            <li><img src="assets/client-zementol-ink.png" alt="Zementol" width="196" height="59"></li>
+          </ul>
+          <ul class="logos" aria-hidden="true">
+            <li><img src="assets/client-cyheadit-ink.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-kvsmart-ink.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-beddeleem-ink.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-cloudpower-ink.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-ipc-ink.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-turaco-ink.png" alt="" width="196" height="59"></li>
+            <li><img src="assets/client-zementol-ink.png" alt="" width="196" height="59"></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -511,6 +544,20 @@
       }, { rootMargin: '-40% 0px -55% 0px' });
       ['private', 'coworking', 'services', 'spaces', 'location'].forEach(function (id) { so.observe(document.getElementById(id)); });
     }
+
+    // language dropdown (UI concept: the content stays in English for now)
+    var lb = document.getElementById('lang-btn'), lm = document.getElementById('lang-menu'), lc = document.getElementById('lang-code');
+    function setMenu(open) { lb.setAttribute('aria-expanded', String(open)); lm.classList.toggle('open', open); }
+    lb.addEventListener('click', function (e) { e.stopPropagation(); setMenu(lb.getAttribute('aria-expanded') !== 'true'); });
+    lm.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        lm.querySelectorAll('button').forEach(function (o) { o.setAttribute('aria-checked', o === b ? 'true' : 'false'); });
+        lc.textContent = b.dataset.code; lb.setAttribute('aria-label', 'Language: ' + b.firstChild.textContent);
+        setMenu(false); lb.focus();
+      });
+    });
+    document.addEventListener('click', function (e) { if (!lm.contains(e.target)) setMenu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
     // gentle parallax on large photos
     var par = document.querySelectorAll('.par');
