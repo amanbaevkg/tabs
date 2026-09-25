@@ -1,0 +1,159 @@
+<!--{
+ "file": "ai.html", "title": "Artificial Intelligence · Cloud Power", "nav": "ai", "ribbon": "Artificial Intelligence", "others": true,
+ "close": {"h": "Need more <span>information ?</span>", "p": "Feel free to contact us"},
+ "note": ["Content: AI page on cloud-power.eu. The percentages on the live page (40%, 40%, 80%, 50%, 50%, 15%) are left out, as agreed, because the page gives no source for them.", "The quote “Technology is simple with people you can trust” now appears only on Consulting. The embedded contact form is replaced by the site-wide Contact Us action.", "Spelling fixed: Ressources → Resources (the domain label now reads “AI for HR”, as on the live page)."]
+}-->
+<style>
+  .phero .wrap { grid-template-columns: 6fr 6fr; }
+  .ai-visual { position: relative; height: 470px; }
+  .ai-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; clip-path: polygon(14% 0, 100% 0, 86% 100%, 0 100%); filter: saturate(.9); }
+  .ai-visual::after { content: ""; position: absolute; left: 6%; bottom: -18px; width: 38%; height: 4px; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); }
+
+  .why { background: var(--paper); color: var(--teal); padding-block: 120px 110px; }
+  .why .wrap { display: grid; grid-template-columns: 3fr 9fr; gap: 56px; }
+  .why p { font: 400 clamp(24px, 2.2vw, 32px)/1.42 var(--font); letter-spacing: -.015em; color: var(--teal); max-width: 42ch; }
+
+  .explore { position: relative; z-index: 2; background: var(--abyss); color: var(--on-dark); padding-block: 130px calc(var(--step) + 120px); }
+  .ex-head { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 60px; }
+  .ex-head p { font-size: 20px; color: var(--on-dark-2); }
+  .ex { display: grid; grid-template-columns: 4fr 8fr; gap: 0; border: 1px solid var(--line-d); }
+  .ex-tabs { display: grid; align-content: start; border-right: 1px solid var(--line-d); }
+  .ex-tabs button { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 17px 26px; text-align: left; font: 500 17px/1.2 var(--font); color: var(--on-dark-2); border-bottom: 1px solid var(--line-d); transition: color .25s ease, background-color .25s ease; }
+  .ex-tabs button:last-child { border-bottom: 0; }
+  .ex-tabs button::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--cyan); transform: scaleY(0); transition: transform .35s ease; }
+  .ex-tabs button:hover { color: var(--on-dark); background: rgba(233,246,246,.03); }
+  .ex-tabs button[aria-selected="true"] { color: var(--on-dark); background: rgba(18,211,216,.07); }
+  .ex-tabs button[aria-selected="true"]::before { transform: scaleY(1); }
+  .ex-tabs button span { font: 400 11.5px/1 var(--mono); color: var(--on-dark-2); }
+  .ex-panel { position: relative; padding: 56px 60px; overflow: hidden; min-height: 560px; }
+  .ex-panel[hidden] { display: none !important; }
+  .ex-panel h3 { font-weight: 700; font-size: clamp(44px, 4.6vw, 70px); line-height: .95; letter-spacing: -.045em; }
+  .ex-panel .mono { margin-top: 42px; color: var(--cyan); }
+  .impact { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .impact li { padding: 22px 24px; border: 1px solid var(--line-d); font: 500 20px/1.3 var(--font); letter-spacing: -.01em; background: rgba(233,246,246,.03); opacity: 0; transform: translateY(14px); animation: in .6s cubic-bezier(.2,.7,.2,1) forwards; }
+  .impact li:nth-child(2) { animation-delay: .07s; } .impact li:nth-child(3) { animation-delay: .14s; } .impact li:nth-child(4) { animation-delay: .21s; }
+  @keyframes in { to { opacity: 1; transform: none; } }
+  .ex-panel .glyph { position: absolute; right: -40px; bottom: -40px; width: 300px; height: 300px; opacity: .5; }
+
+  .strengths { background: var(--paper); color: var(--teal); padding-block: calc(var(--step) + 110px) 140px; }
+  .st-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid var(--teal); margin-top: 60px; }
+  .st { padding: 36px 30px 10px 0; display: grid; gap: 16px; align-content: start; }
+  .st + .st { padding-left: 30px; border-left: 1px solid var(--line-l); }
+  .st .glyph { width: 70px; height: 70px; }
+  .st h3 { font-weight: 650; font-size: 28px; letter-spacing: -.025em; }
+  .st p { font-size: 17px; color: var(--slate); }
+
+  .benefit { background: var(--mist); color: var(--teal); padding-block: 140px; }
+  .benefit .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: 72px; align-items: center; }
+  .benefit figure { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+  .benefit figure img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+  .benefit figure:hover img { transform: scale(1.04); }
+  .who { list-style: none; margin: 36px 0 0; padding: 0; }
+  .who li { display: grid; grid-template-columns: 28px 1fr; gap: 16px; padding: 22px 0; border-top: 1px solid var(--line-l); font-size: 18.5px; line-height: 1.5; color: var(--slate); }
+  .who li:last-child { border-bottom: 1px solid var(--line-l); }
+  .who li::before { content: ""; width: 12px; height: 22px; margin-top: 3px; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); }
+  @media (max-width: 900px) { .why .wrap, .ex, .benefit .wrap { grid-template-columns: 1fr; } .st-grid { grid-template-columns: 1fr 1fr; } .impact { grid-template-columns: 1fr; } .ex-tabs { border-right: 0; } }
+</style>
+
+<section class="phero step-down-r">
+  <canvas id="streaks" data-density="22" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="phero-copy">
+      <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="our-services.html">Our Services</a><i>/</i><span>AI</span></div>
+      <h1>Artificial Intelligence <em>by Cloud Power</em></h1>
+    </div>
+    <figure class="ai-visual"><img src="assets/ai-hologram.jpg" alt="Femme travaillant avec un robot humanoïde holographique, symbolisant la collaboration entre l’humain et l’intelligence artificielle." width="1800" height="1350"></figure>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <span class="kicker mono">Why It Matters</span>
+    <p class="rv">In a world where organizations need to rapidly adopt AI and scale it responsibly, our AI solution offers a way to reduce fragmentation (many separate tools) and accelerate development, while providing enterprise-grade support, governance and flexibility. For companies that are stepping into generative AI or strengthening their AI/ML operations, this platform can serve as a strategic foundation.</p>
+  </div>
+</section>
+
+<section class="explore on-dark step-down-l">
+  <div class="wrap">
+    <div class="ex-head">
+      <h2 class="h-l rv">What we can do for you ?</h2>
+      <p class="rv">Discover where our AI Agents can bring value</p>
+    </div>
+    <div class="ex rv">
+      <div class="ex-tabs" role="tablist" aria-label="AI domains" id="ex-tabs"></div>
+      <div id="ex-panels"></div>
+    </div>
+  </div>
+</section>
+
+<section class="strengths pull-up">
+  <div class="wrap">
+    <h2 class="h-l rv" style="max-width:16ch">How AI Agents Strengthen Business Performance</h2>
+    <div class="st-grid">
+      <div class="st rv"><svg class="glyph" viewBox="0 0 80 80" aria-hidden="true"><path class="s" d="M10 60 L40 20 L70 60"/><circle class="f node" cx="40" cy="20" r="6"/><circle class="ft" cx="10" cy="60" r="5"/><circle class="ft" cx="70" cy="60" r="5"/></svg><h3>Flexibility</h3><p>Enable developers to choose models, tools and frameworks.</p></div>
+      <div class="st rv d1"><svg class="glyph" viewBox="0 0 80 80" aria-hidden="true"><path class="s" d="M40 8 L68 20 V40 C68 56 54 68 40 72 C26 68 12 56 12 40 V20 Z"/><path class="c drawn" d="M28 40 L37 49 L54 30"/></svg><h3>Enterprise-grade</h3><p>Built with security, scalability and compliance in mind.</p></div>
+      <div class="st rv d2"><svg class="glyph" viewBox="0 0 80 80" aria-hidden="true"><path class="s" d="M10 70 H70"/><rect class="ft" x="16" y="30" width="10" height="40"/><rect class="ft" x="35" y="42" width="10" height="28"/><rect class="f node" x="54" y="54" width="10" height="16"/></svg><h3>Cost optimization</h3><p>Customize agents to run more efficiently.</p></div>
+      <div class="st rv d3"><svg class="glyph" viewBox="0 0 80 80" aria-hidden="true"><path class="s" d="M12 68 L68 12"/><path class="c flow" d="M12 68 L68 12"/><path class="s" d="M46 12 H68 V34"/></svg><h3>Rapid deployment</h3><p>Go from playground to production in seconds with one-click deployment.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="benefit">
+  <div class="wrap">
+    <figure class="rv"><img src="assets/ai-robot.jpg" alt="Robot futuriste blanc avec le logo Cloud Power, représentant l’innovation et l’intelligence artificielle." width="1400" height="1050"></figure>
+    <div>
+      <h2 class="h-l rv">Who Will Benefit?</h2>
+      <ul class="who">
+        <li class="rv">Developers and data-scientists who want an integrated toolkit and faster path from prototype to production.</li>
+        <li class="rv">Business users and teams that want to leverage AI with minimal coding involvement.</li>
+        <li class="rv">Enterprises looking to deploy AI across multiple environments (cloud, on-premises, hybrid) with governance.</li>
+        <li class="rv">Organizations dealing with large data sets, content generation needs, knowledge-management use cases, forecasting projects, etc.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    // AI domains and their business impact, as published on the AI page
+    var D = [
+      ['AI for HR', ['Time to offer', 'Cost per hire', 'Reduced support cost', '1-click resolution rates']],
+      ['AI for Sales', ['Higher conversion rate', 'Increased order size', 'Improved upselling', 'Customer retention']],
+      ['AI for IT', ['Reduced ticket volume', 'Improved and seamless user experience', 'Reduced Operational cost']],
+      ['AI for Customer Service', ['Cut support volume/ cost', 'Speedy issue resolution', 'Improved customer satisfaction']],
+      ['AI for Productivity', ['Workforce productivity', 'Decision support', 'Process optimization']],
+      ['AI for Finance', ['Cost per transaction', 'Days sales outstanding', 'Time to close period']],
+      ['AI for Healthcare', ['Streamlining operations', 'Improved access to care', 'Increased patient satisfaction']],
+      ['AI for Research', ['Data enrichment', 'Speedy research', 'Faster reviews']],
+      ['AI for Legal', ['Faster review cycle', 'Improve audit readiness', 'Ensures consistency']],
+      ['AI for Supply Chain', ['Improved onboarding', 'Reduced external spend', 'Lead times & order cycle', 'Improved sourcing']]
+    ];
+    var tabs = document.getElementById('ex-tabs'), panels = document.getElementById('ex-panels');
+    var glyph = '<svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><path class="c flow" d="M50 60L120 120L190 70M50 180L120 120L190 170M120 120V40M120 120V200"/><circle class="ft" cx="120" cy="120" r="12"/><circle class="f node" cx="50" cy="60" r="7"/><circle class="f node d1" cx="190" cy="70" r="7"/><circle class="f node d2" cx="50" cy="180" r="7"/><circle class="f node d3" cx="190" cy="170" r="7"/></svg>';
+    D.forEach(function (d, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.role = 'tab'; b.id = 'ex-t' + i; b.setAttribute('aria-controls', 'ex-p' + i); b.setAttribute('aria-selected', i === 0 ? 'true' : 'false'); b.tabIndex = i === 0 ? 0 : -1;
+      b.innerHTML = d[0] + '<span>' + String(i + 1).padStart(2, '0') + '</span>';
+      tabs.appendChild(b);
+      var p = document.createElement('div');
+      p.className = 'ex-panel'; p.id = 'ex-p' + i; p.setAttribute('role', 'tabpanel'); p.setAttribute('aria-labelledby', b.id); p.hidden = i !== 0;
+      p.innerHTML = '<h3>' + d[0] + '</h3><p class="mono">Business impact:</p><ul class="impact">' + d[1].map(function (x) { return '<li>' + x.replace('&', '&amp;') + '</li>'; }).join('') + '</ul>' + glyph;
+      panels.appendChild(p);
+    });
+    var bs = tabs.querySelectorAll('button');
+    function select(i) {
+      bs.forEach(function (b, k) { b.setAttribute('aria-selected', k === i ? 'true' : 'false'); b.tabIndex = k === i ? 0 : -1; });
+      panels.querySelectorAll('.ex-panel').forEach(function (p, k) {
+        p.hidden = k !== i;
+        if (k === i) p.querySelectorAll('.impact li').forEach(function (li) { li.style.animation = 'none'; li.offsetHeight; li.style.animation = ''; });
+      });
+    }
+    bs.forEach(function (b, i) {
+      b.addEventListener('click', function () { select(i); });
+      b.addEventListener('keydown', function (e) {
+        var n = e.key === 'ArrowDown' ? i + 1 : e.key === 'ArrowUp' ? i - 1 : null;
+        if (n === null) return; e.preventDefault(); n = (n + bs.length) % bs.length; select(n); bs[n].focus();
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,92 @@
+<!--{
+ "file": "contact-us.html", "title": "Contact Us · Cloud Power", "nav": "contact", "ribbon": "Contact Us",
+ "note": ["Content: Contact Us page on cloud-power.eu. This is now the only page with the appointment link (one booking address) and the only contact form.", "In this mockup the form does not send anything. The map is a styled placeholder with a link to Google Maps; the live site would use an embedded map here."]
+}-->
+<style>
+  .phero .wrap { grid-template-columns: 6fr 6fr; align-items: start; padding-bottom: 120px; }
+  .phero h1 { font-size: clamp(50px, 5.6vw, 84px); }
+  .phero .lead { margin-top: 4px; }
+  .quick { margin-top: 40px; display: grid; gap: 0; border-top: 1px solid var(--line-d); max-width: 520px; }
+  .quick div { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line-d); }
+  .quick dt { font: 500 11.5px/1.6 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark-2); }
+  .quick dd { font-size: 18px; color: var(--on-dark); }
+  .quick a { text-decoration: none; } .quick a:hover { color: var(--cyan); }
+  .book { margin-top: 34px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .book p { font-size: 15px; color: var(--on-dark-2); }
+
+  .form { position: relative; background: var(--paper); color: var(--teal); padding: 48px; display: grid; gap: 22px; box-shadow: 0 50px 90px -40px rgba(0,0,0,.6); }
+  .form::before { content: ""; position: absolute; left: 0; top: 0; height: 4px; width: 42%; background: var(--cyan); }
+  .form h2 { font-weight: 650; font-size: 30px; letter-spacing: -.03em; }
+  .field { display: grid; gap: 8px; }
+  .field label { font: 500 11.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+  .field input, .field textarea { width: 100%; font: 400 17px/1.4 var(--font); color: var(--teal); background: #fff; border: 1px solid var(--line-l); padding: 14px 16px; border-radius: 0; transition: border-color .2s ease, box-shadow .2s ease; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--cyan-ink); box-shadow: 0 0 0 3px rgba(18,211,216,.2); }
+  .field textarea { min-height: 140px; resize: vertical; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form .slash { justify-self: start; border: 0; cursor: pointer; }
+  .sent { font-size: 15px; color: var(--cyan-ink); min-height: 1.4em; }
+
+  .vendor { background: var(--mist); color: var(--teal); padding-block: 44px; }
+  .vendor .wrap { display: flex; align-items: center; gap: 22px; font-size: 18px; }
+  .vendor b { font-weight: 600; }
+
+  .map { position: relative; height: 460px; background: linear-gradient(90deg, rgba(0,47,53,.07) 1px, transparent 1px) 0 0 / 64px 64px, linear-gradient(rgba(0,47,53,.07) 1px, transparent 1px) 0 0 / 64px 64px, var(--paper); overflow: hidden; }
+  .map .road { position: absolute; left: -5%; right: -5%; top: 52%; height: 18px; background: #fff; transform: rotate(-9deg); box-shadow: 0 0 0 1px var(--line-l); }
+  .map .pin { position: absolute; left: 58%; top: 44%; width: 18px; height: 18px; margin: -9px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 10px rgba(18,211,216,.2), 0 0 0 28px rgba(18,211,216,.08); animation: ping 2.6s ease-out infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(18,211,216,.45), 0 0 0 0 rgba(18,211,216,.2); } 100% { box-shadow: 0 0 0 22px rgba(18,211,216,0), 0 0 0 48px rgba(18,211,216,0); } }
+  .map .card { position: absolute; left: var(--gutter); bottom: 48px; background: var(--abyss); color: var(--on-dark); padding: 30px 34px; display: grid; gap: 14px; max-width: 420px; }
+  .map .card p { font-size: 19px; }
+  @media (max-width: 900px) { .two { grid-template-columns: 1fr; } .form { padding: 28px; } .map .card { left: 16px; right: 16px; } }
+</style>
+
+<section class="phero no-step">
+  <canvas id="streaks" data-density="26" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="phero-copy" style="align-content:start">
+      <div class="crumbs"><a href="index.html">Home</a><i>/</i><span>Contact Us</span></div>
+      <h1>We would love to <em>hear from you.</em></h1>
+      <p class="lead">Feel free to reach out using the below details.</p>
+      <dl class="quick">
+        <div><dt>Phone</dt><dd>+352 20 600 820</dd></div>
+        <div><dt>Email</dt><dd>sales@cloud-power.eu</dd></div>
+        <div><dt>Address</dt><dd>77, Route d'Arlon 8311 Capellen, Luxembourg</dd></div>
+        <div><dt>Hours</dt><dd>Mon-Fri 9:00 - 17:00</dd></div>
+        <div><dt>Linkedin</dt><dd><a href="https://www.linkedin.com/company/cplux">linkedin.com/company/cplux</a></dd></div>
+      </dl>
+      <div class="book">
+        <a class="slash ghost" href="https://odoo.cloud-power.eu/book/89996c28">Schedule an appointment<svg aria-hidden="true"><use href="#arr"/></svg></a>
+      </div>
+    </div>
+    <form class="form" id="cform" novalidate>
+      <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name"></div>
+      <div class="two">
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message"></textarea></div>
+      <button class="slash solid" type="submit">Send<svg aria-hidden="true"><use href="#arr"/></svg></button>
+      <p class="sent" id="sent" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section class="vendor">
+  <div class="wrap"><p>If you are a vendor please use <b>invoice@cloud-power.eu</b> for all invoices.</p></div>
+</section>
+
+<section class="map" aria-label="Location">
+  <span class="road" aria-hidden="true"></span>
+  <span class="pin" aria-hidden="true"></span>
+  <div class="card">
+    <span class="kicker mono lt">Address</span>
+    <p>77, Route d'Arlon 8311 Capellen, Luxembourg</p>
+    <a class="tlink" href="https://maps.google.com/maps?q=77%20Route%20d%27Arlon%208311%20Capellen%20Luxembourg">Open in Google Maps<svg aria-hidden="true"><use href="#arr"/></svg></a>
+  </div>
+</section>
+
+<script>
+  document.getElementById('cform').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('sent').textContent = 'Mockup only: this form is not connected yet.';
+  });
+</script>

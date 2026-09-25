@@ -91,6 +91,7 @@
   .site-header nav .dd-menu a { opacity: .8; padding: 11px 12px; }
   .site-header nav .dd-menu a:hover { opacity: 1; background: rgba(18,211,216,.08); }
   .site-header nav .dd-menu a::after { display: none; }
+  .site-header nav .dd-menu .all { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line-d); font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); }
 
   /* ---------- 1. hero ---------- */
   .hero { position: relative; height: 900px; background: radial-gradient(90% 70% at 78% 40%, #073842 0%, var(--abyss) 62%); color: var(--on-dark); overflow: hidden; }
@@ -340,21 +341,22 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="https://www.cloud-power.eu/"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
+    <a class="brand" href="index.html"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
     <nav aria-label="Main">
       <div class="dd">
-        <a href="https://www.cloud-power.eu/our-services/" class="dd-top" aria-haspopup="true">Our Services<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a href="our-services.html" class="dd-top" aria-haspopup="true">Our Services<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
         <div class="dd-menu">
-          <a href="https://www.cloud-power.eu/managed-services/">Managed Services</a>
-          <a href="https://www.cloud-power.eu/ai/">AI</a>
-          <a href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">SOC as a Service</a>
-          <a href="https://www.cloud-power.eu/consulting/">Consulting</a>
-          <a href="https://www.cloud-power.eu/digital-conception/">Digital Conception</a>
+          <a href="managed-services.html">Managed Services</a>
+          <a href="ai.html">AI</a>
+          <a href="soc-as-a-service.html">SOC as a Service</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="digital-conception.html">Digital Conception</a>
+          <a class="all" href="our-services.html">All services</a>
         </div>
       </div>
-      <a href="https://www.cloud-power.eu/cloud-power-news/">News</a>
+      <a href="news.html">News</a>
     </nav>
-    <a class="slash solid" href="https://www.cloud-power.eu/contact-us/">Contact Us</a>
+    <a class="slash solid" href="contact-us.html">Contact Us</a>
   </div>
 </header>
 
@@ -368,7 +370,7 @@
         <h1><span class="l1">Your IT Challenges,</span><span class="l2">Our Solutions</span></h1>
         <p class="hero-sub">A human-sized company that understands your needs</p>
         <div class="hero-ctas">
-          <a class="slash solid" href="https://www.cloud-power.eu/contact-us/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+          <a class="slash solid" href="contact-us.html">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
           <a class="scroll-to" href="#dna" aria-label="Our DNA"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
         </div>
       </div>
@@ -397,7 +399,7 @@
         </ol>
         <div class="panels">
           <article class="panel has-more on" id="svc-managed">
-            <h3><a href="https://www.cloud-power.eu/managed-services/">Managed Services</a></h3>
+            <h3><a href="managed-services.html">Managed Services</a></h3>
             <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
               <path class="s" d="M30 70H210M30 120H210M30 170H210"/>
               <g class="anim knob1"><circle class="ft" cx="80" cy="70" r="9"/></g>
@@ -405,11 +407,11 @@
               <g class="anim knob3"><circle class="ft" cx="100" cy="170" r="9"/></g>
             </svg>
             <p>Free yourself from specific tasks. We can take them off your hands.</p>
-            <div class="tags"><span>Prioritize your projects</span><span>Optimize your internal resources</span><span>Reallocate your expenses</span></div>
-            <a class="more" href="https://www.cloud-power.eu/managed-services/" aria-label="Managed Services"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+            <div class="tags"><span>Cloud Services</span><span>Infrastructure</span><span>Performance Review</span></div>
+            <a class="more" href="managed-services.html" aria-label="Managed Services"><svg aria-hidden="true"><use href="#diag"/></svg></a>
           </article>
           <article class="panel has-more" id="svc-ai">
-            <h3><a href="https://www.cloud-power.eu/ai/">Artificial Intelligence</a></h3>
+            <h3><a href="ai.html">Artificial Intelligence</a></h3>
             <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
               <path class="c anim flow" d="M50 60L120 120L190 70M50 180L120 120L190 170M120 120V40M120 120V200"/>
               <circle class="ft anim node" cx="120" cy="120" r="12"/>
@@ -419,10 +421,10 @@
             </svg>
             <p>Our AI solution helps organizations adopt and scale AI responsibly by reducing tool fragmentation, speeding development, and providing enterprise-grade support, governance, and flexibility; a strategic foundation for teams advancing their generative AI or ML operations.</p>
             <div class="tags"><span>AI for HR</span><span>AI for Sales</span><span>AI for IT</span><span>AI for Customer Service</span><span>AI for Productivity</span><span>AI for Finance</span><span>AI for Healthcare</span></div>
-            <a class="more" href="https://www.cloud-power.eu/ai/" aria-label="Artificial Intelligence"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+            <a class="more" href="ai.html" aria-label="Artificial Intelligence"><svg aria-hidden="true"><use href="#diag"/></svg></a>
           </article>
           <article class="panel has-more" id="svc-digital">
-            <h3><a href="https://www.cloud-power.eu/digital-conception/">Digital Conception</a></h3>
+            <h3><a href="digital-conception.html">Digital Conception</a></h3>
             <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
               <rect class="s anim drawn" x="24" y="50" width="150" height="110" rx="4"/>
               <path class="s" d="M24 70H174"/>
@@ -432,20 +434,20 @@
             </svg>
             <p>Discover a Smarter Way to improve your digital renown</p>
             <div class="tags"><span>Website conception</span><span>Mobile App</span><span>Platform Conception</span></div>
-            <a class="more" href="https://www.cloud-power.eu/digital-conception/" aria-label="Digital Conception"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+            <a class="more" href="digital-conception.html" aria-label="Digital Conception"><svg aria-hidden="true"><use href="#diag"/></svg></a>
           </article>
           <article class="panel has-more" id="svc-cloud">
-            <h3><a href="https://www.cloud-power.eu/managed-services/">Private Cloud</a></h3>
+            <h3><a href="managed-services.html#cloud">Private Cloud</a></h3>
             <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
               <g class="anim layer d2"><path class="s" d="M60 170L120 196L180 170L120 144Z"/></g>
               <g class="anim layer d1"><path class="s" d="M60 130L120 156L180 130L120 104Z"/></g>
               <g class="anim layer"><path class="c" d="M60 90L120 116L180 90L120 64Z" style="fill:rgba(18,211,216,.12)"/></g>
             </svg>
             <div class="tags"><span>Website</span><span>Software as a service</span><span>Virtual Desktop Environnement</span><span>Private document sharing</span><span>Infrastructure as a service</span><span>Platform as a service</span><span>Backup as a service</span></div>
-            <a class="more" href="https://www.cloud-power.eu/managed-services/" aria-label="Private Cloud"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+            <a class="more" href="managed-services.html#cloud" aria-label="Private Cloud"><svg aria-hidden="true"><use href="#diag"/></svg></a>
           </article>
           <article class="panel has-more" id="svc-consulting">
-            <h3><a href="https://www.cloud-power.eu/consulting/">Consulting</a></h3>
+            <h3><a href="consulting.html">Consulting</a></h3>
             <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
               <path class="s" d="M30 200H210"/>
               <rect class="ft anim pillar" x="52" y="80" width="34" height="120"/>
@@ -454,10 +456,10 @@
             </svg>
             <p>Skilled experts, ready to join your teams</p>
             <div class="tags"><span>Development</span><span>Infrastructure</span><span>Expertise</span></div>
-            <a class="more" href="https://www.cloud-power.eu/consulting/" aria-label="Consulting"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+            <a class="more" href="consulting.html" aria-label="Consulting"><svg aria-hidden="true"><use href="#diag"/></svg></a>
           </article>
           <article class="panel has-more" id="svc-soc">
-            <h3><a href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/">SOC as a Service</a></h3>
+            <h3><a href="soc-as-a-service.html">SOC as a Service</a></h3>
             <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true">
               <circle class="s" cx="120" cy="120" r="96"/><circle class="s" cx="120" cy="120" r="62"/><circle class="s" cx="120" cy="120" r="28"/>
               <g class="anim sweep"><path d="M120 120L120 24A96 96 0 0 1 188 52Z" style="fill:rgba(18,211,216,.22)"/><path class="c" d="M120 120L120 24"/></g>
@@ -465,7 +467,7 @@
             </svg>
             <p>A 24/7 local security support team for your organization's information systems, ensuring optimum service and value for money.</p>
             <div class="tags"><span>24/7 expert supervision of your information system</span><span>A complete CERT security package</span><span>A local team</span></div>
-            <a class="more" href="https://www.cloud-power.eu/soc-as-a-service-24-7-cybersecurity-monitoring-with-a-managed-security-operations-center/" aria-label="SOC as a Service"><svg aria-hidden="true"><use href="#diag"/></svg></a>
+            <a class="more" href="soc-as-a-service.html" aria-label="SOC as a Service"><svg aria-hidden="true"><use href="#diag"/></svg></a>
           </article>
         </div>
       </div>
@@ -545,7 +547,7 @@
       <div class="contact-top">
         <h2 class="rv">Get <span>Answers</span></h2>
         <div class="contact-cta rv">
-          <a class="slash solid" href="https://www.cloud-power.eu/contact-us/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+          <a class="slash solid" href="contact-us.html">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
         </div>
       </div>
       <ol class="path">
@@ -566,11 +568,11 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="foot">
-      <a class="brand" href="https://www.cloud-power.eu/"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
+      <a class="brand" href="index.html"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
       <ul class="foot-links">
-        <li><a href="https://www.cloud-power.eu/our-services/">Our Services</a></li>
-        <li><a href="https://www.cloud-power.eu/cloud-power-news/">News</a></li>
-        <li><a href="https://www.cloud-power.eu/contact-us/">Contact Us</a></li>
+        <li><a href="our-services.html">Our Services</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
         <li><a href="https://www.linkedin.com/company/cplux">Linkedin</a></li>
       </ul>
     </div>

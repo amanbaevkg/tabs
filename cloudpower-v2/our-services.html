@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Our Services · Cloud Power</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* ============ Cloud Power design system: shared by every page ============ */
+:root {
+  color-scheme: light;
+  --abyss: #001A1E;        /* deepest teal: heroes, closing band, footer */
+  --teal: #002F35;         /* Cloud Power primary */
+  --teal-2: #07404A;       /* raised teal */
+  --mint: #EEFFFD;         /* Cloud Power secondary */
+  --paper: #F4FAF9;        /* light chapters */
+  --mist: #E2EEEC;         /* light raised */
+  --slate: #3E4042;        /* Cloud Power text */
+  --mute: #6B7A7D;
+  --cyan: #12D3D8;         /* logo cyan */
+  --cyan-hi: #5FF0F2;
+  --cyan-ink: #077E83;     /* cyan dark enough for text on light */
+  --on-dark: #E9F6F6;
+  --on-dark-2: #9DB6B9;
+  --line-d: rgba(233,246,246,.14);
+  --line-l: rgba(0,47,53,.13);
+  --slant: 19deg;          /* the angle of the slash in the CP logo */
+  --font: "Geist", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+  --wrap: 1320px;
+  --gutter: 60px;
+  --step: 110px;           /* height of the slash-step between sections */
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; overflow-anchor: none; }
+body { margin: 0; background: var(--paper); color: var(--slate); font: 400 17px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
+h1, h2, h3 { text-wrap: balance; color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.wrap { width: 100%; max-width: calc(var(--wrap) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.kicker { display: inline-flex; align-items: center; gap: 14px; color: var(--cyan-ink); }
+.kicker::before { content: ""; width: 3px; height: 16px; background: currentColor; transform: skewX(calc(-1 * var(--slant))); }
+.on-dark .kicker, .kicker.lt { color: var(--cyan); }
+.h-xl { font-weight: 700; font-size: clamp(52px, 6.6vw, 100px); line-height: .92; letter-spacing: -.05em; }
+.h-l { font-weight: 700; font-size: clamp(40px, 4.6vw, 68px); line-height: .96; letter-spacing: -.045em; }
+.h-m { font-weight: 650; font-size: clamp(28px, 2.6vw, 38px); line-height: 1.08; letter-spacing: -.03em; }
+.lead { font-size: 22px; line-height: 1.5; letter-spacing: -.01em; }
+
+/* review ribbon (not part of the design) */
+.ribbon { background: #1d2224; color: #d9e2e3; font: 400 12px/1.4 var(--mono); }
+.ribbon .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 8px; }
+.ribbon b { color: #fff; font-weight: 500; }
+.ribbon a { color: var(--cyan); }
+
+/* slash buttons: parallelograms at the logo angle */
+.slash { position: relative; display: inline-flex; align-items: center; gap: 12px; padding: 16px 30px; font: 600 15px/1 var(--font); letter-spacing: .01em; text-decoration: none; isolation: isolate; transition: color .3s ease; }
+.slash::before { content: ""; position: absolute; inset: 0; z-index: -1; transform: skewX(calc(-1 * var(--slant))); transition: background-color .3s ease, box-shadow .3s ease, border-color .3s ease; }
+.slash svg { width: 15px; height: 15px; transition: transform .3s ease; }
+.slash:hover svg { transform: translateX(4px); }
+.slash.solid { color: var(--abyss); }
+.slash.solid::before { background: var(--cyan); }
+.slash.solid:hover::before { background: var(--cyan-hi); box-shadow: 0 0 34px rgba(18,211,216,.45); }
+.slash.ghost { color: var(--on-dark); }
+.slash.ghost::before { border: 1px solid rgba(233,246,246,.35); }
+.slash.ghost:hover::before { border-color: var(--cyan); background: rgba(18,211,216,.08); }
+.slash.dark { color: var(--mint); }
+.slash.dark::before { background: var(--teal); }
+.slash.dark:hover::before { background: var(--teal-2); }
+.tlink { display: inline-flex; align-items: center; gap: 10px; font: 500 12.5px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--cyan-ink); text-decoration: none; }
+.tlink svg { width: 15px; height: 15px; flex: none; transition: transform .3s ease; }
+.tlink:hover svg { transform: translateX(5px); }
+.on-dark .tlink { color: var(--cyan); }
+
+/* slash-step section edges */
+.step-down-r { clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--step)), 64% calc(100% - var(--step)), calc(64% - 38px) 100%, 0 100%); }
+.step-down-l { clip-path: polygon(0 0, 100% 0, 100% 100%, calc(36% + 38px) 100%, 36% calc(100% - var(--step)), 0 calc(100% - var(--step))); }
+.pull-up { margin-top: calc(-1 * var(--step)); }
+
+/* tags */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { font: 400 12.5px/1 var(--mono); letter-spacing: .02em; padding: 9px 12px; border: 1px solid var(--line-l); color: var(--teal); background: #fff; }
+.on-dark .tags span { border-color: var(--line-d); color: var(--on-dark); background: rgba(233,246,246,.04); }
+
+/* ---------- header ---------- */
+.site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 60; height: 80px; margin-bottom: -80px; color: var(--on-dark); transition: background-color .4s ease, box-shadow .4s ease, transform .45s cubic-bezier(.2,.7,.2,1); }
+.site-header.solid { background: rgba(0,26,30,.78); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); box-shadow: 0 1px 0 var(--line-d); }
+.site-header.away { transform: translateY(-100%); }
+.site-header .wrap { height: 100%; display: flex; align-items: center; gap: 40px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; flex: none; }
+.brand img { height: 30px; width: auto; }
+.brand span { font: 600 17px/1 var(--font); letter-spacing: -.01em; }
+.brand span b { color: var(--cyan); font-weight: 600; }
+.site-header nav { display: flex; align-items: center; gap: 34px; margin-left: auto; font-size: 14.5px; }
+.site-header nav a { text-decoration: none; opacity: .78; position: relative; padding-block: 6px; transition: opacity .2s ease; }
+.site-header nav a:hover, .site-header nav a[aria-current] { opacity: 1; }
+.site-header nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+.site-header nav a:hover::after, .site-header nav > a[aria-current]::after, .dd.cur .dd-top::after { transform: scaleX(1); }
+.site-header .slash { padding: 12px 22px; font-size: 14px; }
+.dd { position: relative; }
+.dd-top { display: inline-flex; align-items: center; gap: 6px; }
+.dd-top svg { width: 14px; height: 14px; transition: transform .3s ease; }
+.dd:hover .dd-top svg, .dd:focus-within .dd-top svg { transform: rotate(180deg); }
+.dd-menu { position: absolute; left: -22px; top: calc(100% + 14px); min-width: 260px; display: grid; padding: 10px; background: rgba(0,26,30,.96); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid var(--line-d); box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+.dd-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -16px; height: 16px; }
+.dd:hover .dd-menu, .dd:focus-within .dd-menu { opacity: 1; transform: none; pointer-events: auto; }
+.site-header nav .dd-menu a { opacity: .8; padding: 11px 12px; }
+.site-header nav .dd-menu a:hover, .site-header nav .dd-menu a[aria-current] { opacity: 1; background: rgba(18,211,216,.08); }
+.site-header nav .dd-menu a[aria-current] { color: var(--cyan); }
+.site-header nav .dd-menu a::after { display: none; }
+.site-header nav .dd-menu .all { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line-d); font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); }
+
+/* ---------- page hero (every page except the homepage) ---------- */
+.phero { position: relative; min-height: 640px; background: radial-gradient(90% 80% at 80% 30%, #073842 0%, var(--abyss) 64%); color: var(--on-dark); overflow: hidden; }
+.phero #streaks { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .7; }
+.phero .wrap { position: relative; min-height: inherit; display: grid; grid-template-columns: 7fr 5fr; gap: 56px; align-items: center; padding-block: 150px calc(var(--step) + 60px); }
+.phero.no-step .wrap { padding-bottom: 110px; }
+.phero-copy { display: grid; gap: 26px; align-content: center; }
+.crumbs { display: flex; gap: 10px; align-items: center; font: 400 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--on-dark-2); }
+.crumbs a { text-decoration: none; } .crumbs a:hover { color: var(--cyan); }
+.crumbs i { font-style: normal; color: var(--cyan); }
+.phero h1 { font-weight: 700; font-size: clamp(54px, 6.4vw, 96px); line-height: .93; letter-spacing: -.05em; }
+.phero h1 em { font-style: normal; color: var(--cyan); }
+.phero .lead { color: var(--on-dark-2); max-width: 36ch; }
+
+/* ---------- other services (bottom of each service page) ---------- */
+.others { background: var(--paper); padding-block: 64px; border-top: 1px solid var(--line-l); }
+.others .wrap { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+.others ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 34px; }
+.others a { display: inline-flex; align-items: center; gap: 10px; font: 500 18px/1.2 var(--font); letter-spacing: -.01em; color: var(--teal); text-decoration: none; }
+.others a::before { content: ""; width: 2px; height: 16px; background: var(--line-l); transform: skewX(calc(-1 * var(--slant))); transition: background-color .25s ease; }
+.others a:hover { color: var(--cyan-ink); } .others a:hover::before { background: var(--cyan); }
+
+/* ---------- closing band: the one contact action on each page ---------- */
+.close { position: relative; background: var(--abyss); color: var(--on-dark); padding-block: 130px; overflow: hidden; }
+.close::before { content: ""; position: absolute; right: 10%; top: -30%; width: 240px; height: 160%; background: linear-gradient(180deg, rgba(18,211,216,0), rgba(18,211,216,.14), rgba(18,211,216,0)); transform: skewX(calc(-1 * var(--slant))); pointer-events: none; }
+.close .wrap { position: relative; display: flex; justify-content: space-between; align-items: end; gap: 48px; }
+.close h2 { font-weight: 700; font-size: clamp(52px, 6.4vw, 96px); line-height: .92; letter-spacing: -.055em; max-width: 14ch; }
+.close h2 span { color: var(--cyan); }
+.close p { margin-top: 24px; font-size: 19px; line-height: 1.55; color: var(--on-dark-2); max-width: 52ch; }
+
+/* ---------- footer ---------- */
+.site-footer { background: var(--abyss); color: var(--on-dark-2); padding-block: 0 36px; }
+.foot { display: flex; justify-content: space-between; align-items: center; gap: 40px; padding-block: 48px; border-top: 1px solid var(--line-d); }
+.foot-links { display: flex; gap: 36px; list-style: none; margin: 0; padding: 0; font-size: 15px; }
+.foot a { text-decoration: none; } .foot a:hover { color: var(--cyan); }
+.foot .brand img { height: 40px; }
+.foot .brand span { font-size: 20px; color: var(--on-dark); }
+.legal { padding-top: 26px; border-top: 1px solid var(--line-d); font-size: 13.5px; }
+
+/* ---------- motion: reveal on scroll, only for content that starts below the first screen ---------- */
+.rv { transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+.rv.pre { opacity: 0; transform: translate(-28px, 34px); }
+.rv.d1 { transition-delay: .08s; } .rv.d2 { transition-delay: .16s; } .rv.d3 { transition-delay: .24s; }
+
+/* animated line drawings, shared vocabulary */
+.glyph * { vector-effect: non-scaling-stroke; }
+.glyph .s { fill: none; stroke: var(--teal); stroke-width: 1.5; }
+.glyph .c { fill: none; stroke: var(--cyan); stroke-width: 2; }
+.glyph .f { fill: var(--cyan); }
+.glyph .ft { fill: var(--teal); }
+.on-dark .glyph .s { stroke: var(--on-dark-2); }
+.on-dark .glyph .ft { fill: var(--on-dark); }
+.flow { stroke-dasharray: 6 8; animation: flow 1.6s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -28; } }
+.drawn { stroke-dasharray: 400; animation: drawn 5s ease-in-out infinite; }
+@keyframes drawn { 0% { stroke-dashoffset: 400; } 45%, 70% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -400; } }
+.node { transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-in-out infinite; }
+.node.d1 { animation-delay: .4s; } .node.d2 { animation-delay: .8s; } .node.d3 { animation-delay: 1.2s; }
+@keyframes pulse { 50% { transform: scale(1.6); opacity: .55; } }
+.layer { animation: lift 5s ease-in-out infinite; } .layer.d1 { animation-delay: .35s; } .layer.d2 { animation-delay: .7s; }
+@keyframes lift { 50% { transform: translateY(-10px); } }
+.sweep { animation: spin 3.2s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.blip { animation: blip 3.2s ease-out infinite; opacity: 0; } .blip.d1 { animation-delay: 1.1s; } .blip.d2 { animation-delay: 2.2s; }
+@keyframes blip { 0% { opacity: 0; } 8% { opacity: 1; } 60%, 100% { opacity: 0; } }
+
+/* review appendix (not part of the design) */
+.appendix { background: #1d2224; color: #d9e2e3; padding-block: 52px 70px; font-size: 15px; }
+.appendix h2 { font: 500 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 18px; }
+.appendix p { max-width: 84ch; color: #b9c4c6; margin-bottom: 10px; }
+.appendix a { color: var(--cyan); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .rv.pre { opacity: 1; transform: none; }
+}
+/* Desktop is the concept under review; these rules only keep narrow screens readable. */
+@media (max-width: 900px) {
+  :root { --gutter: 16px; --step: 60px; }
+  .site-header nav { display: none; }
+  .site-header .slash { margin-left: auto; }
+  .phero .wrap { grid-template-columns: 1fr; padding-top: 120px; }
+  .close .wrap, .foot { flex-direction: column; align-items: flex-start; }
+  .foot-links { flex-wrap: wrap; gap: 16px 24px; }
+}
+
+/* ============ page: our-services ============ */
+.ledger { background: var(--paper); padding-block: 40px 150px; }
+  .ledger-head { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 36px; color: var(--mute); }
+  .rows { border-top: 1px solid var(--line-l); }
+  .row { position: relative; display: grid; grid-template-columns: 110px 5fr 6fr 72px; gap: 32px; align-items: center; padding: 42px 0; border-bottom: 1px solid var(--line-l); text-decoration: none; color: var(--teal); isolation: isolate; }
+  .row::before { content: ""; position: absolute; inset: 0 -40px; z-index: -1; background: #fff; transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .row:hover::before { transform: scaleX(1); }
+  .row .glyph { width: 88px; height: 88px; }
+  .row h2 { font-weight: 650; font-size: clamp(32px, 3.2vw, 46px); line-height: 1; letter-spacing: -.035em; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .row:hover h2 { transform: translateX(10px); }
+  .row .sum { display: grid; gap: 16px; }
+  .row .sum p { font-size: 17px; line-height: 1.6; color: var(--slate); max-width: 56ch; }
+  .row .go { width: 56px; height: 56px; display: grid; place-items: center; position: relative; isolation: isolate; justify-self: end; }
+  .row .go::before { content: ""; position: absolute; inset: 0; z-index: -1; border: 1px solid var(--line-l); transform: skewX(calc(-1 * var(--slant))); transition: background-color .3s ease, border-color .3s ease; }
+  .row:hover .go::before { background: var(--cyan); border-color: var(--cyan); }
+  .row .go svg { width: 20px; height: 20px; }
+  .row .glyph .anim { animation-play-state: paused; }
+  .row:hover .glyph .anim { animation-play-state: running; }
+
+  .partner { position: relative; background: var(--teal); color: var(--on-dark); padding-block: 130px 140px; overflow: hidden; }
+  .partner .wrap { display: grid; grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
+  .partner ul { list-style: none; margin: 0; padding: 0; display: grid; }
+  .partner li { display: grid; grid-template-columns: 60px 1fr; align-items: center; gap: 24px; padding: 34px 0; border-top: 1px solid var(--line-d); font: 300 clamp(34px, 3.6vw, 54px)/1.05 var(--font); letter-spacing: -.035em; }
+  .partner li:last-child { border-bottom: 1px solid var(--line-d); }
+  .partner li::before { content: ""; width: 14px; height: 40px; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); transition: width .5s cubic-bezier(.2,.7,.2,1); }
+  .partner li:hover::before { width: 44px; }
+  @media (max-width: 900px) { .row { grid-template-columns: 1fr; } .partner .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arr" viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="diag" viewBox="0 0 24 24"><path d="M6 18L18 6M8.5 6H18v9.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="left" viewBox="0 0 24 24"><path d="M21 12H4M10 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+</svg>
+<div class="ribbon" role="note"><div class="wrap"><span><b>Cloud Power</b> · site concept V2 · Our Services · desktop 1440 px · internal review</span><span>all text from cloud-power.eu · <a href="index.html">homepage</a></span></div></div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
+    <nav aria-label="Main">
+      <div class="dd cur">
+        <a href="our-services.html" class="dd-top" aria-haspopup="true" aria-current="page">Our Services<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <div class="dd-menu">
+          <a href="managed-services.html">Managed Services</a>
+          <a href="ai.html">AI</a>
+          <a href="soc-as-a-service.html">SOC as a Service</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="digital-conception.html">Digital Conception</a>
+          <a class="all" href="our-services.html">All services</a>
+        </div>
+      </div>
+      <a href="news.html">News</a>
+    </nav>
+    <a class="slash solid" href="contact-us.html">Contact Us</a>
+  </div>
+</header>
+<main>
+<section class="phero step-down-r">
+  <canvas id="streaks" data-density="20" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="phero-copy">
+      <div class="crumbs"><a href="index.html">Home</a><i>/</i><span>Our Services</span></div>
+      <h1>Our <em>Services</em></h1>
+      <p class="lead">Our teams are here to help you with most of your projects.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ledger">
+  <div class="wrap">
+    <div class="rows">
+      <a class="row rv" href="managed-services.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><path class="s" d="M30 70H210M30 120H210M30 170H210"/><circle class="ft" cx="80" cy="70" r="11"/><circle class="f anim node" cx="160" cy="120" r="11"/><circle class="ft" cx="100" cy="170" r="11"/></svg>
+        <h2>Managed Services</h2>
+        <div class="sum"><p>Free yourself from specific tasks. We can take them off your hands.</p><div class="tags"><span>Cloud Services</span><span>Infrastructure</span><span>Performance Review</span></div></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="managed-services.html#cloud">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><g class="anim layer d2"><path class="s" d="M60 170L120 196L180 170L120 144Z"/></g><g class="anim layer d1"><path class="s" d="M60 130L120 156L180 130L120 104Z"/></g><g class="anim layer"><path class="c" d="M60 90L120 116L180 90L120 64Z" style="fill:rgba(18,211,216,.12)"/></g></svg>
+        <h2>Private Cloud</h2>
+        <div class="sum"><div class="tags"><span>Website</span><span>SaaS</span><span>Virtual Desktop Environment</span><span>Private document sharing</span><span>IaaS</span><span>PaaS</span></div></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="ai.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><path class="c anim flow" d="M50 60L120 120L190 70M50 180L120 120L190 170"/><circle class="ft" cx="120" cy="120" r="14"/><circle class="f anim node" cx="50" cy="60" r="9"/><circle class="f anim node d1" cx="190" cy="70" r="9"/><circle class="f anim node d2" cx="50" cy="180" r="9"/><circle class="f anim node d3" cx="190" cy="170" r="9"/></svg>
+        <h2>Artificial Intelligence</h2>
+        <div class="sum"><p>Our AI solution helps organizations adopt and scale AI responsibly by reducing tool fragmentation, speeding development, and providing enterprise-grade support, governance, and flexibility.</p></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="soc-as-a-service.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><circle class="s" cx="120" cy="120" r="96"/><circle class="s" cx="120" cy="120" r="52"/><g class="anim sweep" style="transform-origin:120px 120px"><path d="M120 120L120 24A96 96 0 0 1 188 52Z" style="fill:rgba(18,211,216,.25)"/></g><circle class="f anim blip" cx="158" cy="80" r="7"/><circle class="f anim blip d1" cx="84" cy="164" r="7"/></svg>
+        <h2>SOC as a Service</h2>
+        <div class="sum"><p>A 24/7 local security support team for your organization's information systems, ensuring optimum service and value for money.</p></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="consulting.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><path class="s" d="M30 200H210"/><rect class="ft" x="52" y="90" width="34" height="110"/><rect class="f anim node" x="103" y="50" width="34" height="150" style="transform-origin:bottom"/><rect class="ft" x="154" y="110" width="34" height="90"/></svg>
+        <h2>Consulting</h2>
+        <div class="sum"><p>Skilled experts, ready to join your teams</p><div class="tags"><span>Development</span><span>Infrastructure</span><span>Expertise</span></div></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="digital-conception.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><rect class="s anim drawn" x="24" y="50" width="150" height="110" rx="4"/><path class="s" d="M24 70H174"/><rect class="c anim drawn" x="150" y="90" width="66" height="116" rx="8" style="animation-delay:.6s"/></svg>
+        <h2>Digital Conception</h2>
+        <div class="sum"><p>Discover a Smarter Way to improve your digital renown</p><div class="tags"><span>Website conception</span><span>Mobile App</span><span>Platform Conception</span></div></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="partner on-dark">
+  <div class="wrap">
+    <div>
+      <span class="kicker mono">Cloud Power</span>
+      <h2 class="h-l rv" style="margin-top:20px">Your IT Partner</h2>
+    </div>
+    <ul>
+      <li class="rv">Prioritize your projects</li>
+      <li class="rv d1">Optimize your internal resources</li>
+      <li class="rv d2">Reallocate your expenses</li>
+    </ul>
+  </div>
+</section>
+<section class="close">
+  <div class="wrap">
+    <div>
+      <h2 class="rv">Take your IT setup to the <span>next level</span></h2>
+      <p>Ready to optimize performance, boost security, and work smarter? Our expert team is here to transform your IT infrastructure into a strategic asset. Don’t wait, reach out today and let’s build your competitive edge together.</p>
+    </div>
+    <a class="slash solid rv" href="contact-us.html">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="index.html"><img src="assets/cp-logo.webp" alt="Cloud Power Luxembourg" width="500" height="303"><span>Cloud <b>Power</b></span></a>
+      <ul class="foot-links">
+        <li><a href="our-services.html">Our Services</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+        <li><a href="https://www.linkedin.com/company/cplux">Linkedin</a></li>
+      </ul>
+    </div>
+    <p class="legal">© 2025 Cloud Power Luxembourg SA</p>
+  </div>
+</footer>
+<section class="appendix" aria-label="Review notes">
+  <div class="wrap">
+    <h2>Review notes (not part of the design)</h2>
+    <p>Content: Our Services page on cloud-power.eu. Each row keeps one short summary; the full descriptions live only on the detail pages. The Private Cloud row links to the Cloud Services part of Managed Services.</p><p>Spelling fixed from the live page: Environnement → Environment, Infrastucture → Infrastructure, Archicects → Architects, develoment → development.</p>
+  </div>
+</section>
+<script>
+/* ============ Cloud Power design system: shared behaviour ============ */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.CP = { reduce: reduce };
+
+  // Header: transparent over the dark hero, solid once scrolled, hides on scroll down and returns on scroll up
+  var header = document.querySelector('.site-header');
+  var hero = document.querySelector('.phero, .hero');
+  var lastY = window.scrollY;
+  function onScroll() {
+    var y = window.scrollY, h = hero ? hero.offsetHeight : 400;
+    header.classList.toggle('solid', y > 40);
+    if (y > h && y > lastY + 2) header.classList.add('away');
+    else if (y < lastY - 2 || y <= h) header.classList.remove('away');
+    lastY = y;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Hero streak field at the logo angle (quieter on inner pages), brighter near the cursor
+  var cv = document.getElementById('streaks');
+  if (cv && hero) {
+    var ctx = cv.getContext('2d'), W = 0, H = 0, streaks = [], mouse = { x: -9999, y: -9999 }, running = true;
+    var TAN = Math.tan(19 * Math.PI / 180), density = +(cv.dataset.density || 14);
+    var size = function () {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      streaks = [];
+      for (var i = 0, n = Math.round(W / density); i < n; i++) streaks.push({ x: Math.random() * (W + H * TAN), y: Math.random() * H, len: 40 + Math.random() * 140, v: .25 + Math.random() * .8, a: .05 + Math.random() * .16 });
+    };
+    var frame = function () {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < streaks.length; i++) {
+        var s = streaks[i];
+        if (!reduce) { s.y -= s.v; s.x += s.v * TAN; if (s.y + s.len < 0) { s.y = H + Math.random() * 60; s.x = Math.random() * (W + H * TAN) - H * TAN * .2; } }
+        var x2 = s.x + s.len * TAN, y2 = s.y - s.len, glow = Math.max(0, 1 - Math.hypot((s.x + x2) / 2 - mouse.x, (s.y + y2) / 2 - mouse.y) / 220);
+        var g = ctx.createLinearGradient(s.x, s.y, x2, y2), col = glow > 0 ? '18,211,216' : '157,210,214';
+        g.addColorStop(0, 'rgba(' + col + ',0)'); g.addColorStop(1, 'rgba(' + col + ',' + Math.min(1, s.a + glow * .8) + ')');
+        ctx.strokeStyle = g; ctx.lineWidth = 1 + glow * 1.2; ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(x2, y2); ctx.stroke();
+      }
+      if (running && !reduce) requestAnimationFrame(frame);
+    };
+    size(); frame();
+    window.addEventListener('resize', function () { size(); if (reduce) frame(); });
+    hero.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; if (reduce) frame(); });
+    hero.addEventListener('pointerleave', function () { mouse.x = mouse.y = -9999; if (reduce) frame(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { var vis = es[0].isIntersecting; if (vis && !running) { running = true; if (!reduce) requestAnimationFrame(frame); } running = vis; }).observe(hero);
+  }
+
+  // Reveal + count-up, only for elements that start below the first screen
+  if ('IntersectionObserver' in window && !reduce) {
+    var fold = window.innerHeight;
+    var ro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target; el.classList.remove('pre'); ro.unobserve(el);
+        var c = el.querySelector('.count');
+        if (c) { var to = +el.dataset.value, t0 = null; (function tick(t) { t0 = t0 || t; var k = Math.min(1, (t - t0) / 1400); c.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); })(performance.now()); }
+      });
+    }, { threshold: .15 });
+    document.querySelectorAll('.rv').forEach(function (el) {
+      if (el.getBoundingClientRect().top > fold) { el.classList.add('pre'); var c = el.querySelector('.count'); if (c) c.textContent = '0'; ro.observe(el); }
+    });
+  }
+
+  // Accordions (FAQ style)
+  document.querySelectorAll('.qa button').forEach(function (b) {
+    b.addEventListener('click', function () { b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); });
+  });
+})();
+
+</script>
+
+</body>
+</html>

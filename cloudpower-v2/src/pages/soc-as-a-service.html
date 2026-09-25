@@ -1,0 +1,130 @@
+<!--{
+ "file": "soc-as-a-service.html", "title": "SOC as a Service · Cloud Power", "nav": "soc", "ribbon": "SOC as a Service", "others": true,
+ "close": {"h": "Protect yourself from <span>threats now</span>", "p": "Contact us to make yourself secure. Our experts will get back to you to review your current IS issues."},
+ "note": ["Content: SOC as a Service page on cloud-power.eu. Left out as agreed, because the page gives no source: “Cyber attacks up 23% in 2024” and “500+ SMEs protected” (with the client-logo image next to it). Kept: “65% of attacks impact business”, sourced to CESIN, 2025 on the Managed Services page.", "The separate “Schedule an Appointment” link is replaced by the site-wide Contact Us action; the booking link now lives only on the Contact page."]
+}-->
+<style>
+  .phero .wrap { grid-template-columns: 7fr 5fr; }
+  .phero .sub { font: 500 24px/1.35 var(--font); letter-spacing: -.015em; color: var(--on-dark); max-width: 30ch; }
+  .radar { position: relative; width: 440px; height: 440px; justify-self: center; }
+  .radar svg { width: 100%; height: 100%; }
+  .radar .ring { fill: none; stroke: rgba(157,210,214,.28); stroke-width: 1; }
+  .radar .axis { stroke: rgba(157,210,214,.18); stroke-width: 1; }
+  .radar .beam { transform-origin: 220px 220px; animation: spin 4.2s linear infinite; }
+  .radar .dot { fill: var(--cyan); opacity: 0; animation: blip 4.2s ease-out infinite; }
+  .radar .dot.b { animation-delay: 1.3s; } .radar .dot.c { animation-delay: 2.6s; } .radar .dot.d { animation-delay: 3.4s; }
+  .radar .core { fill: var(--cyan); }
+
+  .help { background: var(--teal); color: var(--on-dark); padding-block: 110px 120px; position: relative; z-index: 2; }
+  .help-top { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: end; margin-bottom: 64px; }
+  .help-top p { font: 400 26px/1.4 var(--font); letter-spacing: -.015em; }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line-d); }
+  .pillar { padding: 40px 36px 0 0; display: grid; gap: 22px; align-content: start; }
+  .pillar + .pillar { padding-left: 36px; border-left: 1px solid var(--line-d); }
+  .pillar .glyph { width: 64px; height: 64px; }
+  .pillar h3 { font-weight: 600; font-size: 26px; line-height: 1.2; letter-spacing: -.02em; }
+
+  .scope { background: var(--paper); color: var(--teal); padding-block: 140px; }
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 64px; }
+  .card { display: grid; grid-template-columns: 200px 1fr; background: #fff; border: 1px solid var(--line-l); overflow: hidden; transition: box-shadow .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+  .card:hover { box-shadow: 0 40px 80px -50px rgba(0,47,53,.45); transform: translateY(-6px); }
+  .card figure { overflow: hidden; }
+  .card img { width: 100%; height: 100%; object-fit: cover; min-height: 240px; transition: transform 1.1s cubic-bezier(.2,.7,.2,1); }
+  .card:hover img { transform: scale(1.06); }
+  .card div { padding: 38px 36px; display: grid; gap: 18px; align-content: center; }
+  .card h3 { font-weight: 650; font-size: 28px; line-height: 1.1; letter-spacing: -.025em; }
+  .card h3 span { color: var(--cyan-ink); font-weight: 500; }
+  .card p { font: 400 14px/1.7 var(--mono); letter-spacing: .02em; color: var(--slate); }
+
+  .fortress { position: relative; background: var(--abyss); color: var(--on-dark); padding-block: 150px; overflow: hidden; }
+  .fortress::before { content: ""; position: absolute; left: 44%; top: -10%; width: 2px; height: 120%; background: linear-gradient(180deg, transparent, var(--cyan), transparent); transform: skewX(calc(-1 * var(--slant))); opacity: .6; }
+  .fortress .wrap { position: relative; }
+  .ft-head { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .ft-head h2 { font-weight: 700; font-size: clamp(52px, 6vw, 92px); line-height: .92; letter-spacing: -.05em; }
+  .ft-head h2.b { color: var(--cyan); text-align: right; }
+  .ft-body { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; margin-top: 90px; padding-top: 40px; border-top: 1px solid var(--line-d); }
+  .ft-body h3 { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark-2); margin-bottom: 24px; }
+  .ft-body ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .ft-body li { font: 500 28px/1.15 var(--font); letter-spacing: -.02em; }
+  .stat .num { font: 700 110px/1 var(--font); letter-spacing: -.06em; color: var(--cyan); }
+  .stat .num small { font-size: .45em; margin-left: 4px; }
+  .stat p { margin-top: 10px; font-size: 19px; }
+  .stat .src { margin-top: 8px; font: 400 12px/1 var(--mono); letter-spacing: .06em; color: var(--on-dark-2); }
+  .gauge { margin-top: 20px; height: 2px; background: var(--line-d); position: relative; overflow: hidden; }
+  .gauge i { position: absolute; inset: 0; background: var(--cyan); box-shadow: 0 0 12px rgba(18,211,216,.7); transform-origin: left; transform: scaleX(.65); transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+  .stat.pre .gauge i { transform: scaleX(0); }
+
+  .euro { background: var(--mist); color: var(--teal); padding-block: 120px; }
+  .euro .wrap { display: grid; grid-template-columns: 8fr 4fr; gap: 64px; align-items: end; }
+  .euro h2 { font-weight: 700; font-size: clamp(40px, 4.4vw, 64px); line-height: .98; letter-spacing: -.045em; }
+  .euro p { font: 500 22px/1.4 var(--font); }
+  .euro p b { color: var(--cyan-ink); }
+  @media (max-width: 900px) { .help-top, .pillars, .scope-grid, .ft-head, .ft-body, .euro .wrap { grid-template-columns: 1fr; } .pillar + .pillar { padding-left: 0; border-left: 0; } .card { grid-template-columns: 1fr; } .ft-head h2.b { text-align: left; } .radar { width: 300px; height: 300px; } }
+</style>
+
+<section class="phero no-step">
+  <canvas id="streaks" data-density="26" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="phero-copy">
+      <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="our-services.html">Our Services</a><i>/</i><span>SOC as a Service</span></div>
+      <h1>SOC as a <em>Service</em></h1>
+      <p class="sub">24/7 Cybersecurity Monitoring with a Managed Security Operations Center</p>
+    </div>
+    <div class="radar" aria-hidden="true">
+      <svg viewBox="0 0 440 440">
+        <circle class="ring" cx="220" cy="220" r="200"/><circle class="ring" cx="220" cy="220" r="140"/><circle class="ring" cx="220" cy="220" r="80"/>
+        <path class="axis" d="M220 20V420M20 220H420"/>
+        <g class="beam"><defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#12D3D8" stop-opacity="0"/><stop offset="1" stop-color="#12D3D8" stop-opacity=".35"/></linearGradient></defs><path d="M220 220L220 20A200 200 0 0 1 361 79Z" fill="url(#bm)"/><path d="M220 220L220 20" stroke="#12D3D8" stroke-width="2"/></g>
+        <circle class="dot" cx="300" cy="120" r="6"/><circle class="dot b" cx="130" cy="300" r="6"/><circle class="dot c" cx="330" cy="290" r="6"/><circle class="dot d" cx="150" cy="140" r="5"/>
+        <circle class="core" cx="220" cy="220" r="6"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="help on-dark">
+  <div class="wrap">
+    <div class="help-top">
+      <h2 class="h-l rv">We can help you</h2>
+      <p class="rv">24/7 incident detection and response thanks to a team of cybersecurity experts.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar rv"><svg class="glyph" viewBox="0 0 64 64" aria-hidden="true"><circle class="s" cx="32" cy="32" r="26"/><path class="c" d="M32 14V32L44 40"/></svg><h3>24/7 expert supervision of your information system</h3></div>
+      <div class="pillar rv d1"><svg class="glyph" viewBox="0 0 64 64" aria-hidden="true"><path class="s" d="M32 6L54 16V32C54 46 44 55 32 58C20 55 10 46 10 32V16Z"/><path class="c drawn" d="M22 32L29 39L43 25"/></svg><h3>A complete CERT security package</h3></div>
+      <div class="pillar rv d2"><svg class="glyph" viewBox="0 0 64 64" aria-hidden="true"><path class="s" d="M32 58C32 58 12 38 12 25A20 20 0 0 1 52 25C52 38 32 58 32 58Z"/><circle class="f node" cx="32" cy="25" r="7"/></svg><h3>A local team</h3></div>
+    </div>
+  </div>
+</section>
+
+<section class="scope">
+  <div class="wrap">
+    <h2 class="h-l rv" style="max-width:14ch">Cybersecurity SOC: protect your business from attack</h2>
+    <div class="scope-grid">
+      <article class="card rv"><figure><img src="assets/soc-workspace.jpg" alt="Modern workspace with a laptop, a cup of cappuccino, a notebook with a pen, wireless earbuds, and a small potted plant on a white desk." width="431" height="431"></figure><div><h3>EDR/Digital Workspace <span>| Protection</span></h3><p>Workplaces • Servers • Phones • Users • E-mails • Data</p></div></article>
+      <article class="card rv d1"><figure><img src="assets/soc-cameras.jpg" alt="Three surveillance security cameras mounted on a pole against a blue background." width="431" height="431"></figure><div><h3>SOC 24/7 <span>| Managed Services</span></h3><p>Detection, analysis and response • Recognized cyber expertise of SOC analysts</p></div></article>
+      <article class="card rv"><figure><img src="assets/soc-reports.jpg" alt="Financial and analytical charts with a pen and notebook." width="431" height="431"></figure><div><h3>Control <span>| Customized</span></h3><p>Vulnerability reports • Monthly activity reports</p></div></article>
+      <article class="card rv d1"><figure><img src="assets/soc-response.jpg" alt="Hand drawing a human figure stopping a row of falling dominoes." width="431" height="431"></figure><div><h3>Incident response</h3><p>1 allocated day • 24/7 • Local Team</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="fortress">
+  <div class="wrap">
+    <div class="ft-head">
+      <h2 class="rv">Your company is a Target.</h2>
+      <h2 class="b rv d1">Make it a Fortress</h2>
+    </div>
+    <div class="ft-body">
+      <div class="rv"><h3>Risks &amp; impacts of a cyber attack</h3><ul><li>Business interruption</li><li>Lost data</li><li>Image affected</li></ul></div>
+      <div class="rv d1"><h3>Consequences</h3><ul><li>Sales decrease</li><li>Bankruptcy</li></ul></div>
+      <div class="stat rv d2" data-value="65"><div class="num"><span class="count">65</span><small>%</small></div><p>of attacks impact business</p><p class="src">CESIN, 2025</p><div class="gauge"><i></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="euro">
+  <div class="wrap">
+    <h2 class="rv">Protect yourself from cyber attacks with our European SOC</h2>
+    <p class="rv">Managed by a team of experts <b>24/7</b></p>
+  </div>
+</section>

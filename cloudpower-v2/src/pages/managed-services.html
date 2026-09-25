@@ -1,0 +1,187 @@
+<!--{
+ "file": "managed-services.html", "title": "Managed Services · Cloud Power", "nav": "managed", "ribbon": "Managed Services", "others": true,
+ "close": {"h": "Any Questions ?<br><span>Need a Quote ?</span>", "p": "Feel free to contact us"},
+ "note": ["Content: Managed Services page on cloud-power.eu. The former BaaS page (“We secure your data”) is merged into Backup as a service. The SOC section is reduced to one link to the SOC page, keeping the figure with its published source (CESIN, 2025).", "Spelling fixed from the live page: Environnement → Environment."]
+}-->
+<style>
+  .ms-map { display: grid; gap: 10px; }
+  .ms-map a { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; padding: 22px 26px; border: 1px solid var(--line-d); text-decoration: none; background: rgba(233,246,246,.03); transition: background-color .3s ease, border-color .3s ease, transform .4s cubic-bezier(.2,.7,.2,1); }
+  .ms-map a:hover { background: rgba(18,211,216,.08); border-color: rgba(18,211,216,.5); transform: translateX(8px); }
+  .ms-map b { font: 600 22px/1.1 var(--font); letter-spacing: -.02em; }
+  .ms-map span { display: block; margin-top: 6px; font: 400 12px/1.4 var(--mono); letter-spacing: .06em; color: var(--on-dark-2); }
+  .ms-map svg { width: 20px; height: 20px; color: var(--cyan); }
+
+  .subnav { position: sticky; top: 0; z-index: 40; background: rgba(244,250,249,.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line-l); }
+  .subnav .wrap { display: flex; gap: 40px; height: 66px; align-items: center; }
+  .subnav a { position: relative; font: 500 15px/1 var(--font); color: var(--mute); text-decoration: none; padding-block: 22px; transition: color .2s ease; }
+  .subnav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+  .subnav a.on { color: var(--teal); } .subnav a.on::after { transform: scaleX(1); }
+  .subnav .label { margin-right: auto; color: var(--teal); }
+
+  .chapter { scroll-margin-top: 66px; }
+  .ch-head { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: end; margin-bottom: 64px; }
+
+  .cloud { background: var(--paper); color: var(--teal); padding-block: 120px 150px; }
+  .cloud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .offer { position: relative; background: #fff; border: 1px solid var(--line-l); padding: 48px; display: grid; grid-template-columns: 1fr 180px; gap: 24px 32px; transition: box-shadow .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+  .offer:hover { box-shadow: 0 40px 80px -50px rgba(0,47,53,.45); transform: translateY(-6px); }
+  .offer h3 { grid-column: 1 / -1; font-weight: 650; font-size: 40px; line-height: 1; letter-spacing: -.035em; }
+  .offer .note { grid-column: 1; font-size: 19px; color: var(--slate); }
+  .offer ul { grid-column: 1; list-style: none; margin: 0; padding: 0; display: grid; }
+  .offer li { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid var(--line-l); font-size: 17px; color: var(--slate); }
+  .offer li::before { content: ""; width: 3px; height: 14px; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); flex: none; }
+  .offer .glyph { grid-column: 2; grid-row: 2 / span 2; width: 180px; height: 180px; align-self: start; }
+
+  .infra { position: relative; z-index: 2; background: var(--teal); color: var(--on-dark); padding-block: 130px calc(var(--step) + 110px); }
+  .infra-cols { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line-d); }
+  .infra-col { padding: 40px 36px 20px 0; display: grid; gap: 22px; align-content: start; }
+  .infra-col + .infra-col { padding-left: 36px; border-left: 1px solid var(--line-d); }
+  .infra-col h3 { font-weight: 600; font-size: 26px; line-height: 1.15; letter-spacing: -.02em; min-height: 60px; }
+  .infra-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .infra-col li { padding: 14px 0; border-bottom: 1px solid var(--line-d); color: var(--on-dark-2); font-size: 17px; transition: color .25s ease, padding .35s ease; }
+  .infra-col li:hover { color: var(--on-dark); padding-left: 10px; }
+
+  .perf { background: var(--paper); color: var(--teal); padding-block: calc(var(--step) + 110px) 150px; }
+  .perf-grid { display: grid; grid-template-columns: 6fr 6fr; gap: 64px; align-items: center; }
+  .perf-list { list-style: none; margin: 30px 0 0; padding: 0; counter-reset: c; }
+  .perf-list li { display: grid; grid-template-columns: 26px 1fr; gap: 16px; align-items: center; padding: 18px 0; border-top: 1px solid var(--line-l); font: 500 20px/1.3 var(--font); letter-spacing: -.01em; }
+  .perf-list li:last-child { border-bottom: 1px solid var(--line-l); }
+  .perf-list li svg { width: 22px; height: 22px; color: var(--cyan-ink); }
+  .dash { background: var(--abyss); padding: 34px; aspect-ratio: 5 / 4; display: grid; grid-template-rows: auto 1fr; gap: 20px; }
+  .dash .top { display: flex; justify-content: space-between; color: var(--on-dark-2); }
+  .bars { display: flex; align-items: flex-end; gap: 14px; height: 100%; border-bottom: 1px solid var(--line-d); }
+  .bars i { flex: 1; background: linear-gradient(180deg, var(--cyan), rgba(18,211,216,.15)); transform-origin: bottom; animation: bar 4.8s ease-in-out infinite; }
+  .bars i:nth-child(2n) { animation-delay: .4s; background: linear-gradient(180deg, #7fe6e9, rgba(18,211,216,.1)); }
+  .bars i:nth-child(3n) { animation-delay: .9s; }
+  @keyframes bar { 0%, 100% { transform: scaleY(.55); } 50% { transform: scaleY(1); } }
+
+  .soc-link { position: relative; display: block; overflow: hidden; text-decoration: none; color: var(--on-dark); background: var(--abyss); }
+  .soc-link img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; transition: transform 1.2s cubic-bezier(.2,.7,.2,1), opacity .5s ease; }
+  .soc-link:hover img { transform: scale(1.04); opacity: .6; }
+  .soc-link .wrap { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; padding-block: 90px; }
+  .soc-link h2 { font-weight: 700; font-size: clamp(44px, 5vw, 72px); line-height: .95; letter-spacing: -.045em; }
+  .soc-link p { margin-top: 18px; font-size: 20px; color: var(--on-dark-2); }
+  .soc-link p b { color: var(--cyan); font-weight: 600; }
+  .soc-link .src { display: block; margin-top: 6px; font: 400 12px/1 var(--mono); letter-spacing: .06em; color: var(--on-dark-2); }
+  .soc-link .go { width: 96px; height: 96px; display: grid; place-items: center; position: relative; isolation: isolate; }
+  .soc-link .go::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); transition: box-shadow .3s ease; }
+  .soc-link:hover .go::before { box-shadow: 0 0 40px rgba(18,211,216,.5); }
+  .soc-link .go svg { width: 30px; height: 30px; color: var(--abyss); }
+  @media (max-width: 900px) { .cloud-grid, .infra-cols, .perf-grid, .ch-head { grid-template-columns: 1fr; } .infra-col + .infra-col { padding-left: 0; border-left: 0; } .offer { grid-template-columns: 1fr; } .offer .glyph { grid-column: 1; grid-row: auto; } }
+</style>
+
+<section class="phero no-step">
+  <canvas id="streaks" data-density="20" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="phero-copy">
+      <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="our-services.html">Our Services</a><i>/</i><span>Managed Services</span></div>
+      <h1>Managed <em>Services</em></h1>
+      <p class="lead">Free yourself from specific tasks. We can take them off your hands.</p>
+    </div>
+    <nav class="ms-map" aria-label="On this page">
+      <a href="#cloud"><div><b>Cloud Services</b><span>Private Cloud · Backup as a service</span></div><svg aria-hidden="true"><use href="#arr"/></svg></a>
+      <a href="#infrastructure"><div><b>Infrastructure</b><span>Installation · Managed local infrastructure · Support</span></div><svg aria-hidden="true"><use href="#arr"/></svg></a>
+      <a href="#performance"><div><b>Performance Review</b><span>Observability &amp; Performance Automation Services</span></div><svg aria-hidden="true"><use href="#arr"/></svg></a>
+    </nav>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="Managed Services sections">
+  <div class="wrap">
+    <span class="label mono">Managed Services</span>
+    <a href="#cloud" data-sec="cloud">Cloud Services</a>
+    <a href="#infrastructure" data-sec="infrastructure">Infrastructure</a>
+    <a href="#performance" data-sec="performance">Performance Review</a>
+  </div>
+</nav>
+
+<section class="cloud chapter" id="cloud">
+  <div class="wrap">
+    <div class="ch-head">
+      <h2 class="h-l rv">Cloud Services</h2>
+    </div>
+    <div class="cloud-grid">
+      <article class="offer rv">
+        <h3>Private Cloud</h3>
+        <ul>
+          <li>Website</li><li>Software as a service</li><li>Virtual Desktop Environment</li><li>Private document sharing</li><li>Infrastructure as a service</li><li>Platform as a service</li>
+        </ul>
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><g class="layer d2"><path class="s" d="M50 172L120 202L190 172L120 142Z"/></g><g class="layer d1"><path class="s" d="M50 130L120 160L190 130L120 100Z"/></g><g class="layer"><path class="c" d="M50 88L120 118L190 88L120 58Z" style="fill:rgba(18,211,216,.12)"/></g></svg>
+      </article>
+      <article class="offer rv d1" id="backup">
+        <h3>Backup as a service</h3>
+        <p class="note">We secure your data</p>
+        <ul>
+          <li>Local backup</li><li>Remote copy/backup</li><li>Monitoring</li><li>Maintenance</li><li>Infrastructure as a service</li><li>Platform as a service</li>
+        </ul>
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><circle class="s" cx="120" cy="120" r="78"/><path class="c flow" d="M120 42A78 78 0 0 1 198 120"/><path class="c flow" d="M120 198A78 78 0 0 1 42 120" style="animation-delay:.8s"/><rect class="ft" x="96" y="98" width="48" height="44" rx="4"/><path d="M106 98v-10a14 14 0 0 1 28 0v10" fill="none" stroke="var(--teal)" stroke-width="5"/></svg>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="infra chapter on-dark step-down-l" id="infrastructure">
+  <div class="wrap">
+    <div class="ch-head">
+      <h2 class="h-l rv">Infrastructure</h2>
+    </div>
+    <div class="infra-cols">
+      <div class="infra-col rv">
+        <h3>Installation and configuration of office infrastructure</h3>
+        <ul><li>Wifi</li><li>Phone over IP</li><li>Local servers and storage</li><li>New installation simulation</li><li>Existing installation audit</li></ul>
+      </div>
+      <div class="infra-col rv d1">
+        <h3>Managed local infrastructure</h3>
+        <ul><li>Monthly health checks</li><li>Update/upgrades</li><li>Remote monitoring</li><li>Scheduled maintenance</li></ul>
+      </div>
+      <div class="infra-col rv d2">
+        <h3>Support</h3>
+        <ul><li>Infrastructure support</li><li>24/7 Monitoring</li><li>On-call service (astreinte)</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="perf chapter pull-up" id="performance">
+  <div class="wrap perf-grid">
+    <div>
+      <h2 class="h-l rv">Performance Review</h2>
+      <h3 class="h-m rv" style="margin-top:28px">Observability &amp; Performance Automation Services</h3>
+      <p class="rv" style="margin-top:14px;font-size:18px">An IBM-Powered solution that meets key FinOps capabilities :</p>
+      <ul class="perf-list">
+        <li class="rv"><svg aria-hidden="true"><use href="#arr"/></svg>Dynamic &amp; continuous assets discovery</li>
+        <li class="rv"><svg aria-hidden="true"><use href="#arr"/></svg>Application Performance Monitoring</li>
+        <li class="rv"><svg aria-hidden="true"><use href="#arr"/></svg>Infrastructure Usage Optimization</li>
+        <li class="rv"><svg aria-hidden="true"><use href="#arr"/></svg>Resources Management</li>
+        <li class="rv"><svg aria-hidden="true"><use href="#arr"/></svg>Costs clarity &amp; Accurate Dashboarding</li>
+      </ul>
+    </div>
+    <div class="dash rv" aria-hidden="true">
+      <div class="top mono"><span>Performance Review</span><span>●</span></div>
+      <div class="bars"><i style="height:52%"></i><i style="height:74%"></i><i style="height:40%"></i><i style="height:88%"></i><i style="height:63%"></i><i style="height:80%"></i><i style="height:46%"></i><i style="height:70%"></i></div>
+    </div>
+  </div>
+</section>
+
+<a class="soc-link" href="soc-as-a-service.html">
+  <img src="assets/managed-soc-banner.jpg" alt="" width="1584" height="396">
+  <div class="wrap">
+    <div>
+      <span class="kicker mono lt">Managed Services</span>
+      <h2 style="margin-top:18px">SOC as a Service</h2>
+      <p><b>65%</b> of cyber attacks have an impact on business<span class="src">CESIN, 2025</span></p>
+    </div>
+    <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+  </div>
+</a>
+
+<script>
+  (function () {
+    var links = document.querySelectorAll('.subnav a[data-sec]');
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('on', a.dataset.sec === e.target.id); }); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['cloud', 'infrastructure', 'performance'].forEach(function (id) { io.observe(document.getElementById(id)); });
+  })();
+</script>

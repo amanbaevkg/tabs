@@ -1,0 +1,101 @@
+<!--{
+ "file": "our-services.html", "title": "Our Services · Cloud Power", "nav": "services", "ribbon": "Our Services",
+ "close": {"h": "Take your IT setup to the <span>next level</span>", "p": "Ready to optimize performance, boost security, and work smarter? Our expert team is here to transform your IT infrastructure into a strategic asset. Don’t wait, reach out today and let’s build your competitive edge together."},
+ "note": ["Content: Our Services page on cloud-power.eu. Each row keeps one short summary; the full descriptions live only on the detail pages. The Private Cloud row links to the Cloud Services part of Managed Services.", "Spelling fixed from the live page: Environnement → Environment, Infrastucture → Infrastructure, Archicects → Architects, develoment → development."]
+}-->
+<style>
+  .ledger { background: var(--paper); padding-block: 40px 150px; }
+  .ledger-head { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 36px; color: var(--mute); }
+  .rows { border-top: 1px solid var(--line-l); }
+  .row { position: relative; display: grid; grid-template-columns: 110px 5fr 6fr 72px; gap: 32px; align-items: center; padding: 42px 0; border-bottom: 1px solid var(--line-l); text-decoration: none; color: var(--teal); isolation: isolate; }
+  .row::before { content: ""; position: absolute; inset: 0 -40px; z-index: -1; background: #fff; transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .row:hover::before { transform: scaleX(1); }
+  .row .glyph { width: 88px; height: 88px; }
+  .row h2 { font-weight: 650; font-size: clamp(32px, 3.2vw, 46px); line-height: 1; letter-spacing: -.035em; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .row:hover h2 { transform: translateX(10px); }
+  .row .sum { display: grid; gap: 16px; }
+  .row .sum p { font-size: 17px; line-height: 1.6; color: var(--slate); max-width: 56ch; }
+  .row .go { width: 56px; height: 56px; display: grid; place-items: center; position: relative; isolation: isolate; justify-self: end; }
+  .row .go::before { content: ""; position: absolute; inset: 0; z-index: -1; border: 1px solid var(--line-l); transform: skewX(calc(-1 * var(--slant))); transition: background-color .3s ease, border-color .3s ease; }
+  .row:hover .go::before { background: var(--cyan); border-color: var(--cyan); }
+  .row .go svg { width: 20px; height: 20px; }
+  .row .glyph .anim { animation-play-state: paused; }
+  .row:hover .glyph .anim { animation-play-state: running; }
+
+  .partner { position: relative; background: var(--teal); color: var(--on-dark); padding-block: 130px 140px; overflow: hidden; }
+  .partner .wrap { display: grid; grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
+  .partner ul { list-style: none; margin: 0; padding: 0; display: grid; }
+  .partner li { display: grid; grid-template-columns: 60px 1fr; align-items: center; gap: 24px; padding: 34px 0; border-top: 1px solid var(--line-d); font: 300 clamp(34px, 3.6vw, 54px)/1.05 var(--font); letter-spacing: -.035em; }
+  .partner li:last-child { border-bottom: 1px solid var(--line-d); }
+  .partner li::before { content: ""; width: 14px; height: 40px; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); transition: width .5s cubic-bezier(.2,.7,.2,1); }
+  .partner li:hover::before { width: 44px; }
+  @media (max-width: 900px) { .row { grid-template-columns: 1fr; } .partner .wrap { grid-template-columns: 1fr; } }
+</style>
+
+<section class="phero step-down-r">
+  <canvas id="streaks" data-density="20" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="phero-copy">
+      <div class="crumbs"><a href="index.html">Home</a><i>/</i><span>Our Services</span></div>
+      <h1>Our <em>Services</em></h1>
+      <p class="lead">Our teams are here to help you with most of your projects.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ledger">
+  <div class="wrap">
+    <div class="rows">
+      <a class="row rv" href="managed-services.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><path class="s" d="M30 70H210M30 120H210M30 170H210"/><circle class="ft" cx="80" cy="70" r="11"/><circle class="f anim node" cx="160" cy="120" r="11"/><circle class="ft" cx="100" cy="170" r="11"/></svg>
+        <h2>Managed Services</h2>
+        <div class="sum"><p>Free yourself from specific tasks. We can take them off your hands.</p><div class="tags"><span>Cloud Services</span><span>Infrastructure</span><span>Performance Review</span></div></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="managed-services.html#cloud">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><g class="anim layer d2"><path class="s" d="M60 170L120 196L180 170L120 144Z"/></g><g class="anim layer d1"><path class="s" d="M60 130L120 156L180 130L120 104Z"/></g><g class="anim layer"><path class="c" d="M60 90L120 116L180 90L120 64Z" style="fill:rgba(18,211,216,.12)"/></g></svg>
+        <h2>Private Cloud</h2>
+        <div class="sum"><div class="tags"><span>Website</span><span>SaaS</span><span>Virtual Desktop Environment</span><span>Private document sharing</span><span>IaaS</span><span>PaaS</span></div></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="ai.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><path class="c anim flow" d="M50 60L120 120L190 70M50 180L120 120L190 170"/><circle class="ft" cx="120" cy="120" r="14"/><circle class="f anim node" cx="50" cy="60" r="9"/><circle class="f anim node d1" cx="190" cy="70" r="9"/><circle class="f anim node d2" cx="50" cy="180" r="9"/><circle class="f anim node d3" cx="190" cy="170" r="9"/></svg>
+        <h2>Artificial Intelligence</h2>
+        <div class="sum"><p>Our AI solution helps organizations adopt and scale AI responsibly by reducing tool fragmentation, speeding development, and providing enterprise-grade support, governance, and flexibility.</p></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="soc-as-a-service.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><circle class="s" cx="120" cy="120" r="96"/><circle class="s" cx="120" cy="120" r="52"/><g class="anim sweep" style="transform-origin:120px 120px"><path d="M120 120L120 24A96 96 0 0 1 188 52Z" style="fill:rgba(18,211,216,.25)"/></g><circle class="f anim blip" cx="158" cy="80" r="7"/><circle class="f anim blip d1" cx="84" cy="164" r="7"/></svg>
+        <h2>SOC as a Service</h2>
+        <div class="sum"><p>A 24/7 local security support team for your organization's information systems, ensuring optimum service and value for money.</p></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="consulting.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><path class="s" d="M30 200H210"/><rect class="ft" x="52" y="90" width="34" height="110"/><rect class="f anim node" x="103" y="50" width="34" height="150" style="transform-origin:bottom"/><rect class="ft" x="154" y="110" width="34" height="90"/></svg>
+        <h2>Consulting</h2>
+        <div class="sum"><p>Skilled experts, ready to join your teams</p><div class="tags"><span>Development</span><span>Infrastructure</span><span>Expertise</span></div></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+      <a class="row rv" href="digital-conception.html">
+        <svg class="glyph" viewBox="0 0 240 240" aria-hidden="true"><rect class="s anim drawn" x="24" y="50" width="150" height="110" rx="4"/><path class="s" d="M24 70H174"/><rect class="c anim drawn" x="150" y="90" width="66" height="116" rx="8" style="animation-delay:.6s"/></svg>
+        <h2>Digital Conception</h2>
+        <div class="sum"><p>Discover a Smarter Way to improve your digital renown</p><div class="tags"><span>Website conception</span><span>Mobile App</span><span>Platform Conception</span></div></div>
+        <span class="go"><svg aria-hidden="true"><use href="#diag"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="partner on-dark">
+  <div class="wrap">
+    <div>
+      <span class="kicker mono">Cloud Power</span>
+      <h2 class="h-l rv" style="margin-top:20px">Your IT Partner</h2>
+    </div>
+    <ul>
+      <li class="rv">Prioritize your projects</li>
+      <li class="rv d1">Optimize your internal resources</li>
+      <li class="rv d2">Reallocate your expenses</li>
+    </ul>
+  </div>
+</section>
