@@ -105,9 +105,11 @@
   /* ---------- 1. hero ---------- */
   .hero { position: relative; height: 840px; color: var(--light); }
   .hero > .ph { position: absolute; inset: 0; }
+  .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--night); }
+  @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } .hero { background: url(assets/bcc-hero-poster.jpg) center / cover; } }
   .hero > .ph::after { content: ""; position: absolute; inset: -20%; background: radial-gradient(40% 35% at 30% 40%, rgba(140,202,217,.16), transparent 70%), radial-gradient(35% 30% at 72% 62%, rgba(210,202,189,.14), transparent 70%); animation: drift 22s ease-in-out infinite alternate; }
   @keyframes drift { from { transform: translate3d(-4%, -2%, 0) scale(1); } to { transform: translate3d(5%, 3%, 0) scale(1.08); } }
-  .hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,43,55,.5) 0%, rgba(30,43,55,.18) 24%, rgba(30,43,55,.22) 62%, rgba(30,43,55,.62) 100%); }
+  .hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,43,55,.55) 0%, rgba(30,43,55,.36) 24%, rgba(30,43,55,.38) 62%, rgba(30,43,55,.66) 100%); }
   .hero .wrap { position: relative; height: 100%; }
   .hero-center { position: absolute; left: var(--gutter); right: var(--gutter); top: 50%; transform: translateY(-44%); display: grid; justify-items: center; gap: 22px; text-align: center; }
   .hero-center .label { color: var(--cyan); display: inline-flex; align-items: center; gap: 14px; }
@@ -378,7 +380,10 @@
 <main>
   <!-- 1. HERO: full-bleed video, typography over image, inset photo crossing into next section -->
   <section class="hero">
-    <div class="ph dark" aria-label="Video placeholder V1"></div>
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/bcc-hero-poster.jpg" aria-hidden="true">
+      <source src="assets/bcc-hero.webm" type="video/webm">
+      <source src="assets/bcc-hero.mp4" type="video/mp4">
+    </video>
     <div class="hero-shade"></div>
     <div class="wrap">
       <div class="hero-center">
@@ -409,7 +414,6 @@
           <a class="finder-go" id="finder-go" href="https://businesscentercapellen.lu/contact/">Get a Quote<svg aria-hidden="true"><use href="#arr"/></svg></a>
         </form>
       </div>
-      <span class="tag vtag"><span><i>V1</i><b>VIDEO NEEDED: Building Entrance → Workspace</b></span><span>Full-bleed background · 16:9 · 20–25 s muted loop</span></span>
       <span class="scroll-cue" aria-hidden="true"></span>
       <a class="ring" href="https://businesscentercapellen.lu/contact/" aria-label="Work with us: contact">
         <svg class="txt" viewBox="0 0 132 132" aria-hidden="true"><defs><path id="circ" d="M66 66m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text textLength="312" lengthAdjust="spacing"><textPath href="#circ" textLength="312" lengthAdjust="spacing">WORK WITH US · WORK WITH US · </textPath></text></svg>
@@ -617,7 +621,7 @@
       <table>
         <thead><tr><th>ID</th><th>Asset</th><th>Format shown</th><th>Where</th></tr></thead>
         <tbody>
-          <tr><td>V1</td><td>Video: Building Entrance → Workspace</td><td>16:9, full-bleed, 20–25 s loop</td><td>Hero background</td></tr>
+          <tr><td>V1</td><td>Video: Building Entrance → Workspace (draft in place, cut from phone clips)</td><td>16:9, full-bleed, 19.6 s loop</td><td>Hero background</td></tr>
           <tr><td>P1</td><td>Coworking Wide Interior</td><td>Horizontal ≈5:4, large</td><td>Co-Working OFfices</td></tr>
           <tr><td>P2</td><td>Private Office</td><td>Vertical ≈3:4, tall</td><td>Private Offices</td></tr>
           <tr><td>P3</td><td>Private Office Detail</td><td>Square 1:1, close-up</td><td>Private Offices, overlapping P2</td></tr>
