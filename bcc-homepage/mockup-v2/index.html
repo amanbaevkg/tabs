@@ -198,8 +198,10 @@
 
   /* ---------- 3. building tomorrow's now ---------- */
   .tomorrow { position: relative; height: 1000px; color: var(--light); }
-  .tomorrow > .ph { position: absolute; inset: 0; }
-  .tomorrow .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,43,55,.6) 0%, rgba(30,43,55,.05) 55%, rgba(30,43,55,.25) 100%); }
+  .tomorrow > .ph, .tomorrow > .photo.bg, .final > .photo.bg { position: absolute; inset: 0; }
+  .photo.bg img { filter: saturate(.85) contrast(1.02); }
+  .photo.bg:hover img { transform: none; }
+  .tomorrow .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,43,55,.72) 0%, rgba(30,43,55,.5) 45%, rgba(30,43,55,.2) 75%, rgba(30,43,55,.3) 100%); }
   .tomorrow .wrap { position: relative; height: 100%; }
   .tomorrow h2 { position: absolute; top: 110px; left: var(--gutter); font-size: clamp(64px, 10.6vw, 156px); }
   .tomorrow h2 span { display: block; }
@@ -425,12 +427,12 @@
   <!-- 2a. CO-WORKING -->
   <section class="cowork" id="offices">
     <div class="wrap cw-grid">
-      <div class="ph cw-img"><span class="tag tl"><span><i>P1</i><b>PHOTO NEEDED: Coworking Wide Interior</b></span><span>Horizontal · approx. 5:4 · wide · bleeds to left edge</span></span></div>
+      <figure class="photo cw-img"><img src="assets/bcc-cowork-wide.jpg" alt="Co-working space with white desks, grey acoustic dividers and black office chairs" width="2000" height="1600"></figure>
       <div class="cw-text">
         <h2 class="xl offer-title"><a href="https://www.businesscentercapellen.lu/about-us/#offices">Co-Working OFfices<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a></h2>
         <p class="offer-body"><strong>Grow your business</strong> from a place that feels right. Our coworking spaces give you a <strong>real business address</strong>, flexible offices, and a community that inspires you to do more. <strong>From basic package to all-inclusive packages, you decide</strong>.</p>
       </div>
-      <figure class="photo cw-second"><img src="assets/bcc-lounge.jpg" alt="Salle de détente et de réunion équipée d’un baby-foot, d’un téléviseur et d’un espace de travail moderne." width="1600" height="1200"></figure>
+      <figure class="photo cw-second"><img src="assets/bcc-common-table.jpg" alt="Common room with a long black table and a table football game" width="1100" height="1158" loading="lazy"></figure>
     </div>
   </section>
 
@@ -442,8 +444,8 @@
           <h2 class="xl offer-title"><a href="https://www.businesscentercapellen.lu/about-us/#offices">Private Offices<svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a></h2>
           <p class="offer-body"><strong>Your Private Space with no hidden fees</strong>. We believe flexibility isn’t a bonus ➡️ it’s the standard.</p>
         </div>
-        <div class="ph pv-img"><span class="tag br"><span><i>P2</i><b>PHOTO NEEDED: Private Office</b></span><span>Vertical · approx. 3:4 · wide · bleeds to right edge</span></span></div>
-        <div class="ph pv-detail"><span class="tag bl"><span><i>P3</i><b>PHOTO NEEDED: Private Office Detail</b></span><span>Square 1:1 · close-up</span></span></div>
+        <figure class="photo pv-img"><img src="assets/bcc-private-office.jpg" alt="Private office with a desk and black office chairs" width="1300" height="2167" loading="lazy"></figure>
+        <figure class="photo pv-detail"><img src="assets/bcc-private-detail.jpg" alt="Desks with lockable drawer units" width="900" height="900" loading="lazy"></figure>
       </div>
 
       <div class="services-row">
@@ -486,11 +488,10 @@
 
   <!-- 3. BUILDING TOMORROW'S NOW: architectural full-bleed with card crossing into next section -->
   <section class="tomorrow">
-    <div class="ph dark"></div>
+    <figure class="photo bg"><img src="assets/bcc-exterior.jpg" alt="Entrances 75A and 77 of the Business Center Capellen building" width="2600" height="1462" loading="lazy"></figure>
     <div class="shade"></div>
     <div class="wrap">
       <h2 class="xl"><span>BUILDING</span><span class="t2">TOMORROW'S</span><span class="t3">NOW</span></h2>
-      <span class="tag on-dark ptag3"><span><i>P4</i><b>PHOTO NEEDED: Building Exterior, Architectural</b></span><span>Horizontal · 16:9 full-bleed · wide, low angle</span></span>
       <div class="tomorrow-card">
         <h3>Setting Up Your Business in Capellen (Luxembourg): Combine Legal Compliance with Flexible Workspaces</h3>
       </div>
@@ -510,11 +511,11 @@
     </div>
     <div class="gallery" id="gallery" tabindex="0" aria-label="Our spaces gallery">
       <figure class="g1"><div class="photo frame"><img src="assets/bcc-meeting-room.jpg" alt="Salle de réunion moderne avec table de conférence, projecteur et ambiance lumineuse bleutée." width="1600" height="1200"></div><figcaption><span>Meeting room</span><span class="label">BCC photo</span></figcaption></figure>
-      <figure class="g2"><div class="ph frame"><span class="tag bl"><span><i>P5</i><b>PHOTO NEEDED: Mailroom</b></span><span>Vertical · approx. 4:5</span></span></div><figcaption><span>Mailroom</span><span class="label">Placeholder</span></figcaption></figure>
+      <figure class="g2"><div class="photo frame"><img src="assets/bcc-mailroom.jpg" alt="Mail shelves and tenant directory in the reception hall" width="1100" height="1375" loading="lazy"></div><figcaption><span>Mailroom</span><span class="label">BCC photo</span></figcaption></figure>
       <figure class="g3"><div class="photo frame"><img src="assets/bcc-reception.jpg" alt="Hall d’accueil du Business Center Capellen, Bloc C, avec borne de désinfection et espace de réception." width="1024" height="768"></div><figcaption><span>Reception hall, Bloc C</span><span class="label">BCC photo</span></figcaption></figure>
       <figure class="g4"><div class="photo frame"><img src="assets/bcc-lounge.jpg" alt="Salle de détente et de réunion équipée d’un baby-foot, d’un téléviseur et d’un espace de travail moderne." width="1600" height="1200"></div><figcaption><span>Lounge and meeting room</span><span class="label">BCC photo</span></figcaption></figure>
       <figure class="g5"><div class="ph frame"><span class="tag bl"><span><i>P6</i><b>PHOTO NEEDED: Private Parking</b></span><span>Horizontal · approx. 3:2</span></span></div><figcaption><span>Private parking</span><span class="label">Placeholder</span></figcaption></figure>
-      <figure class="g6"><div class="ph frame"><span class="tag bl"><span><i>P7</i><b>PHOTO NEEDED: Common Area</b></span><span>Vertical · approx. 4:5</span></span></div><figcaption><span>Common area</span><span class="label">Placeholder</span></figcaption></figure>
+      <figure class="g6"><div class="photo frame"><img src="assets/bcc-kitchen.jpg" alt="Shared kitchen with microwave, coffee machine and dishwasher" width="1100" height="1375" loading="lazy"></div><figcaption><span>Common area</span><span class="label">BCC photo</span></figcaption></figure>
     </div>
     <div class="wrap"><div class="progress"><span id="bar"></span></div></div>
   </section>
@@ -553,12 +554,11 @@
 
   <!-- 7. FINAL CTA -->
   <section class="final">
-    <div class="ph dark"></div>
+    <figure class="photo bg"><img src="assets/bcc-facade.jpg" alt="Facade of the Business Center Capellen building" width="2160" height="1215" loading="lazy"></figure>
     <div class="shade"></div>
     <div class="wrap">
       <h2 class="xl"><span>Let's Build The</span><span class="f2">Future Together</span></h2>
       <div><a class="btn btn-light" href="https://businesscentercapellen.lu/contact/">Contact Us<svg aria-hidden="true"><use href="#arr"/></svg></a></div>
-      <span class="tag on-dark ptag8"><span><i>P8</i><b>PHOTO NEEDED: Entrance at Dusk</b></span><span>Horizontal · 16:9 full-bleed · wide, lights on</span></span>
     </div>
   </section>
 </main>
@@ -622,14 +622,14 @@
         <thead><tr><th>ID</th><th>Asset</th><th>Format shown</th><th>Where</th></tr></thead>
         <tbody>
           <tr><td>V1</td><td>Video: Building Entrance → Workspace (approved cut, from phone clips)</td><td>16:9, full-bleed, 53 s loop</td><td>Hero background</td></tr>
-          <tr><td>P1</td><td>Coworking Wide Interior</td><td>Horizontal ≈5:4, large</td><td>Co-Working OFfices</td></tr>
-          <tr><td>P2</td><td>Private Office</td><td>Vertical ≈3:4, tall</td><td>Private Offices</td></tr>
-          <tr><td>P3</td><td>Private Office Detail</td><td>Square 1:1, close-up</td><td>Private Offices, overlapping P2</td></tr>
-          <tr><td>P4</td><td>Building Exterior, Architectural</td><td>16:9 full-bleed</td><td>BUILDING TOMORROW'S NOW</td></tr>
-          <tr><td>P5</td><td>Mailroom</td><td>Vertical ≈4:5</td><td>OUR SPACES gallery, slide 2</td></tr>
-          <tr><td>P6</td><td>Private Parking</td><td>Horizontal ≈3:2</td><td>OUR SPACES gallery, slide 5</td></tr>
-          <tr><td>P7</td><td>Common Area</td><td>Vertical ≈4:5</td><td>OUR SPACES gallery, slide 6</td></tr>
-          <tr><td>P8</td><td>Entrance at Dusk</td><td>16:9 full-bleed</td><td>Let's Build The Future Together</td></tr>
+          <tr><td>P1</td><td>Coworking Wide Interior: bureau C.02 photo</td><td>Horizontal ≈5:4, large</td><td>Co-Working OFfices</td></tr>
+          <tr><td>P2</td><td>Private Office: frame from phone video</td><td>Vertical ≈3:4, tall</td><td>Private Offices</td></tr>
+          <tr><td>P3</td><td>Private Office Detail: crop of bureau C.01 photo</td><td>Square 1:1, close-up</td><td>Private Offices, overlapping P2</td></tr>
+          <tr><td>P4</td><td>Building Exterior: entrances 75A / 77 photo</td><td>16:9 full-bleed</td><td>BUILDING TOMORROW'S NOW</td></tr>
+          <tr><td>P5</td><td>Mailroom: crop of Accueil photo</td><td>Vertical ≈4:5</td><td>OUR SPACES gallery, slide 2</td></tr>
+          <tr><td>P6</td><td>Private Parking: still needed</td><td>Horizontal ≈3:2</td><td>OUR SPACES gallery, slide 5</td></tr>
+          <tr><td>P7</td><td>Common Area: kitchen photo</td><td>Vertical ≈4:5</td><td>OUR SPACES gallery, slide 6</td></tr>
+          <tr><td>P8</td><td>Final section: facade frame from phone video (daytime; dusk shot optional)</td><td>16:9 full-bleed</td><td>Let's Build The Future Together</td></tr>
         </tbody>
       </table>
     </div>
