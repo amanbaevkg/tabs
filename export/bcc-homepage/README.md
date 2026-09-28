@@ -1,19 +1,19 @@
-# BCC – Business Center Capellen · homepage concept v2.3 (desktop mockup)
+# BCC – Business Center Capellen · homepage concept (desktop mockup)
 
-A static HTML/CSS/JS mockup for internal review. It is not the production website. It needs no build step, framework or internet connection.
+A static HTML/CSS/JS mockup for review. It is not the production website. It needs no build step, framework or internet connection.
 
 ## Run it
 
-**Option 1: open the file.** Double-click `index.html`. It opens in your browser and everything works, including fonts, animations and the gallery.
+**Option 1: open the file.** Double-click `index.html`. Everything works: fonts, hero video, animations and the gallery.
 
-**Option 2: local server (recommended while editing).** In Terminal:
+**Option 2: local server (recommended while editing).**
 
 ```sh
 cd path/to/bcc-homepage
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000. Press Ctrl+C to stop the server. If you use VS Code, the "Live Server" extension works too.
+Then open http://localhost:8000.
 
 ## Structure
 
@@ -22,46 +22,26 @@ bcc-homepage/
 ├── index.html            page markup
 ├── css/
 │   ├── fonts.css         self-hosted web fonts (@font-face)
-│   └── style.css         all layout, colours, animations and hover effects
+│   └── style.css         layout, colours, animations, hover effects
 ├── js/
-│   └── main.js           header on scroll, language selector, Our Spaces gallery
+│   └── main.js           header on scroll, language selector, workspace selector, Our Spaces gallery
 └── assets/
-    ├── images/           BCC logo, 3 BCC photos, 7 client logos (dark "ink" versions)
+    ├── images/           BCC logo, photos, client logos, hero poster
     ├── fonts/            Archivo, Newsreader, IBM Plex Mono (woff2)
-    └── video/            empty: put the hero video here (see below)
+    └── video/            hero video: bcc-hero.mp4 (53 s muted loop, H.264, plays in all browsers)
 ```
 
-## What is where
+## Content
 
-- **Colours:** CSS variables at the top of `css/style.css` (`--paper` off-white, `--lime` sand, `--stone`, `--haze` grey-blue, `--navy`, `--night`, `--cyan` …).
-- **Animations** (all in `css/style.css`):
-  - `spin`: "Work with us" ring
-  - `marquee`: client logos (60 s loop, pauses on hover)
-  - `drift`: soft light moving over the hero placeholder
-  - `cue`: scroll line at the bottom of the hero
-  - hover transitions on photos, links and buttons
+- All text, names, links and contact details come from businesscentercapellen.lu.
+- Photos and the hero video were supplied by BCC (own photos and phone footage). Car number plates are blurred.
+- Private office and reception photos partly come from the current website.
+- The language selector is a UI concept only; the page stays in English.
+- The existing contact assistant is not included and stays as it is on the live site.
 
-  All of them switch off for visitors who have "Reduce motion" turned on.
-- **Workspace selector** (`js/main.js`): the frosted bar over the hero video. "Choose your workspace" lists Private Offices, Co-Working Space, Meeting Rooms and Company Domiciliation. "Team size" (1–8 persons) is active only for Private Offices. "Get a Quote" opens the BCC contact page.
-- **They trust us:** a light band with each client logo on its own tile, in a slow infinite carousel that pauses on hover. The logo files are dark, fully opaque versions of the originals, so they read clearly on the light background.
-- **Header behaviour** (`js/main.js`): transparent over the hero, then a solid slim bar; it hides when scrolling down and returns when scrolling up.
-- **Language selector:** a UI concept only. EN/FR/DE/LU mark themselves active; the content stays in English.
-- **Placeholders:** striped boxes labelled V1 and P1–P8, sized to the final image shape. Replace each box with an `<img>` (or `<video>`) of the same size.
-- **Review-only parts:** the grey strip at the very top (`.ribbon`) and the "Review notes" block at the bottom (`.appendix`) can be deleted once the concept is approved.
+## Replacing media
 
-## Adding the hero video (V1)
+- **Hero video:** replace `assets/video/bcc-hero.mp4` (keep the name), and `assets/images/bcc-hero-poster.jpg` (first frame).
+- **Photos:** replace a file in `assets/images/` with one of the same name and orientation.
 
-1. Save the video as `assets/video/hero.mp4` (H.264, 1920×1080 or 3840×2160, muted, 20–25 s loop, ideally under 10–15 MB).
-2. Save a still frame as `assets/images/hero-poster.jpg`.
-3. In `index.html`, find the commented `<video class="hero-video" …>` line in the hero and uncomment it.
-4. Delete the placeholder `<div class="ph dark" …>` just above it and the `V1` tag.
-
-## External links
-
-The page loads nothing from other websites. The only external URLs are ordinary links that open when clicked: BCC's own pages (About Us, Our Services, Contact), LinkedIn, Facebook and Google Maps.
-
-The live site uses an embedded Google Map. In this mockup it's a styled placeholder with an "Open in Google Maps" link. Paste the Google Maps `<iframe>` there when you build the real site.
-
-## Fonts
-
-Archivo, Newsreader and IBM Plex Mono come from Google Fonts and are licensed under the SIL Open Font License. They are included locally so the page works offline. The files are the macOS builds; they render identically in any modern browser.
+The live website has not been modified.
