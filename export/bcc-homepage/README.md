@@ -28,7 +28,7 @@ bcc-homepage/
 └── assets/
     ├── images/           BCC logo, photos, client logos, hero poster
     ├── fonts/            Archivo, Newsreader, IBM Plex Mono (woff2)
-    └── video/            hero video: bcc-hero.mp4 (30 s muted loop, H.264, plays in all browsers)
+    └── video/            hero video: bcc-hero.mp4 (48 s muted loop, H.264, plays in all browsers)
 ```
 
 ## Content
