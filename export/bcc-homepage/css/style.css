@@ -147,17 +147,18 @@
   .finder-go:hover svg { transform: translate(3px, -3px); }
 
   /* ---------- 2a. co-working ---------- */
-  .cowork { background: linear-gradient(180deg, var(--paper) 0%, var(--paper) 70%, #E2E1DD 100%); padding-block: 180px 180px; position: relative; overflow-x: clip; }
-  .cw-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 32px; align-items: start; }
-  .cw-img { grid-column: 1 / span 8; margin-left: calc(-1 * max(var(--gutter), (100vw - var(--wrap)) / 2)); height: 720px; }
-  .cw-text { grid-column: 7 / span 6; margin-top: 150px; position: relative; z-index: 2; background: var(--paper); box-shadow: 0 30px 60px -40px rgba(30,43,55,.35); padding: 56px 0 56px 64px; display: grid; gap: 32px; }
+  .cowork { background: linear-gradient(180deg, var(--paper) 0%, var(--paper) 70%, #E2E1DD 100%); padding-block: 120px 120px; position: relative; overflow-x: clip; }
+  .cw-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: auto 1fr; gap: 24px 32px; align-items: start; }
+  .cw-img { grid-column: 1 / span 7; grid-row: 1 / span 2; margin-left: calc(-1 * max(var(--gutter), (100vw - var(--wrap)) / 2)); height: 720px; }
+  .cw-text { grid-column: 8 / span 5; grid-row: 1; margin-left: -96px; margin-top: 48px; position: relative; z-index: 2; background: var(--paper); box-shadow: 0 30px 60px -40px rgba(30,43,55,.35); padding: 48px 0 48px 56px; display: grid; gap: 26px; }
   .offer-title { font-size: clamp(52px, 6vw, 88px); }
   .offer-title a { text-decoration: none; }
   .offer-title .arr { display: inline-block; width: .42em; height: .42em; margin-left: .15em; vertical-align: .05em; color: var(--cyan-deep); transition: transform .3s ease; }
   .offer-title a:hover .arr { transform: translate(6px, -6px); }
   .offer-body { font: 300 20px/1.6 var(--display); color: var(--ink-2); max-width: 36ch; }
   .offer-body strong { font-weight: 500; color: var(--ink); }
-  .cw-second { grid-column: 9 / span 4; margin-top: 16px; height: 420px; }
+  .cw-second { grid-column: 8 / span 5; grid-row: 2; align-self: end; height: 280px; }
+  .cw-second img { object-position: center 18%; }
   .cw-caption { grid-column: 1 / span 5; margin-top: 28px; color: var(--mute); }
 
   /* ---------- 2b. private offices + trust ---------- */
