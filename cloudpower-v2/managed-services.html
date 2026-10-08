@@ -214,6 +214,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .subnav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
   .subnav a.on { color: var(--teal); } .subnav a.on::after { transform: scaleX(1); }
   .subnav .label { margin-right: auto; color: var(--teal); }
+  @media (max-width: 900px) { .subnav .wrap { gap: 26px; overflow-x: auto; scrollbar-width: none; } .subnav .wrap::-webkit-scrollbar { display: none; } .subnav .label { display: none; } .subnav a { flex: none; } }
 
   .chapter { scroll-margin-top: 66px; }
   .ch-head { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: end; margin-bottom: 64px; }

@@ -53,6 +53,7 @@
   .who li:last-child { border-bottom: 1px solid var(--line-l); }
   .who li::before { content: ""; width: 12px; height: 22px; margin-top: 3px; background: var(--cyan); transform: skewX(calc(-1 * var(--slant))); }
   @media (max-width: 900px) { .why .wrap, .ex, .benefit .wrap { grid-template-columns: 1fr; } .st-grid { grid-template-columns: 1fr 1fr; } .impact { grid-template-columns: 1fr; } .ex-tabs { border-right: 0; } }
+  @media (max-width: 600px) { .st-grid { grid-template-columns: 1fr; } .st, .st + .st { padding: 28px 0 10px; border-left: 0; } .st + .st { border-top: 1px solid var(--line-l); } }
 </style>
 
 <section class="phero step-down-r">
